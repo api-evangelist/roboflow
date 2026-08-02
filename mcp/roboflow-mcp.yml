@@ -1,0 +1,292 @@
+generated: '2026-08-02'
+method: searched
+status: published
+source: https://docs.roboflow.com/agents/agents/mcp-server.md
+server:
+  name: roboflow
+  transport: http
+  url: https://mcp.roboflow.com/mcp
+  landing: https://mcp.roboflow.com/
+  docs: https://docs.roboflow.com/agents/agents/mcp-server.md
+authentication:
+  type: oauth2
+  scheme: Bearer
+  no_api_key_required: true
+  authorization_servers:
+  - https://app.roboflow.com
+  protected_resource_metadata: https://mcp.roboflow.com/.well-known/oauth-protected-resource
+  authorization_endpoint: https://app.roboflow.com/oauth/authorize
+  token_endpoint: https://app.roboflow.com/oauth/token
+  dynamic_client_registration: https://app.roboflow.com/oauth/register
+  pkce:
+  - S256
+  scope_count: 55
+  scopes: scopes/roboflow-scopes.yml
+  pre_registered_clients: Workspace Settings > Developer > Create OAuth App, for gateways that cannot use DCR (Azure
+    AI Foundry, Microsoft Copilot Studio, TrueFoundry).
+introspection:
+  tools_list: gated
+  http_status: 401
+  probed: POST https://mcp.roboflow.com/mcp {"jsonrpc":"2.0","id":1,"method":"tools/list"}
+  www_authenticate: Bearer resource_metadata="https://mcp.roboflow.com/.well-known/oauth-protected-resource/mcp"
+  note: The live tools/list requires an OAuth access token. The tool set below is taken verbatim from the provider-published
+    tool tables in the MCP Server docs (names + descriptions only); inputSchemas require authenticated introspection.
+clients:
+- client: Claude
+  method: Custom connector / Claude directory
+  url: https://claude.ai/directory/connectors/dbbc26cf-80b0-4a85-9877-f85874282794
+- client: Claude Code
+  method: claude mcp add -s user roboflow --transport http https://mcp.roboflow.com/mcp
+- client: Cursor
+  method: Cursor marketplace plugin (installs MCP server + all Agent Skills)
+  url: https://cursor.com/marketplace/roboflow
+- client: Codex
+  method: ~/.codex/config.toml [mcp_servers.roboflow] url = "https://mcp.roboflow.com/mcp"
+namespacing: mcp__<server>__<tool_name> (e.g. mcp__roboflow__projects_list)
+tool_count: 67
+categories:
+- category: agent
+  label: 'Agent: chat with the Roboflow agent and build workflows'
+  tools: 4
+- category: projects
+  label: 'Projects: manage projects in your workspace'
+  tools: 6
+- category: images
+  label: 'Images: upload and search project images'
+  tools: 4
+- category: annotation
+  label: 'Annotation: save annotations and run autolabeling'
+  tools: 3
+- category: batch
+  label: 'Batch: create and manage labeling jobs'
+  tools: 3
+- category: versions
+  label: 'Versions: create and export dataset versions'
+  tools: 3
+- category: models
+  label: 'Models: train models and monitor training progress'
+  tools: 9
+- category: model-evaluations
+  label: 'Model Evaluations: view mAP, confusion matrices, and per-class performance'
+  tools: 9
+- category: workflows
+  label: 'Workflows: build and run inference pipelines'
+  tools: 9
+- category: devices
+  label: 'Devices & Streams: manage edge devices and video streams'
+  tools: 12
+- category: universe
+  label: 'Universe: search public datasets on Roboflow Universe'
+  tools: 3
+- category: misc
+  label: 'Misc: poll long-running tasks and send feedback'
+  tools: 2
+tools:
+- name: agent_chat
+  category: agent
+  description: Chat with the Roboflow AI agent (Roboflow Q&A, advanced Workflow building, CV solution planning).
+- name: agent_conversation_get
+  category: agent
+  description: Get a single agent conversation with its full message history.
+- name: agent_conversations_list
+  category: agent
+  description: List Roboflow agent conversations in the workspace.
+- name: agent_workflow_publish
+  category: agent
+  description: Publish the latest agent-edited draft of a workflow.
+- name: projects_list
+  category: projects
+  description: List all projects in the workspace associated with the API key.
+- name: projects_get
+  category: projects
+  description: Get detailed info about a project including versions, classes, splits, and trained models.
+- name: projects_create
+  category: projects
+  description: Create a new computer vision project (detection, classification, segmentation, or keypoint).
+- name: projects_fork
+  category: projects
+  description: Enqueue an async fork of a public Universe project into your workspace.
+- name: projects_health
+  category: projects
+  description: Get the dataset health check for a project.
+- name: create_project_app
+  category: projects
+  description: Open a Prefab UI so the human can create a Roboflow project (calls projects_create on confirm).
+- name: images_search
+  category: images
+  description: Search for images inside a project with filters for tag, class, batch, annotation job, and visual
+    similarity.
+- name: images_prepare_upload
+  category: images
+  description: Get a pre-built upload URL to upload a single image to a project via curl.
+- name: images_prepare_upload_zip
+  category: images
+  description: Prepare a signed URL to bulk-upload a zip of images (and optional COCO/YOLO/VOC/folder annotations).
+- name: images_upload_zip_status
+  category: images
+  description: Check the status of a zip upload task started with images_prepare_upload_zip.
+- name: annotations_save
+  category: annotation
+  description: Save an annotation (XML, JSON, or text) for an existing image.
+- name: autolabel_start
+  category: annotation
+  description: Start a hosted auto-label job over a batch of images.
+- name: autolabel_job_get
+  category: annotation
+  description: Get per-subjob status and progress for an auto-label job.
+- name: annotation_jobs_create
+  category: batch
+  description: Create an annotation job to assign a batch of images to a labeler and reviewer.
+- name: annotation_batches_list
+  category: batch
+  description: List upload batches in a project.
+- name: annotation_batches_get
+  category: batch
+  description: Get details about a specific batch including image count and status.
+- name: versions_get
+  category: versions
+  description: Get info about a dataset version including splits, preprocessing, augmentation, and model metrics.
+- name: versions_generate
+  category: versions
+  description: Create a new dataset version with optional preprocessing and augmentation settings.
+- name: versions_export
+  category: versions
+  description: Check or trigger a dataset export for a version in a specific format (e.g. coco, yolov8, jsonl).
+- name: models_list
+  category: models
+  description: List trained models associated with a project.
+- name: models_get
+  category: models
+  description: Get details for a trained model.
+- name: models_train
+  category: models
+  description: Start training a model (RF-DETR, YOLO, etc.) on a dataset version.
+- name: models_infer
+  category: models
+  description: Run hosted inference on an image using a trained model and return JSON predictions.
+- name: models_get_training_status
+  category: models
+  description: Get the training progress and metrics (epoch, mAP, loss) for a dataset version.
+- name: models_star_nas
+  category: models
+  description: Star or unstar a NAS-trained model.
+- name: trainings_get_results
+  category: models
+  description: Get the run-level training results bundle.
+- name: trainings_stop
+  category: models
+  description: Request an early stop on an in-flight training run.
+- name: trainings_cancel
+  category: models
+  description: Cancel an in-flight training run.
+- name: model_evals_list
+  category: model-evaluations
+  description: List model evaluations in the current workspace.
+- name: model_evals_get
+  category: model-evaluations
+  description: Get the top-level summary for a single model evaluation.
+- name: model_evals_get_map_results
+  category: model-evaluations
+  description: Get per-split mAP results for an eval.
+- name: model_evals_get_confusion_matrix
+  category: model-evaluations
+  description: Get the confusion matrix for an eval.
+- name: model_evals_get_confidence_sweep
+  category: model-evaluations
+  description: Get the precision/recall/F1 confidence sweep for an eval.
+- name: model_evals_get_performance_by_class
+  category: model-evaluations
+  description: Get per-class performance metrics for a single split.
+- name: model_evals_get_image_predictions
+  category: model-evaluations
+  description: Get per-image prediction stats for an eval (paginated).
+- name: model_evals_get_vector_analysis
+  category: model-evaluations
+  description: Get UMAP + HDBSCAN clustering of image embeddings for an eval.
+- name: model_evals_get_recommendations
+  category: model-evaluations
+  description: Get the LLM-generated recommendations for an eval, if available.
+- name: workflows_list
+  category: workflows
+  description: List saved workflows in the current workspace.
+- name: workflows_get
+  category: workflows
+  description: Get details for a saved workflow.
+- name: workflows_create
+  category: workflows
+  description: Create and save a new Workflow in the workspace from a JSON definition.
+- name: workflows_update
+  category: workflows
+  description: Update an existing saved Workflow's name and definition.
+- name: workflows_run
+  category: workflows
+  description: Execute a saved Workflow by ID on one or more images.
+- name: workflow_blocks_list
+  category: workflows
+  description: List all available Workflow blocks with a short summary of each.
+- name: workflow_blocks_get_schema
+  category: workflows
+  description: Get the full schema (properties, required fields) of a specific Workflow block.
+- name: workflow_specs_validate
+  category: workflows
+  description: Validate a Workflow JSON definition without executing it.
+- name: workflow_specs_run
+  category: workflows
+  description: Execute a Workflow directly from an inline JSON definition without saving it first.
+- name: devices_list
+  category: devices
+  description: List devices registered in the workspace.
+- name: devices_get
+  category: devices
+  description: Get a single device by id.
+- name: devices_create
+  category: devices
+  description: Provision a new v2 device.
+- name: devices_get_config
+  category: devices
+  description: Get the device's current runtime configuration.
+- name: devices_get_default_config
+  category: devices
+  description: Get the workspace's default device configuration.
+- name: devices_get_config_history
+  category: devices
+  description: List prior configuration revisions, newest first.
+- name: devices_update_config
+  category: devices
+  description: Update the device's runtime configuration.
+- name: devices_get_logs
+  category: devices
+  description: Fetch device logs from Elasticsearch.
+- name: devices_get_events
+  category: devices
+  description: List device and stream lifecycle events.
+- name: devices_get_telemetry
+  category: devices
+  description: Get aggregated hardware metrics (cpu, memory, disk, gpu).
+- name: devices_streams_list
+  category: devices
+  description: List streams configured on the device.
+- name: devices_streams_get
+  category: devices
+  description: Get a single stream by id.
+- name: universe_search
+  category: universe
+  description: Search Roboflow Universe for public datasets or models, with operators for class, image count, project
+    type, and sort.
+- name: universe_search_app
+  category: universe
+  description: Open a Prefab Universe UI for search, visual comparison, image skim, and fork - the human picks the
+    dataset.
+- name: universe_dataset_images_search
+  category: universe
+  description: Search images inside a public Universe dataset URL.
+- name: async_tasks_get
+  category: misc
+  description: Poll an async task by id (e.g. project forks). Poll every 5 seconds; processing may take up to 30
+    seconds to start.
+- name: meta_feedback_send
+  category: misc
+  description: Report a bug, missing feature, UX friction, or documentation issue back to the Roboflow team.
+related:
+  skills: skills/_index.yml
+  crosswalk: mcp/roboflow-tool-crosswalk.yml

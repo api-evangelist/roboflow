@@ -1,0 +1,39 @@
+generated: '2026-08-02'
+method: searched
+source: https://docs.roboflow.com/deployment/production-checklist.md
+signal:
+  status_code: 429
+  retry_after_header: null
+  guidance: Roboflow does not publish a global rate-limit budget or RateLimit-* response headers. 429 is the documented
+    signal to back off with exponential backoff and jitter (1s, 2s, 4s, 8s + random offset), capping attempts.
+rate_limits:
+- scope: Serverless Hosted API
+  limit_count: null
+  window: null
+  note: No published numeric limit. On 429, back off and retry; move to a Dedicated Deployment or contact enterprise
+    support for higher throughput.
+- scope: Deployment Manager — device logs (per IP)
+  limit_count: 5
+  window: minute
+  http_status: 429
+- scope: Deployment Manager — device logs (global)
+  limit_count: 50
+  window: minute
+  http_status: 429
+- scope: Deployment Manager — telemetry reads (per device)
+  limit_count: 60
+  window: minute
+  burst: 10 requests over 10 seconds
+  http_status: 429
+payload_limits:
+- scope: Serverless Hosted API image upload
+  limit: 20 MB
+  note: Larger images are rejected; the Python SDK downsizes automatically.
+- scope: Batch Processing per-image
+  limit: 20 MB
+observability_headers:
+- header: x-model-cold-start
+  description: Whether this request paid the model load cost.
+- header: x-processing-time
+  description: Server-side processing time for the request.
+docs: https://docs.roboflow.com/deployment/edge-devices/deployment-manager.md#errors

@@ -1,0 +1,44 @@
+generated: '2026-08-02'
+method: searched
+source: https://docs.roboflow.com/reference/changelog/changelog.md
+url: https://docs.roboflow.com/reference/changelog/changelog
+scheme: monthly dated release notes
+current_version: null
+note: Roboflow publishes monthly, feature-level release notes rather than a semver API changelog. Recent window captured
+  below; the live changelog is the source of truth.
+entries:
+- date: 2026-07
+  title: July 2026
+  breaking: false
+  additions:
+  - 'Auto Label with Workflows: label data with any model or custom logic'
+  - 'Run Workflows on Asset Library images: enrich your library at scale'
+  - 'MCP Server: upload custom model weights from your AI assistant'
+  - 'Multiple Models Per Version: train and compare models side by side'
+  - 'Roboflow in the Claude directory: connect and build together more easily'
+  url: https://docs.roboflow.com/reference/changelog/changelog/july-2026
+- date: 2026-06
+  title: June 2026
+  breaking: false
+  additions:
+  - 'Active Learning: improve your models with production data'
+  - Depth Anything on the Serverless API
+  - 'Fast backbone in NAS: train faster, edge-ready models'
+  - RF-DETR Keypoint Preview
+  - Roboflow MCP Server in the Cursor marketplace
+  - Run Workflows on Asset Library images
+  - SAM 3 point prompting and video tracking in Workflows
+  - Track Class Lock block in Workflows
+  - Train and use YOLO26 semantic segmentation models
+  - 'Vision Events: query events with natural language via MCP Server'
+  url: https://docs.roboflow.com/reference/changelog/changelog/june-2026
+- date: 2026-05
+  title: May 2026
+  breaking: false
+  additions:
+  - Active Directory group sync for SSO
+  url: https://docs.roboflow.com/reference/changelog/changelog/may-2026
+  note: Partial capture — only the entries visible in the docs index at harvest time.
+other_changelogs:
+- name: Lens Studio integration
+  url: https://docs.roboflow.com/deployment/self-hosted/sdks/lens-studio/changelog-lens-studio

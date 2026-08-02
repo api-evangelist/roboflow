@@ -1,0 +1,95 @@
+generated: '2026-08-02'
+method: searched
+source:
+- well-known/roboflow-oauth-authorization-server.json
+- well-known/roboflow-openid-configuration.json
+- well-known/roboflow-oauth-protected-resource.json
+- openapi/roboflow-inference-openapi.json
+- https://roboflow.com/security
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: openapi/roboflow-inference-openapi.json declares openapi 3.1.0 with 37 paths / 38 operations and 78 component
+    schemas.
+- id: oauth2
+  conforms: true
+  evidence: Authorization code flow with refresh tokens advertised at https://app.roboflow.com/.well-known/oauth-authorization-server.
+- id: oauth2-pkce
+  conforms: true
+  evidence: 'code_challenge_methods_supported: [S256].'
+- id: oidc
+  conforms: true
+  evidence: OpenID Connect discovery document served at /.well-known/openid-configuration with jwks_uri, RS256 id tokens
+    and openid/profile/email scopes.
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: Live 200 application/json at https://app.roboflow.com/.well-known/oauth-authorization-server.
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: true
+  evidence: Live 200 at https://mcp.roboflow.com/.well-known/oauth-protected-resource; the MCP 401 carries a WWW-Authenticate
+    Bearer challenge with resource_metadata.
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: registration_endpoint https://app.roboflow.com/oauth/register; docs state most MCP clients register automatically
+    via DCR.
+- id: rfc7662-token-introspection
+  conforms: true
+  evidence: introspection_endpoint published in authorization-server metadata.
+- id: rfc7009-token-revocation
+  conforms: true
+  evidence: revocation_endpoint published in authorization-server metadata.
+- id: mcp
+  conforms: true
+  evidence: Hosted remote MCP server at https://mcp.roboflow.com/mcp over streamable HTTP with OAuth; 67 tools published
+    in provider docs.
+- id: llms-txt
+  conforms: true
+  evidence: /llms.txt served at both roboflow.com (200 text/plain) and docs.roboflow.com (200 text/markdown).
+- id: agent-skills
+  conforms: true
+  evidence: Nine first-party Agent Skills published under Apache-2.0 at github.com/roboflow/computer-vision-skills and
+    served as MCP resources.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors return a plain JSON object with a top-level `error` string, not application/problem+json.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 or an SPA HTML shell on every Roboflow host probed.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No documented Deprecation/Sunset header support or deprecation policy.
+- id: a2a
+  conforms: false
+  evidence: No agent card at /.well-known/agent-card.json or /.well-known/agent.json on any host.
+- id: asyncapi
+  conforms: false
+  evidence: No published event/streaming contract. Roboflow ships a Workflows "Webhook Sink" block for outbound delivery
+    to a customer endpoint, which is not a provider-side webhook catalog.
+- id: soc2
+  conforms: true
+  evidence: SOC 2 listed under Compliance in the Roboflow trust center (SafeBase) at https://roboflow.com/security; SOC
+    2 Report available on request.
+- id: hipaa
+  conforms: true
+  evidence: HIPAA listed under Compliance in the Roboflow trust center.
+- id: gdpr
+  conforms: null
+  evidence: Data privacy, data breach notification and data erasure controls are listed in the trust center, but no explicit
+    GDPR certification claim was observed.
+- id: dnssec
+  conforms: true
+  evidence: DNSSEC enabled on roboflow.com (security/roboflow-domain-security.yml), and listed as a Network Security
+    control in the trust center.
+compliance_program:
+  trust_center: https://roboflow.com/security
+  platform: SafeBase
+  certifications:
+  - SOC 2
+  - HIPAA
+  documents_on_request:
+  - SOC 2 Report
+  - Pentest Report
+  - Network Diagram
+  - Acceptable Use Policy
+  - BC/DR Policy
+  detail: security/roboflow-trust-center.yml

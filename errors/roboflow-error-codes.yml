@@ -1,0 +1,109 @@
+generated: '2026-08-02'
+method: searched
+source: https://docs.roboflow.com/reference/errors-and-status-codes.md
+format: json
+notes: Roboflow does not use RFC 9457 problem+json. The REST API returns a plain JSON object with a top-level `error`
+  string, sometimes with a `hint`. Captured from the provider's cross-tool Errors and Status Codes reference; the 422
+  shape is derived from the Inference Server OpenAPI (FastAPI HTTPValidationError).
+envelope:
+  content_type: application/json
+  fields:
+  - field: error
+    type: string
+    required: true
+    description: Human-readable error message.
+  - field: hint
+    type: string
+    required: false
+    description: Suggested remediation, on some endpoints.
+  example:
+    error: Project 'nonexistent' not found
+problems:
+- status: 400
+  title: Malformed request
+  description: Missing required field, bad shape, or invalid value.
+  retryable: false
+- status: 401
+  title: Authentication failure
+  description: No api_key, an invalid one, or a key that lacks the required scope for the operation.
+  retryable: false
+  see: scopes/roboflow-scopes.yml
+- status: 402
+  title: Payment required
+  description: The workspace's plan does not support the requested operation, or the monthly Hosted API inference quota
+    has been reached. The response body includes an AccessException error type.
+  retryable: false
+  error_type: AccessException
+- status: 403
+  title: Forbidden
+  description: The key authenticated but doesn't have access to the target workspace or resource.
+  retryable: false
+- status: 404
+  title: Not found
+  description: The workspace, project, version, workflow, or other resource doesn't exist or isn't visible to your key.
+  retryable: false
+- status: 409
+  title: Conflict
+  description: The resource exists in a state that prevents the requested operation (e.g. restoring a version whose parent
+    project is also in Trash).
+  retryable: false
+- status: 422
+  title: Validation error
+  description: 'Request body failed schema validation. Returns HTTPValidationError { detail: [{loc, msg, type}] }.'
+  retryable: false
+  source_operation: openapi/roboflow-inference-openapi.json
+  occurrences_in_spec: 31
+- status: 423
+  title: Locked
+  description: Workspace billing is paused — see the response body for the reason.
+  retryable: false
+- status: 429
+  title: Rate limited
+  description: Slow down and retry with exponential backoff and jitter.
+  retryable: true
+  see: rate-limits/roboflow-rate-limits.yml
+- status: 500
+  title: Server error
+  description: Transient server error. Safe to retry with backoff.
+  retryable: true
+cli_exit_codes:
+- code: 0
+  meaning: Success
+- code: 1
+  meaning: General error
+- code: 2
+  meaning: Authentication failure
+- code: 3
+  meaning: Resource not found
+sdk_exceptions:
+- exception: RuntimeError
+  when: Operation is logically invalid — e.g. calling restore() on a project that isn't in Trash.
+- exception: ValueError
+  when: A passed argument is malformed — e.g. an unrecognized model_format for Version.download().
+- exception: roboflow.adapters.rfapi.RoboflowError
+  when: The REST API returned a non-2xx response; the exception string carries the server's error body.
+- exception: roboflow.adapters.deploymentapi.DeploymentApiError
+  when: Equivalent to RoboflowError for the dedicated-deployments service.
+- exception: requests.exceptions.HTTPError / ConnectionError
+  when: Network-level failures (DNS, TLS, timeout).
+cross_tool_mapping:
+- situation: Missing / invalid API key
+  cli_exit: 2
+  sdk: RoboflowError ("401")
+  rest: 401
+- situation: Resource not found
+  cli_exit: 3
+  sdk: RoboflowError ("404") / RuntimeError
+  rest: 404
+- situation: Plan limitation / quota exceeded
+  cli_exit: 1
+  sdk: RoboflowError ("402")
+  rest: 402
+- situation: Bad input / malformed request
+  cli_exit: 1
+  sdk: ValueError / RoboflowError ("400")
+  rest: 400
+- situation: Server error / transient
+  cli_exit: 1
+  sdk: RoboflowError ("5xx")
+  rest: 5xx

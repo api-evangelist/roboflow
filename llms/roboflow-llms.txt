@@ -1,0 +1,69 @@
+# Roboflow
+
+> Roboflow is the computer vision platform used by over 1 million engineers to annotate images, train models, and deploy them to production — from the cloud to the edge.
+
+The links below are a curated map of the most useful pages for understanding what Roboflow offers. For the full catalog of individual model pages, see the Roboflow Playground model directory (linked under Resources); for every page on the site, see the sitemap at https://roboflow.com/sitemap.xml.
+
+## Product
+
+- [Annotate](https://roboflow.com/annotate): Label images faster with AI-assisted annotation tools.
+- [Train](https://roboflow.com/train): Train custom computer vision models on your own datasets.
+- [Deploy](https://roboflow.com/deploy): Run production vision models at scale, in the cloud or on-device.
+- [Workflows](https://roboflow.com/workflows/build): Open-source low-code tool to build multi-step vision pipelines.
+- [Auto Label](https://roboflow.com/auto-label): Automatically label datasets using foundation models.
+- [Universe](https://roboflow.com/universe): The largest community library of open vision datasets and models.
+- [Managed Compute](https://roboflow.com/managed-compute): Hosted, autoscaling inference infrastructure.
+- [Edge Vision Pro](https://roboflow.com/roboflow-edge-vision-pro): On-device vision AI with or without internet.
+- [OCR](https://roboflow.com/ocr): Easy online optical character recognition.
+
+## Solutions
+
+- [Enterprise](https://roboflow.com/enterprise): Real-world computer vision used by the Fortune 100.
+- [Customer Stories](https://roboflow.com/customer-stories): How teams use Roboflow in production.
+- [Integrations](https://roboflow.com/integrations): Connect Roboflow to data, training, and deployment tools.
+
+## Industries
+
+- [Industries](https://roboflow.com/industries): Vision AI solutions by industry vertical.
+- [Aerospace and Defense](https://roboflow.com/industries/aerospace-and-defense): Vision AI for aerospace and defense — efficiency, quality, and compliance.
+- [Agriculture](https://roboflow.com/industries/agriculture): Computer vision for agriculture — crop, livestock, and field monitoring.
+- [Automotive](https://roboflow.com/industries/automotive): Vision AI for automotive manufacturing — reduce costs and downtime.
+- [Banking and Finance](https://roboflow.com/industries/banking-and-finance): Computer vision for banking and finance.
+- [Consumer Goods](https://roboflow.com/industries/consumer-goods): AI for consumer goods manufacturing — improve quality and efficiency.
+- [Energy and Utilities](https://roboflow.com/industries/energy-and-utilities): Vision AI for energy and utilities — automated inspections and smart operations.
+- [Food Beverage Packaging](https://roboflow.com/industries/food-beverage-packaging): Computer vision for food and beverage packaging.
+- [Government](https://roboflow.com/industries/government): Computer vision for government and the public sector.
+- [Healthcare and Medicine](https://roboflow.com/industries/healthcare-and-medicine): Vision AI for healthcare — improve quality, operations, and safety.
+- [Industrial Manufacturing](https://roboflow.com/industries/industrial-manufacturing): Visual intelligence for smart factories and industrial manufacturing.
+- [Logistics](https://roboflow.com/industries/logistics): Bring vision AI to your logistics operations.
+- [Manufacturing](https://roboflow.com/industries/manufacturing): Computer vision for manufacturing quality and automation.
+- [Media and Entertainment](https://roboflow.com/industries/media-and-entertainment): Vision AI for media and entertainment — automate creative operations.
+- [Retail and Service](https://roboflow.com/industries/retail-and-service): AI for retail and service — improve efficiency and elevate quality.
+- [Robotics](https://roboflow.com/industries/robotics): Perception infrastructure for modern robotics.
+- [Safety and Security](https://roboflow.com/industries/safety-and-security): Computer vision for safety and security monitoring.
+- [Telecommunications](https://roboflow.com/industries/telecommunications): Computer vision for telecommunications.
+- [Transportation](https://roboflow.com/industries/transportation): Vision AI for transportation — real-time insights.
+- [Warehousing](https://roboflow.com/industries/warehousing): AI for warehouses — boost efficiency, safety, and inventory accuracy.
+
+## Resources
+
+- [Documentation](https://docs.roboflow.com): Official product and API documentation.
+- [Inference (open source)](https://inference.roboflow.com): Open-source library to run vision models anywhere.
+- [Blog](https://blog.roboflow.com): Tutorials, model explainers, and research write-ups.
+- [Learn Computer Vision](https://roboflow.com/learn): Guides and tutorials for learning computer vision.
+- [Model Directory (Playground)](https://playground.roboflow.com/models): Canonical catalog of 115+ supported vision models, with specs, comparisons, and live testing.
+- [Roboflow Rapid](https://rapid.roboflow.com): Build a working vision model in about 5 minutes.
+- [Annotation Formats](https://roboflow.com/formats): Reference and converters for 40+ annotation formats.
+- [Pricing](https://roboflow.com/pricing): Plans and usage-based pricing.
+- [Open Source](https://roboflow.com/open-source): Roboflow’s open-source projects.
+
+## Company
+
+- [About](https://roboflow.com/about): About Roboflow.
+- [Careers](https://roboflow.com/careers): Open roles at Roboflow.
+- [Contact Sales](https://roboflow.com/sales): Talk to the Roboflow sales team.
+- [Press](https://roboflow.com/press): Press and media resources.
+
+---
+
+_Maintainer: Roboflow. Contact: chris@roboflow.com. Last updated: 2026-06-17._

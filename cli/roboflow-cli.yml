@@ -1,0 +1,95 @@
+generated: '2026-08-02'
+method: searched
+source: https://docs.roboflow.com/reference/platform/cli.md
+name: roboflow
+install:
+- method: pip
+  command: pip install roboflow
+  package: packages/roboflow-packages.yml
+pattern: roboflow <noun> <verb>
+agent_friendly:
+  json_mode: --json / -j emits structured JSON on stdout; errors go to stderr as {"error":{"message","hint"}} leaving
+    stdout empty so pipelines stay safe to parse.
+  exit_codes:
+  - code: 0
+    meaning: Success
+  - code: 1
+    meaning: General error (bad input, network failure, unexpected server response)
+  - code: 2
+    meaning: Authentication failure (missing or invalid API key, no workspace selected)
+  - code: 3
+    meaning: Resource not found (project, version, workflow, deployment doesn't exist or isn't visible to your key)
+commands:
+- command: auth
+  description: Login, logout, check status, set default workspace
+- command: workspace
+  description: List and inspect workspaces
+- command: project
+  description: List, get, and create projects
+- command: version
+  description: List, get, download, and export dataset versions
+- command: image
+  description: Upload, get, search, tag, delete, and annotate images
+- command: model
+  description: List, get, and upload trained models
+- command: train
+  description: Start model training
+- command: infer
+  description: Run inference on an image
+- command: search
+  description: Search workspace images and export results
+- command: deployment
+  description: Manage dedicated deployments
+- command: workflow
+  description: Manage workflows
+- command: folder
+  description: Manage workspace folders
+- command: annotation
+  description: Annotation batches and jobs
+- command: universe
+  description: Search Roboflow Universe
+- command: video
+  description: Video inference
+- command: batch
+  description: Batch processing jobs
+  status: coming soon
+- command: completion
+  description: Generate shell completion scripts (bash, zsh, fish)
+global_flags:
+- flag: --json
+  short: -j
+  description: Output results as structured JSON (for agents and piping)
+- flag: --api-key
+  short: -k
+  description: API key override
+- flag: --workspace
+  short: -w
+  description: Workspace override
+- flag: --quiet
+  short: -q
+  description: Suppress progress bars and status messages
+- flag: --version
+  description: Show package version
+resource_shorthand:
+- form: my-project
+  meaning: Uses your default workspace
+- form: my-ws/my-project
+  meaning: Explicit workspace
+- form: my-project/3
+  meaning: Default workspace, version 3
+- form: my-ws/my-project/3
+  meaning: Explicit workspace, version 3
+aliases:
+- alias: roboflow login
+  equivalent: roboflow auth login
+- alias: roboflow whoami
+  equivalent: roboflow auth status
+- alias: roboflow upload
+  equivalent: roboflow image upload
+- alias: roboflow download
+  equivalent: roboflow version download
+other_clis:
+- name: inference
+  install: pip install inference-cli
+  description: Run and manage a self-hosted Roboflow Inference server
+  docs: https://docs.roboflow.com/deployment/self-hosted/self-hosted.md

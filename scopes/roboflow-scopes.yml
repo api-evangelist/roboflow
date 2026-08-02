@@ -1,0 +1,489 @@
+generated: '2026-08-02'
+method: searched
+source: https://app.roboflow.com/.well-known/oauth-authorization-server
+docs: https://docs.roboflow.com/reference/authentication/authentication/sign-in-with-roboflow-getting-started#available-scopes
+notes: Scope list harvested verbatim from the live RFC 8414 authorization-server metadata; descriptions
+  taken from the published "Available Scopes" table in the Sign in with Roboflow docs. Scopes present
+  in the metadata but absent from the docs table carry no description rather than an invented one.
+schemes:
+- name: Sign in with Roboflow (OAuth 2.1 / OIDC)
+  source: well-known/roboflow-oauth-authorization-server.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.roboflow.com/oauth/authorize
+    tokenUrl: https://app.roboflow.com/oauth/token
+    pkce:
+    - S256
+    refresh: true
+scope_count: 67
+mcp_scope_count: 55
+scopes:
+- scope: workspace:read
+  description: Read workspace details, list projects
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: project:create
+  description: Create projects
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: project:read
+  description: Read project details
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: project:update
+  description: Update project settings
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: workflow:create
+  description: Create Workflows
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: workflow:read
+  description: Read Workflows
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: workflow:update
+  description: Update Workflows
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: folder:create
+  description: Create project folders
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: folder:read
+  description: Read project folders
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: folder:update
+  description: Update project folders
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: folder:delete
+  description: Delete project folders
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: image:create
+  description: Upload images
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: image:read
+  description: Read and download images
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: image:tag
+  description: Add and remove image tags
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: image:annotate
+  description: Create and update annotations
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: model:infer
+  description: Run inference
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: model:deploy
+  description: Deploy models
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: model:manage
+  description: Manage model settings
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: model-eval:read
+  description: Read model evaluation results
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: device:read
+  description: Read devices
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: device:update
+  description: Update device settings
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: vision-events:read
+  description: Read vision events
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: vision-events:write
+  description: Create vision events
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: vision-events:manage
+  description: Manage vision event use cases
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: workspace-stats:read
+  description: Read workspace statistics
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: batch:create
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: false
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: batch:read
+  description: Read batches
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: batch:admin-read
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: false
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: batch:update
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: false
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: batch:delete
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: false
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: version:create
+  description: Create dataset versions
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: version:read
+  description: Read dataset versions
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: version:update
+  description: Update dataset versions
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: training-job:create
+  description: Start training jobs
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: annotation-job:create
+  description: Create annotation jobs
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: annotation-job:read
+  description: Read annotation jobs
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: annotation-job:update
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: false
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: annotation-job:submit-review
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: false
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: annotation-job:review
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: false
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: annotation-job:return-edits
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: false
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: annotation-job:accept
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: false
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: annotation-job:delete-annotations
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: false
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: annotation-job:delete
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: false
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: video-inference-job:create
+  description: Create video inference jobs
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: video-inference-job:read
+  description: Read video inference jobs
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: integration:create
+  description: Create integrations
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: integration:delete
+  description: Delete integrations
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: credentials:create
+  description: Create credentials
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: credentials:read
+  description: Read credentials
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: credentials:update
+  description: Update credentials
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: credentials:delete
+  description: Delete credentials
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: api-key:read
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: api-key:create
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: api-key:update
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: api-key:revoke
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: datasource:bucket-mirror:read
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: datasource:bucket-mirror:write
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: datasource:bucket-mirror:trigger
+  description: null
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: data-staging:read
+  description: Read staged data
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: data-staging:write
+  description: Write staged data
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: data-staging:delete
+  description: Delete staged data
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: batch-processing:read
+  description: Read batch jobs
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: batch-processing:trigger
+  description: Trigger batch processing
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: openid
+  description: Required. Returns a stable user ID in the sub claim.
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: profile
+  description: Read the user's display name and avatar.
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: email
+  description: Read the user's email address.
+  flows:
+  - authorizationCode
+  mcp_server: true
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json
+- scope: offline_access
+  description: Issue a refresh token so the app can keep access after the user leaves.
+  flows:
+  - authorizationCode
+  mcp_server: false
+  sources:
+  - well-known/roboflow-oauth-authorization-server.json

@@ -1,0 +1,83 @@
+generated: '2026-08-02'
+method: searched
+source:
+- https://docs.roboflow.com/reference/platform/rest-api.md
+- https://docs.roboflow.com/reference/platform/rest-api/async-tasks.md
+- https://docs.roboflow.com/deployment/production-checklist.md
+- https://docs.roboflow.com/reference/errors-and-status-codes.md
+authentication:
+  style: workspace-scoped API key, or OAuth 2.1 bearer token
+  placements:
+  - query parameter api_key
+  - JSON request body field api_key
+  - 'Authorization: Bearer header'
+  detail: authentication/roboflow-authentication.yml
+idempotency:
+  supported: false
+  note: Roboflow documents no idempotency key header or parameter on any surface, and none appears in the published Inference
+    Server OpenAPI. Write safety is handled by async task polling (each long-running write returns a task id) rather
+    than request-level idempotency. Recorded as absent — no Idempotency pointer is emitted.
+pagination:
+  style: per-endpoint
+  note: No single documented cross-API pagination contract. Model-evaluation image predictions are documented as paginated;
+    the REST API reference documents pagination per endpoint rather than as a platform convention.
+async_operations:
+  pattern: task-id polling
+  description: Long-running REST operations return a task ID; poll it for running / completed / failed status. Poll roughly
+    every 5 seconds; processing may take up to 30 seconds to start.
+  mcp_tool: async_tasks_get
+  docs: https://docs.roboflow.com/reference/platform/rest-api/async-tasks.md
+resource_addressing:
+  style: hierarchical path
+  hierarchy:
+  - /:workspace
+  - /:workspace/:project
+  - /:workspace/:project/:version
+  - /:workspace/:project/:version/:format
+  - /:workspace/workflows/:workflow
+  - /:workspace/groups
+  - /:workspace/trash
+hosts:
+- host: https://api.roboflow.com
+  role: Management — workspaces, projects, versions, training, workflows, datasets, vision events, trash
+- host: https://serverless.roboflow.com
+  role: Hosted inference — running a trained model or workflow against an image or video
+- host: https://detect.roboflow.com
+  role: Hosted Inference API (model predictions)
+- host: https://roboflow.cloud
+  role: Dedicated Deployments management
+error_envelope:
+  format: json
+  top_level_field: error
+  optional_field: hint
+  rfc9457: false
+  detail: errors/roboflow-error-codes.yml
+retries:
+  retryable:
+  - 429
+  - 5xx
+  non_retryable:
+  - 400
+  - 401
+  - 402
+  - 403
+  - 404
+  - 423
+  strategy: exponential backoff with jitter (1s, 2s, 4s, 8s + random offset), capped attempts
+rate_limit_signaling:
+  status: 429
+  headers: null
+  detail: rate-limits/roboflow-rate-limits.yml
+cold_starts:
+  note: Serverless loads models on demand; first call after idle (~10 min) pays a warmup cost. Set generous client timeouts
+    and prime the model. Observe x-model-cold-start and x-processing-time headers.
+versioning:
+  scheme: unversioned path
+  note: The REST API exposes no /v1-style version segment; the resource hierarchy is workspace/project/version where
+    "version" is a dataset version, not an API version. Inference Server releases are versioned semantically (info.version
+    in the OpenAPI).
+  detail: lifecycle/roboflow-lifecycle.yml
+agent_conventions:
+  cli_json_mode: cli/roboflow-cli.yml
+  mcp_server: mcp/roboflow-mcp.yml
+  agent_skills: skills/_index.yml

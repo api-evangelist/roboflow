@@ -1,0 +1,48 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Roboflow Inference Server API
+  version: 1.0.0
+extends: openapi/roboflow-inference-openapi.json
+actions:
+- target: $.info
+  description: Provenance and cross-links to the API Evangelist artifacts derived for this spec.
+  update:
+    x-apievangelist-provider: roboflow
+    x-apievangelist-harvested: '2026-08-02'
+    x-apievangelist-source: https://serverless.roboflow.com/openapi.json
+    x-apievangelist-artifacts:
+      authentication: authentication/roboflow-authentication.yml
+      scopes: scopes/roboflow-scopes.yml
+      errors: errors/roboflow-error-codes.yml
+      rate_limits: rate-limits/roboflow-rate-limits.yml
+      conventions: conventions/roboflow-conventions.yml
+      data_model: data-model/roboflow-data-model.yml
+      agentic_access: agentic-access/roboflow-agentic-access.yml
+      mcp: mcp/roboflow-mcp.yml
+      crosswalk: mcp/roboflow-tool-crosswalk.yml
+- target: $
+  description: The harvested spec omits servers[]. Record the three hosts that serve this identical document, plus the
+    self-hosted form.
+  update:
+    servers:
+    - url: https://serverless.roboflow.com
+      description: Serverless Hosted API
+    - url: https://detect.roboflow.com
+      description: Hosted Inference API
+    - url: https://infer.roboflow.com
+      description: Hosted inference alias
+    - url: http://localhost:9001
+      description: Self-hosted Roboflow Inference server (docker)
+- target: $.components
+  description: Document the api_key authentication the platform docs define but the spec does not declare.
+  update:
+    securitySchemes:
+      apiKeyQuery:
+        type: apiKey
+        in: query
+        name: api_key
+        description: Workspace-scoped Roboflow API key. See https://docs.roboflow.com/reference/authentication/authentication/find-your-roboflow-api-key
+- target: $.paths['/gaze/gaze_detection'].post
+  description: Flag the replacement path for the deprecated gaze detection operation.
+  update:
+    x-apievangelist-note: Marked deprecated in the upstream spec; no replacement operation is declared in this document.

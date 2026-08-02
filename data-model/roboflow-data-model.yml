@@ -1,0 +1,469 @@
+generated: '2026-08-02'
+method: derived
+source:
+- openapi/roboflow-inference-openapi.json
+- https://docs.roboflow.com/reference/platform/rest-api.md
+notes: Two layers. The platform entity hierarchy is taken from the published REST API resource hierarchy (prose docs
+  — api.roboflow.com has no public OpenAPI). The schema graph below is derived mechanically from $ref edges in the Inference
+  Server OpenAPI and describes request/response payload shapes, not persisted platform entities.
+platform_entities:
+- entity: Workspace
+  path: /:workspace
+  description: Top-level tenant. Owns projects, folders, team members, API keys, devices and billing.
+  relationships:
+  - kind: has_many
+    to: Project
+    via: projects
+  - kind: has_many
+    to: Folder
+    via: groups
+  - kind: has_many
+    to: Workflow
+    via: workflows
+  - kind: has_one
+    to: Trash
+    via: trash
+- entity: Project
+  path: /:workspace/:project
+  description: A computer vision project — detection, classification, segmentation or keypoint. Owns images, annotations,
+    batches and dataset versions.
+  relationships:
+  - kind: belongs_to
+    to: Workspace
+    via: workspace
+  - kind: has_many
+    to: Version
+    via: versions
+  - kind: has_many
+    to: Image
+    via: images
+  - kind: has_many
+    to: Batch
+    via: batches
+  - kind: has_many
+    to: AnnotationJob
+    via: annotation_jobs
+- entity: Version
+  path: /:workspace/:project/:version
+  description: An immutable dataset version with its splits, preprocessing and augmentation settings. A version can carry
+    one or more trained models.
+  relationships:
+  - kind: belongs_to
+    to: Project
+    via: project
+  - kind: has_many
+    to: Model
+    via: models
+  - kind: has_many
+    to: Export
+    via: formats
+- entity: Export
+  path: /:workspace/:project/:version/:format
+  description: A dataset version rendered into an export format (coco, yolov8, jsonl, …).
+  relationships:
+  - kind: belongs_to
+    to: Version
+    via: version
+- entity: Model
+  description: A trained model produced by a training job on a dataset version; deployable to serverless, dedicated,
+    self-hosted or edge targets.
+  relationships:
+  - kind: belongs_to
+    to: Version
+    via: version
+  - kind: has_many
+    to: ModelEvaluation
+    via: evals
+  - kind: belongs_to
+    to: TrainingJob
+    via: training
+- entity: ModelEvaluation
+  description: Evaluation of a model — mAP by split, confusion matrix, confidence sweep, per-class performance, vector
+    analysis.
+  relationships:
+  - kind: belongs_to
+    to: Model
+    via: model
+- entity: Image
+  description: An image in a project, with tags and annotations, arriving through an upload batch.
+  relationships:
+  - kind: belongs_to
+    to: Project
+    via: project
+  - kind: has_many
+    to: Annotation
+    via: annotations
+  - kind: belongs_to
+    to: Batch
+    via: batch
+- entity: Annotation
+  description: Labels attached to an image (XML, JSON or text).
+  relationships:
+  - kind: belongs_to
+    to: Image
+    via: image
+- entity: Batch
+  description: An upload batch grouping images for labeling.
+  relationships:
+  - kind: belongs_to
+    to: Project
+    via: project
+  - kind: has_many
+    to: Image
+    via: images
+  - kind: has_many
+    to: AnnotationJob
+    via: jobs
+- entity: AnnotationJob
+  description: Assignment of a batch to a labeler and a reviewer, with a review workflow.
+  relationships:
+  - kind: belongs_to
+    to: Batch
+    via: batch
+- entity: Workflow
+  path: /:workspace/workflows/:workflow
+  description: A low-code pipeline composing model steps, logic and visualization blocks into one deployable unit.
+  relationships:
+  - kind: belongs_to
+    to: Workspace
+    via: workspace
+  - kind: has_many
+    to: WorkflowBlock
+    via: steps
+- entity: Folder
+  path: /:workspace/groups
+  description: Project folder used to group projects and scope billing.
+  relationships:
+  - kind: belongs_to
+    to: Workspace
+    via: workspace
+  - kind: has_many
+    to: Project
+    via: projects
+- entity: Device
+  description: A registered edge device with runtime configuration, telemetry, logs and video streams.
+  relationships:
+  - kind: belongs_to
+    to: Workspace
+    via: workspace
+  - kind: has_many
+    to: Stream
+    via: streams
+  - kind: has_one
+    to: DeviceConfig
+    via: config
+- entity: AsyncTask
+  description: Handle returned by long-running operations (project fork, zip upload, export); polled for running/completed/failed.
+  relationships: []
+schema_graph:
+  source: openapi/roboflow-inference-openapi.json
+  schema_count: 78
+  relationship_count: 61
+  most_connected:
+  - schema: InferenceRequestImage
+    edges: 22
+  - schema: InferenceResponseImage
+    edges: 8
+  - schema: WebRTCWorkerRequest
+    edges: 4
+  - schema: InstanceSegmentationInferenceResponse
+    edges: 3
+  - schema: TrainingImage
+    edges: 3
+  - schema: Sam2Prompt
+    edges: 3
+  - schema: Sam3Prompt
+    edges: 3
+  - schema: Sam3PromptResult
+    edges: 3
+  - schema: ClassificationInferenceResponse
+    edges: 2
+  - schema: ClipCompareRequest
+    edges: 2
+  - schema: InstanceSegmentationPrediction
+    edges: 2
+  - schema: KeypointsDetectionInferenceResponse
+    edges: 2
+  - schema: KeypointsPrediction
+    edges: 2
+  - schema: MultiLabelClassificationInferenceResponse
+    edges: 2
+  - schema: OCRInferenceResponse
+    edges: 2
+  - schema: ObjectDetectionPrediction
+    edges: 2
+  - schema: ObjectDetectionInferenceResponse
+    edges: 2
+  - schema: OwlV2InferenceRequest
+    edges: 2
+  - schema: PerceptionEncoderCompareRequest
+    edges: 2
+  - schema: Box
+    edges: 2
+  - schema: Sam2PromptSet
+    edges: 2
+  - schema: Sam2SegmentationRequest
+    edges: 2
+  - schema: Sam3SegmentationRequest
+    edges: 2
+  - schema: SemanticSegmentationInferenceResponse
+    edges: 2
+  - schema: WebRTCConfig
+    edges: 2
+  relationships:
+  - from: ClassificationInferenceResponse
+    to: InferenceResponseImage
+    kind: has_many
+    via: image
+  - from: ClassificationInferenceResponse
+    to: ClassificationPrediction
+    kind: has_many
+    via: predictions
+  - from: ClipCompareRequest
+    to: InferenceRequestImage
+    kind: has_one
+    via: subject
+  - from: ClipCompareRequest
+    to: InferenceRequestImage
+    kind: has_many
+    via: prompt
+  - from: ClipImageEmbeddingRequest
+    to: InferenceRequestImage
+    kind: has_many
+    via: image
+  - from: DepthEstimationRequest
+    to: InferenceRequestImage
+    kind: has_many
+    via: image
+  - from: DoctrOCRInferenceRequest
+    to: InferenceRequestImage
+    kind: has_many
+    via: image
+  - from: EasyOCRInferenceRequest
+    to: InferenceRequestImage
+    kind: has_many
+    via: image
+  - from: GroundingDINOInferenceRequest
+    to: InferenceRequestImage
+    kind: has_many
+    via: image
+  - from: HTTPValidationError
+    to: ValidationError
+    kind: has_many
+    via: detail
+  - from: InitializeWebRTCResponse
+    to: CommandContext
+    kind: has_one
+    via: context
+  - from: InstanceSegmentationInferenceResponse
+    to: InferenceResponseImage
+    kind: has_many
+    via: image
+  - from: InstanceSegmentationInferenceResponse
+    to: InstanceSegmentationPrediction
+    kind: has_many
+    via: predictions
+  - from: InstanceSegmentationInferenceResponse
+    to: InstanceSegmentationRLEPrediction
+    kind: has_many
+    via: predictions
+  - from: InstanceSegmentationPrediction
+    to: Point-Output
+    kind: has_many
+    via: points
+  - from: KeypointsDetectionInferenceResponse
+    to: InferenceResponseImage
+    kind: has_many
+    via: image
+  - from: KeypointsDetectionInferenceResponse
+    to: KeypointsPrediction
+    kind: has_many
+    via: predictions
+  - from: KeypointsPrediction
+    to: Keypoint
+    kind: has_many
+    via: keypoints
+  - from: LMMInferenceRequest
+    to: InferenceRequestImage
+    kind: has_many
+    via: image
+  - from: LMMInferenceResponse
+    to: InferenceResponseImage
+    kind: has_many
+    via: image
+  - from: ModelsDescriptions
+    to: ModelDescriptionEntity
+    kind: has_many
+    via: models
+  - from: MultiLabelClassificationInferenceResponse
+    to: InferenceResponseImage
+    kind: has_many
+    via: image
+  - from: MultiLabelClassificationInferenceResponse
+    to: MultiLabelClassificationPrediction
+    kind: has_one
+    via: predictions
+  - from: OCRInferenceResponse
+    to: InferenceResponseImage
+    kind: has_one
+    via: image
+  - from: OCRInferenceResponse
+    to: ObjectDetectionPrediction
+    kind: has_many
+    via: predictions
+  - from: ObjectDetectionInferenceResponse
+    to: InferenceResponseImage
+    kind: has_many
+    via: image
+  - from: ObjectDetectionInferenceResponse
+    to: ObjectDetectionPrediction
+    kind: has_many
+    via: predictions
+  - from: OwlV2InferenceRequest
+    to: InferenceRequestImage
+    kind: has_many
+    via: image
+  - from: OwlV2InferenceRequest
+    to: TrainingImage
+    kind: has_many
+    via: training_data
+  - from: PPOCRInferenceRequest
+    to: InferenceRequestImage
+    kind: has_many
+    via: image
+  - from: PerceptionEncoderCompareRequest
+    to: InferenceRequestImage
+    kind: has_one
+    via: subject
+  - from: PerceptionEncoderCompareRequest
+    to: InferenceRequestImage
+    kind: has_many
+    via: prompt
+  - from: PerceptionEncoderImageEmbeddingRequest
+    to: InferenceRequestImage
+    kind: has_many
+    via: image
+  - from: Sam2EmbeddingRequest
+    to: InferenceRequestImage
+    kind: has_one
+    via: image
+  - from: Sam2Prompt
+    to: Box
+    kind: has_one
+    via: box
+  - from: Sam2Prompt
+    to: Point-Input
+    kind: has_many
+    via: points
+  - from: Sam2PromptSet
+    to: Sam2Prompt
+    kind: has_many
+    via: prompts
+  - from: Sam2SegmentationRequest
+    to: InferenceRequestImage
+    kind: has_one
+    via: image
+  - from: Sam2SegmentationRequest
+    to: Sam2PromptSet
+    kind: has_one
+    via: prompts
+  - from: Sam2SegmentationResponse
+    to: Sam2SegmentationPrediction
+    kind: has_many
+    via: predictions
+  - from: Sam3Prompt
+    to: Box
+    kind: has_many
+    via: boxes
+  - from: Sam3Prompt
+    to: BoxXYXY
+    kind: has_many
+    via: boxes
+  - from: Sam3PromptResult
+    to: Sam3PromptEcho
+    kind: has_one
+    via: echo
+  - from: Sam3PromptResult
+    to: Sam3SegmentationPrediction
+    kind: has_many
+    via: predictions
+  - from: Sam3SegmentationRequest
+    to: InferenceRequestImage
+    kind: has_one
+    via: image
+  - from: Sam3SegmentationRequest
+    to: Sam3Prompt
+    kind: has_many
+    via: prompts
+  - from: Sam3SegmentationResponse
+    to: Sam3PromptResult
+    kind: has_many
+    via: prompt_results
+  - from: Sam3_3D_Objects_InferenceRequest
+    to: InferenceRequestImage
+    kind: has_one
+    via: image
+  - from: SamEmbeddingRequest
+    to: InferenceRequestImage
+    kind: has_one
+    via: image
+  - from: SamSegmentationRequest
+    to: InferenceRequestImage
+    kind: has_one
+    via: image
+  - from: SemanticSegmentationInferenceResponse
+    to: InferenceResponseImage
+    kind: has_many
+    via: image
+  - from: SemanticSegmentationInferenceResponse
+    to: SemanticSegmentationPrediction
+    kind: has_one
+    via: predictions
+  - from: TrOCRInferenceRequest
+    to: InferenceRequestImage
+    kind: has_many
+    via: image
+  - from: TrainingImage
+    to: TrainBox
+    kind: has_many
+    via: boxes
+  - from: TrainingImage
+    to: InferenceRequestImage
+    kind: has_one
+    via: image
+  - from: WebRTCConfig
+    to: RTCIceServer
+    kind: has_many
+    via: iceServers
+  - from: WebRTCWorkerRequest
+    to: WorkflowConfiguration
+    kind: has_one
+    via: workflow_configuration
+  - from: WebRTCWorkerRequest
+    to: WebRTCOffer
+    kind: has_one
+    via: webrtc_offer
+  - from: WebRTCWorkerRequest
+    to: WebRTCConfig
+    kind: has_one
+    via: webrtc_config
+  - from: WebRTCWorkerRequest
+    to: WebRTCTURNConfig
+    kind: has_one
+    via: webrtc_turn_config
+  - from: YOLOWorldInferenceRequest
+    to: InferenceRequestImage
+    kind: has_many
+    via: image
+identifiers:
+- id: workspace
+  form: url slug
+  note: Workspace slug, changes when the workspace is renamed.
+- id: project
+  form: url slug
+- id: version
+  form: integer
+  note: Always numeric — that is how workspace/project is disambiguated from project/version in CLI shorthand.
+- id: model_id
+  form: <project>/<version>
+  note: Model identifier used on inference calls.

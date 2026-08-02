@@ -1,0 +1,479 @@
+generated: '2026-08-02'
+method: derived
+source:
+- mcp/roboflow-mcp.yml
+- openapi/roboflow-inference-openapi.json
+notes: 'Roboflow runs two non-overlapping API surfaces. The published OpenAPI covers only the Inference Server (detect/infer/serverless.roboflow.com)
+  — model execution primitives. The MCP server almost entirely fronts the management REST API at api.roboflow.com, which
+  has no public machine-readable contract. The result is a near-disjoint crosswalk: one real binding, and two large sets
+  that each surface capability the other does not.'
+surfaces:
+  openapi:
+    file: openapi/roboflow-inference-openapi.json
+    title: Roboflow Inference Server
+    version: 1.3.8
+    operations: 38
+    gated: false
+    hosts:
+    - https://detect.roboflow.com
+    - https://infer.roboflow.com
+    - https://serverless.roboflow.com
+  rest_management:
+    host: https://api.roboflow.com
+    openapi: null
+    gated: true
+    note: 401 on every anonymous path including /openapi.json, /swagger.json, /docs. Documented in prose only.
+    docs: https://docs.roboflow.com/reference/platform/rest-api.md
+  mcp:
+    url: https://mcp.roboflow.com/mcp
+    tools: 67
+    gated: true
+    note: tools/list returns 401 with an OAuth challenge; tool names/descriptions taken from the provider-published docs
+      tables, inputSchemas require an authenticated introspection.
+  graphql: null
+crosswalk:
+- tool: models_infer
+  category: models
+  rest:
+  - legacy_infer_from_request__dataset_id___version_id__post
+  - legacy_infer_from_request__dataset_id___version_id__get
+  binding: rest
+  confidence: high
+  note: The MCP hosted-inference tool calls the serverless model endpoint POST/GET /{dataset_id}/{version_id}, which
+    is exactly the legacy_infer_from_request pair in the Inference Server spec served at serverless.roboflow.com. Mapped
+    by endpoint semantics; the live tool inputSchema is OAuth-gated so the binding was not confirmed by introspection.
+  input_contract: openapi/roboflow-inference-openapi.json#/paths/~1{dataset_id}~1{version_id}
+mcp_only:
+- tool: agent_chat
+  category: agent
+  reason: Backed by the in-app Roboflow Agent HTTP chat API; no public OpenAPI.
+- tool: agent_conversation_get
+  category: agent
+  reason: Backed by the in-app Roboflow Agent HTTP chat API; no public OpenAPI.
+- tool: agent_conversations_list
+  category: agent
+  reason: Backed by the in-app Roboflow Agent HTTP chat API; no public OpenAPI.
+- tool: agent_workflow_publish
+  category: agent
+  reason: Backed by the in-app Roboflow Agent HTTP chat API; no public OpenAPI.
+- tool: projects_list
+  category: projects
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: projects_get
+  category: projects
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: projects_create
+  category: projects
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: projects_fork
+  category: projects
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: projects_health
+  category: projects
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: create_project_app
+  category: projects
+  reason: Server-side "Prefab" UI composite — opens an interactive surface for the human rather than calling one REST
+    operation.
+- tool: images_search
+  category: images
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: images_prepare_upload
+  category: images
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: images_prepare_upload_zip
+  category: images
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: images_upload_zip_status
+  category: images
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: annotations_save
+  category: annotation
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: autolabel_start
+  category: annotation
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: autolabel_job_get
+  category: annotation
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: annotation_jobs_create
+  category: batch
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: annotation_batches_list
+  category: batch
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: annotation_batches_get
+  category: batch
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: versions_get
+  category: versions
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: versions_generate
+  category: versions
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: versions_export
+  category: versions
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: models_list
+  category: models
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: models_get
+  category: models
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: models_train
+  category: models
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: models_get_training_status
+  category: models
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: models_star_nas
+  category: models
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: trainings_get_results
+  category: models
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: trainings_stop
+  category: models
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: trainings_cancel
+  category: models
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: model_evals_list
+  category: model-evaluations
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: model_evals_get
+  category: model-evaluations
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: model_evals_get_map_results
+  category: model-evaluations
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: model_evals_get_confusion_matrix
+  category: model-evaluations
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: model_evals_get_confidence_sweep
+  category: model-evaluations
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: model_evals_get_performance_by_class
+  category: model-evaluations
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: model_evals_get_image_predictions
+  category: model-evaluations
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: model_evals_get_vector_analysis
+  category: model-evaluations
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: model_evals_get_recommendations
+  category: model-evaluations
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: workflows_list
+  category: workflows
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: workflows_get
+  category: workflows
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: workflows_create
+  category: workflows
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: workflows_update
+  category: workflows
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: workflows_run
+  category: workflows
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: workflow_blocks_list
+  category: workflows
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: workflow_blocks_get_schema
+  category: workflows
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: workflow_specs_validate
+  category: workflows
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: workflow_specs_run
+  category: workflows
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: devices_list
+  category: devices
+  reason: Backed by the Deployment Manager / edge-device service, documented in prose under docs.roboflow.com/deployment/edge-devices;
+    no public machine-readable contract.
+- tool: devices_get
+  category: devices
+  reason: Backed by the Deployment Manager / edge-device service, documented in prose under docs.roboflow.com/deployment/edge-devices;
+    no public machine-readable contract.
+- tool: devices_create
+  category: devices
+  reason: Backed by the Deployment Manager / edge-device service, documented in prose under docs.roboflow.com/deployment/edge-devices;
+    no public machine-readable contract.
+- tool: devices_get_config
+  category: devices
+  reason: Backed by the Deployment Manager / edge-device service, documented in prose under docs.roboflow.com/deployment/edge-devices;
+    no public machine-readable contract.
+- tool: devices_get_default_config
+  category: devices
+  reason: Backed by the Deployment Manager / edge-device service, documented in prose under docs.roboflow.com/deployment/edge-devices;
+    no public machine-readable contract.
+- tool: devices_get_config_history
+  category: devices
+  reason: Backed by the Deployment Manager / edge-device service, documented in prose under docs.roboflow.com/deployment/edge-devices;
+    no public machine-readable contract.
+- tool: devices_update_config
+  category: devices
+  reason: Backed by the Deployment Manager / edge-device service, documented in prose under docs.roboflow.com/deployment/edge-devices;
+    no public machine-readable contract.
+- tool: devices_get_logs
+  category: devices
+  reason: Backed by the Deployment Manager / edge-device service, documented in prose under docs.roboflow.com/deployment/edge-devices;
+    no public machine-readable contract.
+- tool: devices_get_events
+  category: devices
+  reason: Backed by the Deployment Manager / edge-device service, documented in prose under docs.roboflow.com/deployment/edge-devices;
+    no public machine-readable contract.
+- tool: devices_get_telemetry
+  category: devices
+  reason: Backed by the Deployment Manager / edge-device service, documented in prose under docs.roboflow.com/deployment/edge-devices;
+    no public machine-readable contract.
+- tool: devices_streams_list
+  category: devices
+  reason: Backed by the Deployment Manager / edge-device service, documented in prose under docs.roboflow.com/deployment/edge-devices;
+    no public machine-readable contract.
+- tool: devices_streams_get
+  category: devices
+  reason: Backed by the Deployment Manager / edge-device service, documented in prose under docs.roboflow.com/deployment/edge-devices;
+    no public machine-readable contract.
+- tool: universe_search
+  category: universe
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: universe_search_app
+  category: universe
+  reason: Server-side "Prefab" UI composite — opens an interactive surface for the human rather than calling one REST
+    operation.
+- tool: universe_dataset_images_search
+  category: universe
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: async_tasks_get
+  category: misc
+  reason: Backed by the Roboflow management REST API at api.roboflow.com, which publishes no public OpenAPI (every path
+    answers 401 to anonymous probes, including /openapi.json). Documented only in prose at docs.roboflow.com/reference/platform/rest-api.
+- tool: meta_feedback_send
+  category: misc
+  reason: MCP-server-native utility with no public REST equivalent.
+rest_only:
+- capability: CLIP embeddings
+  operations:
+  - operationId: clip_embed_image_clip_embed_image_post
+    method: POST
+    path: /clip/embed_image
+    summary: CLIP Image Embeddings
+  - operationId: clip_embed_text_clip_embed_text_post
+    method: POST
+    path: /clip/embed_text
+    summary: CLIP Text Embeddings
+  - operationId: clip_compare_clip_compare_post
+    method: POST
+    path: /clip/compare
+    summary: CLIP Compare
+- capability: Perception Encoder embeddings
+  operations:
+  - operationId: pe_embed_image_perception_encoder_embed_image_post
+    method: POST
+    path: /perception_encoder/embed_image
+    summary: PE Image Embeddings
+  - operationId: pe_embed_text_perception_encoder_embed_text_post
+    method: POST
+    path: /perception_encoder/embed_text
+    summary: Perception Encoder Text Embeddings
+  - operationId: pe_compare_perception_encoder_compare_post
+    method: POST
+    path: /perception_encoder/compare
+    summary: Perception Encoder Compare
+- capability: Open-vocabulary detection
+  operations:
+  - operationId: grounding_dino_infer_grounding_dino_infer_post
+    method: POST
+    path: /grounding_dino/infer
+    summary: Grounding DINO inference.
+  - operationId: yolo_world_infer_yolo_world_infer_post
+    method: POST
+    path: /yolo_world/infer
+    summary: YOLO-World inference.
+  - operationId: owlv2_infer_owlv2_infer_post
+    method: POST
+    path: /owlv2/infer
+    summary: Owlv2 image prompting
+- capability: Segment Anything (SAM / SAM2 / SAM3)
+  operations:
+  - operationId: sam_embed_image_sam_embed_image_post
+    method: POST
+    path: /sam/embed_image
+    summary: SAM Image Embeddings
+  - operationId: sam_segment_image_sam_segment_image_post
+    method: POST
+    path: /sam/segment_image
+    summary: SAM Image Segmentation
+  - operationId: sam2_embed_image_sam2_embed_image_post
+    method: POST
+    path: /sam2/embed_image
+    summary: SAM2 Image Embeddings
+  - operationId: sam2_segment_image_sam2_segment_image_post
+    method: POST
+    path: /sam2/segment_image
+    summary: SAM2 Image Segmentation
+  - operationId: sam3_embed_image_sam3_embed_image_post
+    method: POST
+    path: /sam3/embed_image
+    summary: Seg preview Image Embeddings
+  - operationId: sam3_segment_image_sam3_concept_segment_post
+    method: POST
+    path: /sam3/concept_segment
+    summary: SAM3 PCS (promptable concept segmentation)
+  - operationId: sam3_visual_segment_sam3_visual_segment_post
+    method: POST
+    path: /sam3/visual_segment
+    summary: SAM3 PVS (promptable visual segmentation)
+  - operationId: sam3_3d_infer_sam3_3d_infer_post
+    method: POST
+    path: /sam3_3d/infer
+    summary: SAM3 3D Object Generation
+- capability: OCR
+  operations:
+  - operationId: doctr_retrieve_text_doctr_ocr_post
+    method: POST
+    path: /doctr/ocr
+    summary: DocTR OCR response
+  - operationId: easy_ocr_retrieve_text_easy_ocr_ocr_post
+    method: POST
+    path: /easy_ocr/ocr
+    summary: EasyOCR OCR response
+  - operationId: trocr_retrieve_text_ocr_trocr_post
+    method: POST
+    path: /ocr/trocr
+    summary: TrOCR OCR response
+  - operationId: pp_ocr_retrieve_text_ocr_pp_ocr_post
+    method: POST
+    path: /ocr/pp-ocr
+    summary: PP-OCRv6 OCR response
+- capability: Large multimodal models
+  operations:
+  - operationId: infer_lmm_infer_lmm_post
+    method: POST
+    path: /infer/lmm
+    summary: Large multi-modal model infer
+  - operationId: infer_lmm_with_model_id_infer_lmm__model_id__post
+    method: POST
+    path: /infer/lmm/{model_id}
+    summary: Large multi-modal model infer with model ID in path
+- capability: Depth estimation
+  operations:
+  - operationId: depth_estimation_infer_depth_estimation_post
+    method: POST
+    path: /infer/depth-estimation
+    summary: Depth Estimation
+  - operationId: depth_estimation_with_model_id_infer_depth_estimation__model_id__post
+    method: POST
+    path: /infer/depth-estimation/{model_id}
+    summary: Depth Estimation with model ID in path
+- capability: Gaze detection (deprecated)
+  operations:
+  - operationId: gaze_detection_deprecated_gaze_gaze_detection_post
+    method: POST
+    path: /gaze/gaze_detection
+    summary: Gaze Detection (deprecated)
+    deprecated: true
+- capability: WebRTC live video
+  operations:
+  - operationId: initialise_webrtc_worker_initialise_webrtc_worker_post
+    method: POST
+    path: /initialise_webrtc_worker
+    summary: '[EXPERIMENTAL] Establishes WebRTC peer connection and processes video stream in spawned process or modal
+      function'
+  - operationId: webrtc_session_heartbeat_webrtc_session_heartbeat_post
+    method: POST
+    path: /webrtc/session/heartbeat
+    summary: WebRTC session heartbeat
+  - operationId: webrtc_session_end_webrtc_session_heartbeat_end_post
+    method: POST
+    path: /webrtc/session/heartbeat/end
+    summary: End WebRTC session
+- capability: Server health and metadata
+  operations:
+  - operationId: metrics_metrics_get
+    method: GET
+    path: /metrics
+    summary: Metrics
+  - operationId: root_info_get
+    method: GET
+    path: /info
+    summary: Info
+  - operationId: get_logs_logs_get
+    method: GET
+    path: /logs
+    summary: Get Recent Logs
+  - operationId: registry_model_registry_get
+    method: GET
+    path: /model/registry
+    summary: Get model keys
+  - operationId: readiness_readiness_get
+    method: GET
+    path: /readiness
+    summary: Readiness
+  - operationId: healthz_healthz_get
+    method: GET
+    path: /healthz
+    summary: Healthz
+  - operationId: dashboard_guard_dashboard_html_get
+    method: GET
+    path: /dashboard.html
+    summary: Dashboard Guard
+coverage:
+  tools_named: 67
+  tools_bound_to_openapi: 1
+  tools_mcp_only: 66
+  rest_ops_total: 38
+  rest_ops_with_tool: 2
+  rest_ops_without_tool: 36

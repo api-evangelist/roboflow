@@ -1,0 +1,97 @@
+generated: '2026-08-02'
+method: probed
+notes: Probed /.well-known/* across roboflow.com, api.roboflow.com, detect.roboflow.com, docs.roboflow.com,
+  app.roboflow.com, infer.roboflow.com and mcp.roboflow.com. app.roboflow.com is a single-page app that
+  answers 200 with an HTML shell for unknown /.well-known/* paths — only the four JSON documents below
+  were accepted as real.
+hosts:
+- host: https://app.roboflow.com
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    file: roboflow-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    file: roboflow-oauth-authorization-server.json
+  - path: /.well-known/jwks.json
+    status: 200
+    content_type: application/jwk-set+json
+    file: roboflow-jwks.json
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/html
+    rejected: SPA HTML catch-all, not RFC 9116
+  - path: /.well-known/agent-card.json
+    status: 200
+    content_type: text/html
+    rejected: SPA HTML catch-all, not an AgentCard
+  - path: /.well-known/agent.json
+    status: 200
+    content_type: text/html
+    rejected: SPA HTML catch-all, not an AgentCard
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: text/html
+    rejected: SPA HTML catch-all
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    content_type: text/html
+    rejected: SPA HTML catch-all
+- host: https://mcp.roboflow.com
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: application/json
+    file: roboflow-oauth-protected-resource.json
+- host: https://roboflow.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://api.roboflow.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 401
+  - path: /.well-known/agent-card.json
+    status: 401
+  - path: /.well-known/agent.json
+    status: 401
+  - path: /.well-known/oauth-protected-resource
+    status: 401
+  note: api.roboflow.com requires an api_key on every path and answers 401 to anonymous probes.
+- host: https://detect.roboflow.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://docs.roboflow.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+security_txt:
+  found: false
+  note: No RFC 9116 security.txt published on any Roboflow host as of this probe.
+agent_card:
+  found: false
+  note: No A2A agent card on any host. Every 200 on an agent-card path was the app.roboflow.com SPA HTML
+    shell and was rejected.

@@ -1,0 +1,53 @@
+generated: '2026-08-02'
+method: searched
+source:
+- https://docs.roboflow.com/platform/support/roboflow-status-and-uptime.md
+- https://docs.roboflow.com/reference/changelog/changelog.md
+- openapi/roboflow-inference-openapi.json
+versioning:
+  scheme: unversioned-path
+  current: null
+  note: The Roboflow REST API carries no version segment in the path — resources are addressed as /:workspace/:project/:version
+    where "version" is a dataset version, not an API version. The Inference Server is released semantically; the harvested
+    spec reports info.version 1.3.8.
+  inference_server_version: 1.3.8
+  docs: https://docs.roboflow.com/reference/platform/rest-api.md
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: Roboflow publishes no formal deprecation or sunset policy and does not document RFC 8594 Deprecation/Sunset headers.
+    Deprecations surface case by case in the monthly changelog and as deprecated flags in the Inference Server OpenAPI.
+    No Deprecation pointer is emitted.
+deprecated_operations:
+- operationId: gaze_detection_deprecated_gaze_gaze_detection_post
+  path: /gaze/gaze_detection
+  method: POST
+  summary: Gaze Detection (deprecated)
+  source: openapi/roboflow-inference-openapi.json
+sla:
+  url: https://security.roboflow.com/
+  uptime_target: null
+  note: A Service-Level Agreement is listed as a document in the Roboflow trust center (SafeBase), gated behind an access
+    request; no public uptime target is published.
+status_page: https://status.roboflow.com/
+status_components:
+- service: Roboflow App
+  covers: app.roboflow.com — dashboard, training, annotation
+- service: Hosted Inference API
+  covers: detect.roboflow.com — model predictions
+- service: REST API
+  covers: dataset, project, and workspace endpoints
+- service: Universe
+  covers: universe.roboflow.com — public datasets and models
+- service: Serverless Hosted API
+  covers: serverless inference
+changelog: changelog/roboflow-changelog.yml
+support:
+  community: https://discuss.roboflow.com/
+  help_center: https://help.roboflow.com/
+  docs: https://docs.roboflow.com/platform/support.md
+  live_chat: in-app, paid plans
+account_lifecycle:
+  account_deletion: https://docs.roboflow.com/platform/support/account-deletion.md
+  trash_retention: Deleted projects, dataset versions, trainings and workflows are restorable from Trash for 30 days.
+  docs: https://docs.roboflow.com/platform/workspaces/trash.md

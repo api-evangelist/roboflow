@@ -1,0 +1,127 @@
+generated: '2026-08-02'
+method: searched
+source:
+- https://pypi.org
+- https://registry.npmjs.org
+- https://docs.roboflow.com/reference/platform/python-sdk.md
+packages:
+- language: python
+  registry: pypi
+  name: roboflow
+  version_at_harvest: 1.4.0
+  summary: Official Python package for working with the Roboflow API
+  url: https://pypi.org/project/roboflow/
+  install: pip install roboflow
+  official: true
+  role: platform SDK + CLI
+  source: https://github.com/roboflow/roboflow-python
+  docs: https://docs.roboflow.com/reference/platform/python-sdk.md
+- language: python
+  registry: pypi
+  name: inference
+  version_at_harvest: 1.3.8
+  summary: Roboflow Inference — run vision models locally or as a server
+  url: https://pypi.org/project/inference/
+  install: pip install inference
+  official: true
+  role: self-hosted inference server
+  source: https://github.com/roboflow/inference
+- language: python
+  registry: pypi
+  name: inference-sdk
+  version_at_harvest: 1.3.8
+  summary: HTTP client for a Roboflow Inference server
+  url: https://pypi.org/project/inference-sdk/
+  install: pip install inference-sdk
+  official: true
+  role: inference HTTP client
+- language: python
+  registry: pypi
+  name: inference-cli
+  version_at_harvest: 1.3.8
+  summary: CLI for running and managing a Roboflow Inference server
+  url: https://pypi.org/project/inference-cli/
+  install: pip install inference-cli
+  official: true
+  role: inference CLI
+- language: python
+  registry: pypi
+  name: supervision
+  version_at_harvest: 0.29.1
+  summary: Reusable computer vision utilities (annotators, trackers, dataset tooling)
+  url: https://pypi.org/project/supervision/
+  install: pip install supervision
+  official: true
+  role: open-source CV toolkit
+  source: https://github.com/roboflow/supervision
+- language: python
+  registry: pypi
+  name: rfdetr
+  version_at_harvest: 1.9.0
+  summary: RF-DETR — Roboflow real-time detection transformer
+  url: https://pypi.org/project/rfdetr/
+  install: pip install rfdetr
+  official: true
+  role: model family
+  source: https://github.com/roboflow/rf-detr
+- language: python
+  registry: pypi
+  name: maestro
+  version_at_harvest: 1.0.0
+  summary: Streamline fine-tuning of vision-language models
+  url: https://pypi.org/project/maestro/
+  install: pip install maestro
+  official: true
+  role: VLM fine-tuning
+  source: https://github.com/roboflow/maestro
+- language: python
+  registry: pypi
+  name: trackers
+  version_at_harvest: 2.5.0.post0
+  summary: Unified object-tracking library
+  url: https://pypi.org/project/trackers/
+  install: pip install trackers
+  official: true
+  role: object tracking
+  source: https://github.com/roboflow/trackers
+- language: javascript
+  registry: npm
+  name: roboflow
+  version_at_harvest: 0.2.0
+  summary: Roboflow.com node module
+  url: https://www.npmjs.com/package/roboflow
+  install: npm install roboflow
+  official: true
+  role: Node.js client
+  source: https://github.com/roboflow/roboflow-node
+- language: javascript
+  registry: npm
+  name: inferencejs
+  version_at_harvest: 1.3.0
+  summary: Edge library for deploying computer vision applications in the browser
+  url: https://www.npmjs.com/package/inferencejs
+  install: npm install inferencejs
+  official: true
+  role: in-browser inference (WebGL)
+- language: javascript
+  registry: npm
+  name: '@roboflow/skills'
+  url: https://github.com/roboflow/computer-vision-skills
+  install: npx @roboflow/skills install
+  official: true
+  role: Agent Skills installer
+  note: Referenced in the Roboflow agents docs as the install path for the Agent Skills plugin; not resolvable on the
+    public npm registry at harvest time (404).
+summary:
+  official_count: 11
+  languages:
+  - python
+  - javascript
+  registries:
+  - pypi
+  - npm
+not_found:
+- registry: pypi
+  name: roboflow-cli
+  status: 404
+  note: The CLI ships inside the roboflow PyPI package, not as a separate distribution.
