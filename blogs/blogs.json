@@ -1,0 +1,14 @@
+{
+  "repo": "roboflow",
+  "feeds": [
+    {
+      "source": "https://discuss.roboflow.com/",
+      "feed_url": "https://discuss.roboflow.com/posts.rss",
+      "title": "",
+      "saved": 2,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 2,
+  "fetched": "2026-08-06T14:08:46Z"
+}
