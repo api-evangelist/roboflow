@@ -28,35 +28,14 @@ tags:
 - Edge AI
 - Datasets
 apis:
-- aid: roboflow:inference
-  name: Roboflow Inference Server API
-  description: The OpenAPI-described inference surface of the Roboflow platform. Runs trained Roboflow models
-    plus a catalog of foundation models — CLIP and Perception Encoder embeddings, Grounding DINO, YOLO-World
-    and OWLv2 open-vocabulary detection, SAM/SAM2/SAM3 segmentation, DocTR/EasyOCR/TrOCR/PP-OCR text
-    extraction, depth estimation, and large multimodal models — over HTTP. The same specification is served
-    by the hosted serverless endpoints and by a self-hosted Docker inference server.
-  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
-  baseURL: https://serverless.roboflow.com
-  tags:
-  - Inference
-  - Computer Vision
-  - Object Detection
-  - Segmentation
-  - OCR
-  properties:
-  - type: OpenAPI
-    url: openapi/roboflow-inference-openapi.json
-  - type: Overlay
-    url: overlays/roboflow-inference-overlay.yaml
-  - type: Documentation
-    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
 - aid: roboflow:rest
   name: Roboflow REST API
-  description: The authoritative management interface to the Roboflow platform — workspaces, projects,
-    dataset versions, image upload and annotation, training jobs, model evaluations, Workflows, folders,
-    vision events and trash. Every platform feature ships here first; the Python SDK and CLI both call it.
-    Resources are addressed hierarchically as /:workspace/:project/:version. Authenticated with a
-    workspace-scoped API key; long-running operations return a task id to poll.
+  description: >-
+    The authoritative management interface to the Roboflow platform — workspaces, projects, dataset versions,
+    image upload and annotation, training jobs, model evaluations, Workflows, folders, vision events and
+    trash. Every platform feature ships here first; the Python SDK and CLI both call it. Resources are
+    addressed hierarchically as /:workspace/:project/:version. Authenticated with a workspace-scoped API
+    key; long-running operations return a task id to poll.
   humanURL: https://docs.roboflow.com/reference/platform/rest-api
   baseURL: https://api.roboflow.com
   tags:
@@ -73,9 +52,10 @@ apis:
     url: https://docs.roboflow.com/reference/errors-and-status-codes
 - aid: roboflow:mcp
   name: Roboflow MCP Server
-  description: Roboflow's hosted, remote Model Context Protocol server. Exposes 67 tools across agent chat,
-    projects, images, annotation, batches, dataset versions, model training, model evaluations, Workflows,
-    edge devices and streams, and Roboflow Universe search. Authenticated with OAuth 2.1 (authorization code
+  description: >-
+    Roboflow's hosted, remote Model Context Protocol server. Exposes 67 tools across agent chat, projects,
+    images, annotation, batches, dataset versions, model training, model evaluations, Workflows, edge
+    devices and streams, and Roboflow Universe search. Authenticated with OAuth 2.1 (authorization code
     + PKCE) against app.roboflow.com with RFC 7591 dynamic client registration — no API key required.
   humanURL: https://docs.roboflow.com/agents/agents/mcp-server
   baseURL: https://mcp.roboflow.com/mcp
@@ -90,12 +70,304 @@ apis:
     url: mcp/roboflow-tool-crosswalk.yml
   - type: Documentation
     url: https://docs.roboflow.com/agents/agents/mcp-server
+- aid: roboflow:roboflow-clip-api
+  name: Roboflow Clip API
+  description: The Clip API from Roboflow — 3 operation(s) for clip.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Clip
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-clip-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-dashboard-html-api
+  name: Roboflow Dashboard.html API
+  description: The Dashboard.html API from Roboflow — 1 operation(s) for dashboard.html.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Dashboard.html
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-dashboard-html-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-doctr-api
+  name: Roboflow Doctr API
+  description: The Doctr API from Roboflow — 1 operation(s) for doctr.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Doctr
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-doctr-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-easy-ocr-api
+  name: Roboflow Easy Ocr API
+  description: The Easy Ocr API from Roboflow — 1 operation(s) for easy ocr.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Easy Ocr
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-easy-ocr-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-gaze-api
+  name: Roboflow Gaze API
+  description: The Gaze API from Roboflow — 1 operation(s) for gaze.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Gaze
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-gaze-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-grounding-dino-api
+  name: Roboflow Grounding Dino API
+  description: The Grounding Dino API from Roboflow — 1 operation(s) for grounding dino.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Grounding Dino
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-grounding-dino-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-healthz-api
+  name: Roboflow Healthz API
+  description: The Healthz API from Roboflow — 1 operation(s) for healthz.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Healthz
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-healthz-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-infer-api
+  name: Roboflow Infer API
+  description: The Infer API from Roboflow — 4 operation(s) for infer.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Infer
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-infer-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-info-api
+  name: Roboflow Info API
+  description: The Info API from Roboflow — 1 operation(s) for info.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Info
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-info-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-initialise-webrtc-worker-api
+  name: Roboflow Initialise Webrtc Worker API
+  description: >-
+    The Initialise Webrtc Worker API from Roboflow — 1 operation(s) for initialise webrtc worker.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Initialise Webrtc Worker
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-initialise-webrtc-worker-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-logs-api
+  name: Roboflow Logs API
+  description: The Logs API from Roboflow — 1 operation(s) for logs.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-logs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-metrics-api
+  name: Roboflow Metrics API
+  description: The Metrics API from Roboflow — 1 operation(s) for metrics.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-model-api
+  name: Roboflow Model API
+  description: The Model API from Roboflow — 1 operation(s) for model.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Model
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-model-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-ocr-api
+  name: Roboflow Ocr API
+  description: The Ocr API from Roboflow — 2 operation(s) for ocr.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Ocr
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-ocr-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-owlv2-api
+  name: Roboflow Owlv2 API
+  description: The Owlv2 API from Roboflow — 1 operation(s) for owlv2.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Owlv2
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-owlv2-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-perception-encoder-api
+  name: Roboflow Perception Encoder API
+  description: The Perception Encoder API from Roboflow — 3 operation(s) for perception encoder.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Perception Encoder
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-perception-encoder-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-readiness-api
+  name: Roboflow Readiness API
+  description: The Readiness API from Roboflow — 1 operation(s) for readiness.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Readiness
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-readiness-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-roboflow-inference-server-api
+  name: Roboflow Roboflow Inference Server API
+  description: >-
+    The Roboflow Inference Server API from Roboflow — 1 operation(s) for roboflow inference server.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Roboflow Inference Server
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-roboflow-inference-server-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-sam-api
+  name: Roboflow Sam API
+  description: The Sam API from Roboflow — 2 operation(s) for sam.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Sam
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-sam-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-sam2-api
+  name: Roboflow Sam2 API
+  description: The Sam2 API from Roboflow — 2 operation(s) for sam2.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Sam2
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-sam2-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-sam3-3d-api
+  name: Roboflow Sam3 3d API
+  description: The Sam3 3d API from Roboflow — 1 operation(s) for sam3 3d.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Sam3 3d
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-sam3-3d-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-sam3-api
+  name: Roboflow Sam3 API
+  description: The Sam3 API from Roboflow — 3 operation(s) for sam3.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Sam3
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-sam3-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-webrtc-api
+  name: Roboflow Webrtc API
+  description: The Webrtc API from Roboflow — 2 operation(s) for webrtc.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Webrtc
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-webrtc-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+- aid: roboflow:roboflow-yolo-world-api
+  name: Roboflow Yolo World API
+  description: The Yolo World API from Roboflow — 1 operation(s) for yolo world.
+  humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
+  baseURL: https://serverless.roboflow.com
+  tags:
+  - Yolo World
+  properties:
+  - type: OpenAPI
+    url: openapi/roboflow-yolo-world-api-openapi.yml
+  - type: Documentation
+    url: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/roboflow-inference-overlay.yaml
 - type: DomainSecurity
   url: security/roboflow-domain-security.yml
 - type: Website
