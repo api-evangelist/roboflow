@@ -1,0 +1,102 @@
+{
+  "item": [
+    {
+      "id": "ab7f4630-234a-45c0-8394-cf8ec9cb9dc9",
+      "name": "Healthz",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ec0e7434-d771-4175-a354-f0a9abbff9b8",
+          "name": "Healthz",
+          "request": {
+            "name": "Healthz",
+            "description": {
+              "content": "Health endpoint for Kubernetes liveness probe.\n\nVerifies CUDA context health when running on GPU. Returns 503 if\nCUDA is corrupted (unrecoverable - requires process restart).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "healthz"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d2e4950-a07b-4e22-964c-2354acdf7bb6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "healthz"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f4b8e5e1-92a7-4947-a65f-2848c1a3412d",
+    "name": "Roboflow Inference Server Healthz API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Roboflow inference server\n\nContact Support:\n Name: Roboflow Inc.\n Email: help@roboflow.com",
+      "type": "text/plain"
+    }
+  }
+}

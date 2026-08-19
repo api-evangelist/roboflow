@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Roboflow Inference Server Healthz API",
+    "version": "1.3.8"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Healthz",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Healthz",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/healthz"
+          },
+          "docs": "Health endpoint for Kubernetes liveness probe.\n\nVerifies CUDA context health when running on GPU. Returns 503 if\nCUDA is corrupted (unrecoverable - requires process restart)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

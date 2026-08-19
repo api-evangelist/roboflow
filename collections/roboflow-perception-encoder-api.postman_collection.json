@@ -1,0 +1,572 @@
+{
+  "item": [
+    {
+      "id": "fcdcd44a-6bc1-4bd6-91ff-a62d2582ab35",
+      "name": "Perception Encoder",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fad1bd78-4a10-4376-aa83-58f05a875a60",
+          "name": "PE Image Embeddings",
+          "request": {
+            "name": "PE Image Embeddings",
+            "description": {
+              "content": "Run the Meta Perception Encoder model to embed image data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "perception_encoder",
+                "embed_image"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "countinference",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_secret",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"perception_encoder_version_id\": \"<string>\",\n  \"model_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b57fa799-2d12-4073-8a95-e228891d3a60",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "perception_encoder",
+                    "embed_image"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"perception_encoder_version_id\": \"<string>\",\n  \"model_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"embeddings\": [\n    [\n      5896.897731705163,\n      8896.120131220072\n    ],\n    [\n      9707.016371826012,\n      6017.107684444651\n    ]\n  ],\n  \"inference_id\": \"string\",\n  \"frame_id\": 1768,\n  \"time\": 482.15541841025833\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0108a806-cbe8-4f38-8698-fdfa8d7b0e71",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "perception_encoder",
+                    "embed_image"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"perception_encoder_version_id\": \"<string>\",\n  \"model_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ddf3971f-e76a-40a6-9bde-e687761e4191",
+          "name": "Perception Encoder Text Embeddings",
+          "request": {
+            "name": "Perception Encoder Text Embeddings",
+            "description": {
+              "content": "Run the Meta Perception Encoder model to embed text data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "perception_encoder",
+                "embed_text"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "countinference",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_secret",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"text\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"perception_encoder_version_id\": \"<string>\",\n  \"model_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "96be03cd-9504-4536-b20f-c4e5fb8dab8e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "perception_encoder",
+                    "embed_text"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"text\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"perception_encoder_version_id\": \"<string>\",\n  \"model_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"embeddings\": [\n    [\n      9866.36363947322,\n      8017.207889628611\n    ],\n    [\n      6239.667856335953,\n      1052.1546723700615\n    ]\n  ],\n  \"inference_id\": \"string\",\n  \"frame_id\": 9640,\n  \"time\": 3029.9105688270356\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a654f130-a4d3-423b-880d-0fc5fe2ef8ba",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "perception_encoder",
+                    "embed_text"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"text\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"perception_encoder_version_id\": \"<string>\",\n  \"model_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23e2a863-5392-41d4-936f-b5d94959d1ea",
+          "name": "Perception Encoder Compare",
+          "request": {
+            "name": "Perception Encoder Compare",
+            "description": {
+              "content": "Run the Meta Perception Encoder model to compute similarity scores.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "perception_encoder",
+                "compare"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "countinference",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_secret",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"subject\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"prompt\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"perception_encoder_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"subject_type\": \"image\",\n  \"prompt_type\": \"text\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e0f5377e-336a-429d-b5e1-df4c9bf9a2b8",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "perception_encoder",
+                    "compare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"subject\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"prompt\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"perception_encoder_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"subject_type\": \"image\",\n  \"prompt_type\": \"text\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"similarity\": [\n    9732.231053502119,\n    940.1630374058378\n  ],\n  \"inference_id\": \"string\",\n  \"frame_id\": 1460,\n  \"time\": 9933.822498967858,\n  \"parent_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "848aa0c9-16eb-4cf4-a5ac-9454629b4408",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "perception_encoder",
+                    "compare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"subject\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"prompt\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"perception_encoder_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"subject_type\": \"image\",\n  \"prompt_type\": \"text\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4441c6f4-863c-400d-89a4-e071acd0fe77",
+    "name": "Roboflow Inference Server Perception Encoder API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Roboflow inference server\n\nContact Support:\n Name: Roboflow Inc.\n Email: help@roboflow.com",
+      "type": "text/plain"
+    }
+  }
+}

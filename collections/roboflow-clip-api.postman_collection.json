@@ -1,0 +1,572 @@
+{
+  "item": [
+    {
+      "id": "362ed4bf-9f3b-4426-9473-4e8ff91feb13",
+      "name": "Clip",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6c17d507-718f-44ad-9af9-e15e34d44b89",
+          "name": "CLIP Image Embeddings",
+          "request": {
+            "name": "CLIP Image Embeddings",
+            "description": {
+              "content": "Run the Open AI CLIP model to embed image data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clip",
+                "embed_image"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "countinference",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_secret",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"clip_version_id\": \"<string>\",\n  \"model_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3bf8c271-233d-4c06-9051-dfdc85872786",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clip",
+                    "embed_image"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"clip_version_id\": \"<string>\",\n  \"model_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"embeddings\": [\n    [\n      3776.7139508099344,\n      9061.009980585355\n    ],\n    [\n      9758.14065707311,\n      7681.8260468257995\n    ]\n  ],\n  \"inference_id\": \"string\",\n  \"frame_id\": 5255,\n  \"time\": 4518.153330780782\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e96dcfdc-e0bf-45c2-8c41-67aebc8bd196",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clip",
+                    "embed_image"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"clip_version_id\": \"<string>\",\n  \"model_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3e64bc3-6b1c-479a-8f03-4ef026fb84db",
+          "name": "CLIP Text Embeddings",
+          "request": {
+            "name": "CLIP Text Embeddings",
+            "description": {
+              "content": "Run the Open AI CLIP model to embed text data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clip",
+                "embed_text"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "countinference",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_secret",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"text\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"clip_version_id\": \"<string>\",\n  \"model_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7bf8591-c6a5-467e-b7f1-9219f0f0f9e9",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clip",
+                    "embed_text"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"text\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"clip_version_id\": \"<string>\",\n  \"model_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"embeddings\": [\n    [\n      8675.001361309087,\n      7916.800818371813\n    ],\n    [\n      1172.5848236937509,\n      2593.784283338776\n    ]\n  ],\n  \"inference_id\": \"string\",\n  \"frame_id\": 6665,\n  \"time\": 4965.064604777136\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "307c94e7-f983-4fca-8118-44113b8190d3",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clip",
+                    "embed_text"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"text\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"clip_version_id\": \"<string>\",\n  \"model_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad46f1ce-a2c6-4104-86b7-4a54f7e04f00",
+          "name": "CLIP Compare",
+          "request": {
+            "name": "CLIP Compare",
+            "description": {
+              "content": "Run the Open AI CLIP model to compute similarity scores.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clip",
+                "compare"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "countinference",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_secret",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"subject\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"prompt\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"clip_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"subject_type\": \"image\",\n  \"prompt_type\": \"text\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "911e808f-9f40-4d05-8328-9acccc4e5232",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clip",
+                    "compare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"subject\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"prompt\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"clip_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"subject_type\": \"image\",\n  \"prompt_type\": \"text\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"similarity\": [\n    4889.982204575241,\n    1602.7793897213082\n  ],\n  \"inference_id\": \"string\",\n  \"frame_id\": 8971,\n  \"time\": 1874.889951530161,\n  \"parent_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16e8737b-e112-432d-9d8c-e85676791d9a",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clip",
+                    "compare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"subject\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"prompt\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"clip_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"subject_type\": \"image\",\n  \"prompt_type\": \"text\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c9faae4c-0d9b-4803-9d08-8f5879dc1bfc",
+    "name": "Roboflow Inference Server Clip API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Roboflow inference server\n\nContact Support:\n Name: Roboflow Inc.\n Email: help@roboflow.com",
+      "type": "text/plain"
+    }
+  }
+}

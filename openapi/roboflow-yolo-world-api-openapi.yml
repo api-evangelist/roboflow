@@ -1,0 +1,384 @@
+openapi: 3.2.0
+info:
+  title: Roboflow Inference Server Yolo World API
+  description: Roboflow inference server
+  termsOfService: https://roboflow.com/terms
+  contact:
+    name: Roboflow Inc.
+    url: https://roboflow.com/contact
+    email: help@roboflow.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.3.8
+tags:
+- name: Yolo World
+paths:
+  /yolo_world/infer:
+    post:
+      summary: YOLO-World inference.
+      description: Run the YOLO-World zero-shot object detection model.
+      operationId: yolo_world_infer_yolo_world_infer_post
+      parameters:
+      - name: api_key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Roboflow API Key that will be passed to the model during initialization for artifact
+            retrieval
+          title: Api Key
+        description: Roboflow API Key that will be passed to the model during initialization for artifact
+          retrieval
+      - name: countinference
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Countinference
+      - name: service_secret
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Service Secret
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/YOLOWorldInferenceRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectDetectionInferenceResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Yolo World
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ObjectDetectionInferenceResponse:
+      properties:
+        visualization:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Visualization
+          description: Base64 encoded string containing prediction visualization image data
+        inference_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Id
+          description: Unique identifier of inference
+        frame_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Id
+          description: The frame id of the image used in inference if the input was a video
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: The time in seconds it took to produce the predictions including image preprocessing
+        image:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/InferenceResponseImage'
+            type: array
+          - $ref: '#/components/schemas/InferenceResponseImage'
+          title: Image
+        predictions:
+          items:
+            $ref: '#/components/schemas/ObjectDetectionPrediction'
+          type: array
+          title: Predictions
+      type: object
+      required:
+      - image
+      - predictions
+      title: ObjectDetectionInferenceResponse
+      description: "Object Detection inference response.\n\nAttributes:\n    predictions (List[inference.core.entities.responses.inference.ObjectDetectionPrediction]):\
+        \ List of object detection predictions."
+    InferenceRequestImage:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
+          examples:
+          - url
+        value:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Value
+          description: Image data corresponding to the image type, if type = 'url' then value is a string
+            containing the url of an image, else if type = 'base64' then value is a string containing
+            base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized
+            using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
+          examples:
+          - http://www.example-image-url.com
+      type: object
+      required:
+      - type
+      title: InferenceRequestImage
+      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image\
+        \ data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding\
+        \ to the image type."
+    InferenceResponseImage:
+      properties:
+        width:
+          type: integer
+          title: Width
+          description: The original width of the image used in inference
+        height:
+          type: integer
+          title: Height
+          description: The original height of the image used in inference
+      type: object
+      required:
+      - width
+      - height
+      title: InferenceResponseImage
+      description: "Inference response image information.\n\nAttributes:\n    width (int): The original\
+        \ width of the image used in inference.\n    height (int): The original height of the image used\
+        \ in inference."
+    YOLOWorldInferenceRequest:
+      properties:
+        id:
+          type: string
+          title: Id
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+          description: Roboflow API Key that will be passed to the model during initialization for artifact
+            retrieval
+        usage_billable:
+          type: boolean
+          title: Usage Billable
+          default: true
+        start:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Start
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        source_info:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Info
+        stream_pipeline_context_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Stream Pipeline Context Id
+          description: Internal stream-pipeline frame pairing id. Not part of the public API.
+        disable_model_monitoring:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Model Monitoring
+          description: If true, disables model monitoring for this request
+          default: false
+        model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Id
+        model_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Type
+          description: The type of the model, usually referring to what task the model performs
+          examples:
+          - object-detection
+        image:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/InferenceRequestImage'
+            type: array
+          - $ref: '#/components/schemas/InferenceRequestImage'
+          title: Image
+        disable_preproc_auto_orient:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Preproc Auto Orient
+          description: If true, the auto orient preprocessing step is disabled for this call.
+          default: false
+        disable_preproc_contrast:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Preproc Contrast
+          description: If true, the auto contrast preprocessing step is disabled for this call.
+          default: false
+        disable_preproc_grayscale:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Preproc Grayscale
+          description: If true, the grayscale preprocessing step is disabled for this call.
+          default: false
+        disable_preproc_static_crop:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Preproc Static Crop
+          description: If true, the static crop preprocessing step is disabled for this call.
+          default: false
+        text:
+          items:
+            type: string
+          type: array
+          title: Text
+          description: A list of strings
+          examples:
+          - - person
+            - dog
+            - cat
+        yolo_world_version_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Yolo World Version Id
+          default: l
+        confidence:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Confidence
+          default: 0.4
+      type: object
+      required:
+      - id
+      - image
+      - text
+      title: YOLOWorldInferenceRequest
+      description: "Request for Grounding DINO zero-shot predictions.\n\nAttributes:\n    text (List[str]):\
+        \ A list of strings."
+    ObjectDetectionPrediction:
+      properties:
+        x:
+          type: number
+          title: X
+          description: The center x-axis pixel coordinate of the prediction
+        y:
+          type: number
+          title: Y
+          description: The center y-axis pixel coordinate of the prediction
+        width:
+          type: number
+          title: Width
+          description: The width of the prediction bounding box in number of pixels
+        height:
+          type: number
+          title: Height
+          description: The height of the prediction bounding box in number of pixels
+        confidence:
+          type: number
+          title: Confidence
+          description: The detection confidence as a fraction between 0 and 1
+        class:
+          type: string
+          title: Class
+          description: The predicted class label
+        class_confidence:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Class Confidence
+          description: The class label confidence as a fraction between 0 and 1
+        class_id:
+          type: integer
+          title: Class Id
+          description: The class id of the prediction
+        tracker_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Tracker Id
+          description: The tracker id of the prediction if tracking is enabled
+        detection_id:
+          type: string
+          title: Detection Id
+          description: Unique identifier of detection
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+          description: Identifier of parent image region. Useful when stack of detection-models is in
+            use to refer the RoI being the input to inference
+      type: object
+      required:
+      - x
+      - y
+      - width
+      - height
+      - confidence
+      - class
+      - class_id
+      title: ObjectDetectionPrediction
+      description: "Object Detection prediction.\n\nAttributes:\n    x (float): The center x-axis pixel\
+        \ coordinate of the prediction.\n    y (float): The center y-axis pixel coordinate of the prediction.\n\
+        \    width (float): The width of the prediction bounding box in number of pixels.\n    height\
+        \ (float): The height of the prediction bounding box in number of pixels.\n    confidence (float):\
+        \ The detection confidence as a fraction between 0 and 1.\n    class_name (str): The predicted\
+        \ class label.\n    class_confidence (Union[float, None]): The class label confidence as a fraction\
+        \ between 0 and 1.\n    class_id (int): The class id of the prediction"
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

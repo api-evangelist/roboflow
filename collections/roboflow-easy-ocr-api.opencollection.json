@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Roboflow Inference Server Easy Ocr API",
+    "version": "1.3.8"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Easy Ocr",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "EasyOCR OCR response",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/easy_ocr/ocr",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "countinference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_secret",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run the EasyOCR model to retrieve text in an image."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

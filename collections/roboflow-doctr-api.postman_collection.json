@@ -1,0 +1,212 @@
+{
+  "item": [
+    {
+      "id": "e97e73f6-5aac-4188-b18c-93d1c054c49b",
+      "name": "Doctr",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43b174cb-d736-4ae8-8aa8-01e0d3d5bb75",
+          "name": "DocTR OCR response",
+          "request": {
+            "name": "DocTR OCR response",
+            "description": {
+              "content": "Run the DocTR OCR model to retrieve text in an image.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "doctr",
+                "ocr"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "countinference",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_secret",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"doctr_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"generate_bounding_boxes\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a2b61f05-eb2d-4f43-9218-cb82488cd74e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "doctr",
+                    "ocr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"doctr_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"generate_bounding_boxes\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": \"string\",\n  \"time\": 9948.88637059656,\n  \"image\": {\n    \"width\": 4882,\n    \"height\": 3371\n  },\n  \"predictions\": [\n    {\n      \"x\": 2951.7667647670487,\n      \"y\": 8739.257980898108,\n      \"width\": 818.1394394934327,\n      \"height\": 3074.6017709864136,\n      \"confidence\": 809.1761187085167,\n      \"class\": \"string\",\n      \"class_id\": 5975,\n      \"class_confidence\": 2905.1538157888936,\n      \"tracker_id\": 4272,\n      \"detection_id\": \"string\",\n      \"parent_id\": \"string\"\n    },\n    {\n      \"x\": 5958.718784653929,\n      \"y\": 9013.735725586745,\n      \"width\": 3403.9963027463236,\n      \"height\": 1785.9548781311962,\n      \"confidence\": 8845.376503583682,\n      \"class\": \"string\",\n      \"class_id\": 1474,\n      \"class_confidence\": 7141.812895086006,\n      \"tracker_id\": 1581,\n      \"detection_id\": \"string\",\n      \"parent_id\": \"string\"\n    }\n  ],\n  \"parent_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "043060df-252f-4af2-8002-37184e1c0132",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "doctr",
+                    "ocr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"doctr_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"generate_bounding_boxes\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1f051ba2-cb3c-47b7-a44c-756153f88421",
+    "name": "Roboflow Inference Server Doctr API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Roboflow inference server\n\nContact Support:\n Name: Roboflow Inc.\n Email: help@roboflow.com",
+      "type": "text/plain"
+    }
+  }
+}

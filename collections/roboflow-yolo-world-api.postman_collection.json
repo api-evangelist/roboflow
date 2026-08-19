@@ -1,0 +1,212 @@
+{
+  "item": [
+    {
+      "id": "0328a0a8-16f1-4150-bcd2-eed1a1081f18",
+      "name": "Yolo World",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ba78b577-b552-44ab-acea-795d1b01062b",
+          "name": "YOLO-World inference.",
+          "request": {
+            "name": "YOLO-World inference.",
+            "description": {
+              "content": "Run the YOLO-World zero-shot object detection model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "yolo_world",
+                "infer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "countinference",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_secret",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"text\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"model_id\": \"<string>\",\n  \"model_type\": \"<string>\",\n  \"disable_preproc_auto_orient\": \"<boolean>\",\n  \"disable_preproc_contrast\": \"<boolean>\",\n  \"disable_preproc_grayscale\": \"<boolean>\",\n  \"disable_preproc_static_crop\": \"<boolean>\",\n  \"yolo_world_version_id\": \"<string>\",\n  \"confidence\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "27170aa8-269a-41c7-89fe-47314c284920",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "yolo_world",
+                    "infer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"text\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"model_id\": \"<string>\",\n  \"model_type\": \"<string>\",\n  \"disable_preproc_auto_orient\": \"<boolean>\",\n  \"disable_preproc_contrast\": \"<boolean>\",\n  \"disable_preproc_grayscale\": \"<boolean>\",\n  \"disable_preproc_static_crop\": \"<boolean>\",\n  \"yolo_world_version_id\": \"<string>\",\n  \"confidence\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"image\": [\n    {\n      \"width\": 4134,\n      \"height\": 4666\n    },\n    {\n      \"width\": 519,\n      \"height\": 1908\n    }\n  ],\n  \"predictions\": [\n    {\n      \"x\": 9614.111981670689,\n      \"y\": 8640.207303121117,\n      \"width\": 738.686547996189,\n      \"height\": 5442.869055105153,\n      \"confidence\": 6549.95664993177,\n      \"class\": \"string\",\n      \"class_id\": 7390,\n      \"class_confidence\": 7197.736273931591,\n      \"tracker_id\": 2342,\n      \"detection_id\": \"string\",\n      \"parent_id\": \"string\"\n    },\n    {\n      \"x\": 6377.620845938686,\n      \"y\": 2234.5631547293974,\n      \"width\": 6826.282538556927,\n      \"height\": 6224.218147126748,\n      \"confidence\": 310.6391681995302,\n      \"class\": \"string\",\n      \"class_id\": 8926,\n      \"class_confidence\": 2453.834455041628,\n      \"tracker_id\": 9379,\n      \"detection_id\": \"string\",\n      \"parent_id\": \"string\"\n    }\n  ],\n  \"visualization\": \"string\",\n  \"inference_id\": \"string\",\n  \"frame_id\": 5706,\n  \"time\": 3012.065776646321\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a6d43e8-b1d0-4b72-bde1-b30ee2d96e39",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "yolo_world",
+                    "infer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"text\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"model_id\": \"<string>\",\n  \"model_type\": \"<string>\",\n  \"disable_preproc_auto_orient\": \"<boolean>\",\n  \"disable_preproc_contrast\": \"<boolean>\",\n  \"disable_preproc_grayscale\": \"<boolean>\",\n  \"disable_preproc_static_crop\": \"<boolean>\",\n  \"yolo_world_version_id\": \"<string>\",\n  \"confidence\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3de64e02-0608-4ffa-ad37-768e90b514f6",
+    "name": "Roboflow Inference Server Yolo World API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Roboflow inference server\n\nContact Support:\n Name: Roboflow Inc.\n Email: help@roboflow.com",
+      "type": "text/plain"
+    }
+  }
+}

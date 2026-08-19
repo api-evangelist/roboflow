@@ -1,0 +1,628 @@
+{
+  "item": [
+    {
+      "id": "2e8e069a-6904-412d-8b83-bc33ac71839f",
+      "name": "Sam3",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "152ca859-5b79-42b4-8e40-b28a8b1b04bf",
+          "name": "Seg preview Image Embeddings",
+          "request": {
+            "name": "Seg preview Image Embeddings",
+            "description": {
+              "content": "Run the  Model to embed image data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sam3",
+                "embed_image"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "countinference",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_secret",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"sam2_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"image\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"image_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "425a1435-a2f4-4e22-a1c1-ec738d47adf1",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sam3",
+                    "embed_image"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"sam2_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"image\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"image_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"image_id\": \"string\",\n  \"time\": 3872.61919169673\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5d88b6a-9963-44b8-be3e-a5e5099b3a57",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sam3",
+                    "embed_image"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"sam2_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"image\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"image_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d11ea215-de18-45bf-8f70-64642aee7b4c",
+          "name": "SAM3 PCS (promptable concept segmentation)",
+          "request": {
+            "name": "SAM3 PCS (promptable concept segmentation)",
+            "description": {
+              "content": "Run the SAM3 PCS (promptable concept segmentation) to generate segmentations for image data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sam3",
+                "concept_segment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "countinference",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_secret",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "The source of the inference request"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_info",
+                  "value": "<string>",
+                  "description": "The detailed source information of the inference request"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"image\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"prompts\": [\n    {\n      \"type\": \"<string>\",\n      \"text\": \"<string>\",\n      \"output_prob_thresh\": \"<number>\",\n      \"boxes\": [\n        {\n          \"x\": \"<number>\",\n          \"y\": \"<number>\",\n          \"width\": \"<number>\",\n          \"height\": \"<number>\"\n        },\n        {\n          \"x\": \"<number>\",\n          \"y\": \"<number>\",\n          \"width\": \"<number>\",\n          \"height\": \"<number>\"\n        }\n      ],\n      \"box_labels\": [\n        \"<integer>\",\n        \"<integer>\"\n      ]\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"model_id\": \"<string>\",\n  \"format\": \"<string>\",\n  \"image_id\": \"<string>\",\n  \"output_prob_thresh\": \"<number>\",\n  \"nms_iou_threshold\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a506ecb5-d45a-445d-b7f7-fcf0aca1c544",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sam3",
+                    "concept_segment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_info",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"prompts\": [\n    {\n      \"type\": \"<string>\",\n      \"text\": \"<string>\",\n      \"output_prob_thresh\": \"<number>\",\n      \"boxes\": [\n        {\n          \"x\": \"<number>\",\n          \"y\": \"<number>\",\n          \"width\": \"<number>\",\n          \"height\": \"<number>\"\n        },\n        {\n          \"x\": \"<number>\",\n          \"y\": \"<number>\",\n          \"width\": \"<number>\",\n          \"height\": \"<number>\"\n        }\n      ],\n      \"box_labels\": [\n        \"<integer>\",\n        \"<integer>\"\n      ]\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"model_id\": \"<string>\",\n  \"format\": \"<string>\",\n  \"image_id\": \"<string>\",\n  \"output_prob_thresh\": \"<number>\",\n  \"nms_iou_threshold\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"prompt_results\": [\n    {\n      \"prompt_index\": 4330,\n      \"echo\": {\n        \"prompt_index\": 3704,\n        \"type\": \"string\",\n        \"text\": \"string\",\n        \"num_boxes\": 2111\n      },\n      \"predictions\": [\n        {\n          \"masks\": [\n            [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          ],\n          \"confidence\": 277.65647775411793,\n          \"format\": \"string\"\n        },\n        {\n          \"masks\": [\n            [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          ],\n          \"confidence\": 4752.441627307838,\n          \"format\": \"string\"\n        }\n      ]\n    },\n    {\n      \"prompt_index\": 6041,\n      \"echo\": {\n        \"prompt_index\": 8443,\n        \"type\": \"string\",\n        \"text\": \"string\",\n        \"num_boxes\": 9011\n      },\n      \"predictions\": [\n        {\n          \"masks\": [\n            [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          ],\n          \"confidence\": 1087.8847475164987,\n          \"format\": \"string\"\n        },\n        {\n          \"masks\": [\n            [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          ],\n          \"confidence\": 7305.310107060215,\n          \"format\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"time\": 1781.1920435417871\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22e5f09e-6c57-41f2-8434-c28f392befc0",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sam3",
+                    "concept_segment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_info",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"prompts\": [\n    {\n      \"type\": \"<string>\",\n      \"text\": \"<string>\",\n      \"output_prob_thresh\": \"<number>\",\n      \"boxes\": [\n        {\n          \"x\": \"<number>\",\n          \"y\": \"<number>\",\n          \"width\": \"<number>\",\n          \"height\": \"<number>\"\n        },\n        {\n          \"x\": \"<number>\",\n          \"y\": \"<number>\",\n          \"width\": \"<number>\",\n          \"height\": \"<number>\"\n        }\n      ],\n      \"box_labels\": [\n        \"<integer>\",\n        \"<integer>\"\n      ]\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"model_id\": \"<string>\",\n  \"format\": \"<string>\",\n  \"image_id\": \"<string>\",\n  \"output_prob_thresh\": \"<number>\",\n  \"nms_iou_threshold\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ff4e939-c59c-4ce9-b9e3-eda56be2c58a",
+          "name": "SAM3 PVS (promptable visual segmentation)",
+          "request": {
+            "name": "SAM3 PVS (promptable visual segmentation)",
+            "description": {
+              "content": "Run the SAM3 PVS (promptable visual segmentation) to generate segmentations for image data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sam3",
+                "visual_segment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "countinference",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_secret",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "The source of the inference request"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_info",
+                  "value": "<string>",
+                  "description": "The detailed source information of the inference request"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"image\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"sam2_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"format\": \"<string>\",\n  \"image_id\": \"<string>\",\n  \"prompts\": {\n    \"prompts\": [\n      {\n        \"box\": {\n          \"x\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"y\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"width\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"height\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"points\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"box\": {\n          \"x\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"y\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"width\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"height\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"points\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"multimask_output\": true,\n  \"save_logits_to_cache\": false,\n  \"load_logits_from_cache\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ccba4422-7baf-4115-94d6-1dbe1f705329",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sam3",
+                    "visual_segment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_info",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"sam2_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"format\": \"<string>\",\n  \"image_id\": \"<string>\",\n  \"prompts\": {\n    \"prompts\": [\n      {\n        \"box\": {\n          \"x\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"y\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"width\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"height\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"points\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"box\": {\n          \"x\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"y\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"width\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"height\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"points\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"multimask_output\": true,\n  \"save_logits_to_cache\": false,\n  \"load_logits_from_cache\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"predictions\": [\n    {\n      \"masks\": [\n        [\n          [\n            6915,\n            5505\n          ],\n          [\n            1249,\n            8516\n          ]\n        ],\n        [\n          [\n            8155,\n            3391\n          ],\n          [\n            215,\n            8132\n          ]\n        ]\n      ],\n      \"confidence\": 2487.1256164106826,\n      \"format\": \"string\"\n    },\n    {\n      \"masks\": [\n        [\n          [\n            6584,\n            134\n          ],\n          [\n            3993,\n            6633\n          ]\n        ],\n        [\n          [\n            5158,\n            4444\n          ],\n          [\n            9437,\n            1632\n          ]\n        ]\n      ],\n      \"confidence\": 7792.576144269519,\n      \"format\": \"string\"\n    }\n  ],\n  \"time\": 2305.6819288989636\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e0b5803-e445-4e71-8e8f-5fd6084b3507",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sam3",
+                    "visual_segment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_info",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": {\n    \"type\": \"<string>\",\n    \"value\": {}\n  },\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"sam2_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"format\": \"<string>\",\n  \"image_id\": \"<string>\",\n  \"prompts\": {\n    \"prompts\": [\n      {\n        \"box\": {\n          \"x\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"y\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"width\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"height\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"points\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"box\": {\n          \"x\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"y\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"width\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"height\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"points\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"multimask_output\": true,\n  \"save_logits_to_cache\": false,\n  \"load_logits_from_cache\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bf93f767-b8a2-4d3d-a87b-6da1a201cb48",
+    "name": "Roboflow Inference Server Sam3 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Roboflow inference server\n\nContact Support:\n Name: Roboflow Inc.\n Email: help@roboflow.com",
+      "type": "text/plain"
+    }
+  }
+}

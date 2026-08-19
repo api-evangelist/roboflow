@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Roboflow Inference Server Dashboard.html API",
+    "version": "1.3.8"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dashboard.html",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Dashboard Guard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/dashboard.html"
+          },
+          "docs": "Dashboard Guard"
+        },
+        {
+          "info": {
+            "name": "Dashboard Guard",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "{{baseUrl}}/dashboard.html"
+          },
+          "docs": "Dashboard Guard"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

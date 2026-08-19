@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Roboflow Inference Server Webrtc API",
+    "version": "1.3.8"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webrtc",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "WebRTC session heartbeat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/webrtc/session/heartbeat",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Receive heartbeat for an active WebRTC session.\n\nThis endpoint is called periodically to indicate\nthat their session is still active. The session will be removed from\nthe quota count if no heartbeat is received within the TTL period.\n\nRequires api_key for authentication."
+        },
+        {
+          "info": {
+            "name": "End WebRTC session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/webrtc/session/heartbeat/end",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "End a WebRTC session and immediately free the quota slot.\n\nRequires api_key for authentication."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

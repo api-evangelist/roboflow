@@ -1,0 +1,166 @@
+{
+  "item": [
+    {
+      "id": "2c4cdae0-6cd1-4dab-87c0-e2dc95bf25ec",
+      "name": "Initialise Webrtc Worker",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a091849-45e0-4830-a997-8bb31abee650",
+          "name": "[EXPERIMENTAL] Establishes WebRTC peer connection and processes video stream in spawned process or modal function",
+          "request": {
+            "name": "[EXPERIMENTAL] Establishes WebRTC peer connection and processes video stream in spawned process or modal function",
+            "description": {
+              "content": "[EXPERIMENTAL] Establishes WebRTC peer connection and processes video stream in spawned process or modal function",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "initialise_webrtc_worker"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workflow_configuration\": {\n    \"type\": \"<string>\",\n    \"workflow_specification\": {\n      \"key_0\": 6000,\n      \"key_1\": \"string\",\n      \"key_2\": 7938.745474352934\n    },\n    \"workspace_name\": \"<string>\",\n    \"workflow_id\": \"<string>\",\n    \"workflow_version_id\": \"<string>\",\n    \"image_input_name\": \"image\",\n    \"workflows_parameters\": {\n      \"key_0\": \"string\",\n      \"key_1\": true\n    },\n    \"disable_sinks\": false,\n    \"workflows_thread_pool_workers\": 4,\n    \"cancel_thread_pool_tasks_on_exit\": true,\n    \"video_metadata_input_name\": \"video_metadata\"\n  },\n  \"webrtc_offer\": {\n    \"type\": \"<string>\",\n    \"sdp\": \"<string>\"\n  },\n  \"api_key\": \"<string>\",\n  \"is_preview\": false,\n  \"webrtc_config\": {\n    \"iceServers\": [\n      {\n        \"urls\": \"<string>\",\n        \"username\": \"<string>\",\n        \"credential\": \"<string>\"\n      },\n      {\n        \"urls\": \"<string>\",\n        \"username\": \"<string>\",\n        \"credential\": \"<string>\"\n      }\n    ]\n  },\n  \"webrtc_turn_config\": {\n    \"urls\": \"<string>\",\n    \"username\": \"<string>\",\n    \"credential\": \"<string>\"\n  },\n  \"webrtc_realtime_processing\": true,\n  \"stream_output\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data_output\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"declared_fps\": \"<number>\",\n  \"rtsp_url\": \"<string>\",\n  \"mjpeg_url\": \"<string>\",\n  \"processing_timeout\": \"<integer>\",\n  \"processing_session_started\": \"<dateTime>\",\n  \"requested_plan\": \"<string>\",\n  \"requested_gpu\": \"<string>\",\n  \"requested_region\": \"<string>\",\n  \"workspace_id\": \"<string>\",\n  \"session_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5405b316-6015-46a8-a485-465050fee4a2",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "initialise_webrtc_worker"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workflow_configuration\": {\n    \"type\": \"<string>\",\n    \"workflow_specification\": {\n      \"key_0\": 184,\n      \"key_1\": 211.82261547723735,\n      \"key_2\": 2012,\n      \"key_3\": 7023\n    },\n    \"workspace_name\": \"<string>\",\n    \"workflow_id\": \"<string>\",\n    \"workflow_version_id\": \"<string>\",\n    \"image_input_name\": \"image\",\n    \"workflows_parameters\": {\n      \"key_0\": false,\n      \"key_1\": 9047\n    },\n    \"disable_sinks\": false,\n    \"workflows_thread_pool_workers\": 4,\n    \"cancel_thread_pool_tasks_on_exit\": true,\n    \"video_metadata_input_name\": \"video_metadata\"\n  },\n  \"webrtc_offer\": {\n    \"type\": \"<string>\",\n    \"sdp\": \"<string>\"\n  },\n  \"api_key\": \"<string>\",\n  \"is_preview\": false,\n  \"webrtc_config\": {\n    \"iceServers\": [\n      {\n        \"urls\": \"<string>\",\n        \"username\": \"<string>\",\n        \"credential\": \"<string>\"\n      },\n      {\n        \"urls\": \"<string>\",\n        \"username\": \"<string>\",\n        \"credential\": \"<string>\"\n      }\n    ]\n  },\n  \"webrtc_turn_config\": {\n    \"urls\": \"<string>\",\n    \"username\": \"<string>\",\n    \"credential\": \"<string>\"\n  },\n  \"webrtc_realtime_processing\": true,\n  \"stream_output\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data_output\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"declared_fps\": \"<number>\",\n  \"rtsp_url\": \"<string>\",\n  \"mjpeg_url\": \"<string>\",\n  \"processing_timeout\": \"<integer>\",\n  \"processing_session_started\": \"<dateTime>\",\n  \"requested_plan\": \"<string>\",\n  \"requested_gpu\": \"<string>\",\n  \"requested_region\": \"<string>\",\n  \"workspace_id\": \"<string>\",\n  \"session_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"context\": {\n    \"request_id\": \"string\",\n    \"pipeline_id\": \"string\"\n  },\n  \"sdp\": \"string\",\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73f39539-f692-4f92-984b-74ec96362485",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "initialise_webrtc_worker"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workflow_configuration\": {\n    \"type\": \"<string>\",\n    \"workflow_specification\": {\n      \"key_0\": 184,\n      \"key_1\": 211.82261547723735,\n      \"key_2\": 2012,\n      \"key_3\": 7023\n    },\n    \"workspace_name\": \"<string>\",\n    \"workflow_id\": \"<string>\",\n    \"workflow_version_id\": \"<string>\",\n    \"image_input_name\": \"image\",\n    \"workflows_parameters\": {\n      \"key_0\": false,\n      \"key_1\": 9047\n    },\n    \"disable_sinks\": false,\n    \"workflows_thread_pool_workers\": 4,\n    \"cancel_thread_pool_tasks_on_exit\": true,\n    \"video_metadata_input_name\": \"video_metadata\"\n  },\n  \"webrtc_offer\": {\n    \"type\": \"<string>\",\n    \"sdp\": \"<string>\"\n  },\n  \"api_key\": \"<string>\",\n  \"is_preview\": false,\n  \"webrtc_config\": {\n    \"iceServers\": [\n      {\n        \"urls\": \"<string>\",\n        \"username\": \"<string>\",\n        \"credential\": \"<string>\"\n      },\n      {\n        \"urls\": \"<string>\",\n        \"username\": \"<string>\",\n        \"credential\": \"<string>\"\n      }\n    ]\n  },\n  \"webrtc_turn_config\": {\n    \"urls\": \"<string>\",\n    \"username\": \"<string>\",\n    \"credential\": \"<string>\"\n  },\n  \"webrtc_realtime_processing\": true,\n  \"stream_output\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data_output\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"declared_fps\": \"<number>\",\n  \"rtsp_url\": \"<string>\",\n  \"mjpeg_url\": \"<string>\",\n  \"processing_timeout\": \"<integer>\",\n  \"processing_session_started\": \"<dateTime>\",\n  \"requested_plan\": \"<string>\",\n  \"requested_gpu\": \"<string>\",\n  \"requested_region\": \"<string>\",\n  \"workspace_id\": \"<string>\",\n  \"session_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bb46d48d-3760-4ded-908f-7ca73025d3ba",
+    "name": "Roboflow Inference Server Initialise Webrtc Worker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Roboflow inference server\n\nContact Support:\n Name: Roboflow Inc.\n Email: help@roboflow.com",
+      "type": "text/plain"
+    }
+  }
+}

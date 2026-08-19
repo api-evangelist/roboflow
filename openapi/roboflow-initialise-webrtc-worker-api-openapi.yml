@@ -1,0 +1,338 @@
+openapi: 3.2.0
+info:
+  title: Roboflow Inference Server Initialise Webrtc Worker API
+  description: Roboflow inference server
+  termsOfService: https://roboflow.com/terms
+  contact:
+    name: Roboflow Inc.
+    url: https://roboflow.com/contact
+    email: help@roboflow.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.3.8
+tags:
+- name: Initialise Webrtc Worker
+paths:
+  /initialise_webrtc_worker:
+    post:
+      summary: '[EXPERIMENTAL] Establishes WebRTC peer connection and processes video stream in spawned
+        process or modal function'
+      description: '[EXPERIMENTAL] Establishes WebRTC peer connection and processes video stream in spawned
+        process or modal function'
+      operationId: initialise_webrtc_worker_initialise_webrtc_worker_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebRTCWorkerRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitializeWebRTCResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Initialise Webrtc Worker
+components:
+  schemas:
+    CommandContext:
+      properties:
+        request_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Request Id
+          description: Server-side request ID
+        pipeline_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Pipeline Id
+          description: Identifier of pipeline connected to operation
+      type: object
+      title: CommandContext
+    WebRTCOffer:
+      properties:
+        type:
+          type: string
+          title: Type
+        sdp:
+          type: string
+          title: Sdp
+      type: object
+      required:
+      - type
+      - sdp
+      title: WebRTCOffer
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    WebRTCWorkerRequest:
+      properties:
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+        workflow_configuration:
+          $ref: '#/components/schemas/WorkflowConfiguration'
+        is_preview:
+          type: boolean
+          title: Is Preview
+          default: false
+        webrtc_offer:
+          $ref: '#/components/schemas/WebRTCOffer'
+        webrtc_config:
+          anyOf:
+          - $ref: '#/components/schemas/WebRTCConfig'
+          - type: 'null'
+        webrtc_turn_config:
+          anyOf:
+          - $ref: '#/components/schemas/WebRTCTURNConfig'
+          - type: 'null'
+        webrtc_realtime_processing:
+          type: boolean
+          title: Webrtc Realtime Processing
+          default: true
+        stream_output:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Stream Output
+        data_output:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Data Output
+        declared_fps:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Declared Fps
+        rtsp_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Rtsp Url
+        mjpeg_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Mjpeg Url
+        processing_timeout:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Processing Timeout
+          default: 3600
+        processing_session_started:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Processing Session Started
+        requested_plan:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Requested Plan
+          default: webrtc-gpu-small
+        requested_gpu:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Requested Gpu
+        requested_region:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Requested Region
+        workspace_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Workspace Id
+        session_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Session Id
+      type: object
+      required:
+      - workflow_configuration
+      - webrtc_offer
+      title: WebRTCWorkerRequest
+    WebRTCConfig:
+      properties:
+        iceServers:
+          items:
+            $ref: '#/components/schemas/RTCIceServer'
+          type: array
+          title: Iceservers
+      type: object
+      required:
+      - iceServers
+      title: WebRTCConfig
+    WorkflowConfiguration:
+      properties:
+        type:
+          type: string
+          const: WorkflowConfiguration
+          title: Type
+        workflow_specification:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Workflow Specification
+        workspace_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Workspace Name
+        workflow_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Workflow Id
+        workflow_version_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Workflow Version Id
+        image_input_name:
+          type: string
+          title: Image Input Name
+          default: image
+        workflows_parameters:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Workflows Parameters
+        disable_sinks:
+          type: boolean
+          title: Disable Sinks
+          default: false
+        workflows_thread_pool_workers:
+          type: integer
+          title: Workflows Thread Pool Workers
+          default: 4
+        cancel_thread_pool_tasks_on_exit:
+          type: boolean
+          title: Cancel Thread Pool Tasks On Exit
+          default: true
+        video_metadata_input_name:
+          type: string
+          title: Video Metadata Input Name
+          default: video_metadata
+      type: object
+      required:
+      - type
+      title: WorkflowConfiguration
+    InitializeWebRTCResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+          description: Operation status
+        context:
+          $ref: '#/components/schemas/CommandContext'
+          description: Context of the command.
+        sdp:
+          type: string
+          title: Sdp
+        type:
+          type: string
+          title: Type
+      type: object
+      required:
+      - status
+      - context
+      - sdp
+      - type
+      title: InitializeWebRTCResponse
+    RTCIceServer:
+      properties:
+        urls:
+          anyOf:
+          - type: string
+          - items:
+              type: string
+            type: array
+          title: Urls
+        username:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Username
+        credential:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Credential
+      type: object
+      required:
+      - urls
+      title: RTCIceServer
+    WebRTCTURNConfig:
+      properties:
+        urls:
+          anyOf:
+          - type: string
+          - items:
+              type: string
+            type: array
+          title: Urls
+        username:
+          type: string
+          title: Username
+        credential:
+          type: string
+          title: Credential
+      type: object
+      required:
+      - urls
+      - username
+      - credential
+      title: WebRTCTURNConfig
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

@@ -1,0 +1,212 @@
+{
+  "item": [
+    {
+      "id": "106ff0f7-f654-4676-b5f2-83067316ebbe",
+      "name": "Grounding Dino",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ff1eeb71-92b8-4a46-8265-925e1913af56",
+          "name": "Grounding DINO inference.",
+          "request": {
+            "name": "Grounding DINO inference.",
+            "description": {
+              "content": "Run the Grounding DINO zero-shot object detection model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "grounding_dino",
+                "infer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "countinference",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_secret",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"text\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"model_id\": \"<string>\",\n  \"model_type\": \"<string>\",\n  \"disable_preproc_auto_orient\": \"<boolean>\",\n  \"disable_preproc_contrast\": \"<boolean>\",\n  \"disable_preproc_grayscale\": \"<boolean>\",\n  \"disable_preproc_static_crop\": \"<boolean>\",\n  \"box_threshold\": \"<number>\",\n  \"grounding_dino_version_id\": \"<string>\",\n  \"text_threshold\": \"<number>\",\n  \"class_agnostic_nms\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7ce21758-103e-4d95-9948-ae62078433e0",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "grounding_dino",
+                    "infer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"text\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"model_id\": \"<string>\",\n  \"model_type\": \"<string>\",\n  \"disable_preproc_auto_orient\": \"<boolean>\",\n  \"disable_preproc_contrast\": \"<boolean>\",\n  \"disable_preproc_grayscale\": \"<boolean>\",\n  \"disable_preproc_static_crop\": \"<boolean>\",\n  \"box_threshold\": \"<number>\",\n  \"grounding_dino_version_id\": \"<string>\",\n  \"text_threshold\": \"<number>\",\n  \"class_agnostic_nms\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"image\": [\n    {\n      \"width\": 4687,\n      \"height\": 7165\n    },\n    {\n      \"width\": 9189,\n      \"height\": 7106\n    }\n  ],\n  \"predictions\": [\n    {\n      \"x\": 5034.341871732217,\n      \"y\": 8817.783523848078,\n      \"width\": 5503.561161945183,\n      \"height\": 8613.602704412882,\n      \"confidence\": 7053.179438448342,\n      \"class\": \"string\",\n      \"class_id\": 5902,\n      \"class_confidence\": 337.97631425690145,\n      \"tracker_id\": 5539,\n      \"detection_id\": \"string\",\n      \"parent_id\": \"string\"\n    },\n    {\n      \"x\": 436.79813385594235,\n      \"y\": 7096.420177918785,\n      \"width\": 1678.2697671553315,\n      \"height\": 6872.073434217882,\n      \"confidence\": 9142.534456072844,\n      \"class\": \"string\",\n      \"class_id\": 9384,\n      \"class_confidence\": 7262.750296588734,\n      \"tracker_id\": 6820,\n      \"detection_id\": \"string\",\n      \"parent_id\": \"string\"\n    }\n  ],\n  \"visualization\": \"string\",\n  \"inference_id\": \"string\",\n  \"frame_id\": 6880,\n  \"time\": 563.7212176851148\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18bd20fa-fb32-4460-8c75-e02e16816542",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "grounding_dino",
+                    "infer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"text\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"model_id\": \"<string>\",\n  \"model_type\": \"<string>\",\n  \"disable_preproc_auto_orient\": \"<boolean>\",\n  \"disable_preproc_contrast\": \"<boolean>\",\n  \"disable_preproc_grayscale\": \"<boolean>\",\n  \"disable_preproc_static_crop\": \"<boolean>\",\n  \"box_threshold\": \"<number>\",\n  \"grounding_dino_version_id\": \"<string>\",\n  \"text_threshold\": \"<number>\",\n  \"class_agnostic_nms\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2a235296-00ba-45d7-979c-897224f236a7",
+    "name": "Roboflow Inference Server Grounding Dino API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Roboflow inference server\n\nContact Support:\n Name: Roboflow Inc.\n Email: help@roboflow.com",
+      "type": "text/plain"
+    }
+  }
+}

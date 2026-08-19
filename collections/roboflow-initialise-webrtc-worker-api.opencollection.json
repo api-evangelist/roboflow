@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Roboflow Inference Server Initialise Webrtc Worker API",
+    "version": "1.3.8"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Initialise Webrtc Worker",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "[EXPERIMENTAL] Establishes WebRTC peer connection and processes video stream in spawned process or modal function",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/initialise_webrtc_worker",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "[EXPERIMENTAL] Establishes WebRTC peer connection and processes video stream in spawned process or modal function"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

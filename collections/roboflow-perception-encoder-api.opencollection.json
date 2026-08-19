@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Roboflow Inference Server Perception Encoder API",
+    "version": "1.3.8"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Perception Encoder",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PE Image Embeddings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/perception_encoder/embed_image",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "countinference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_secret",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run the Meta Perception Encoder model to embed image data."
+        },
+        {
+          "info": {
+            "name": "Perception Encoder Text Embeddings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/perception_encoder/embed_text",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "countinference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_secret",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run the Meta Perception Encoder model to embed text data."
+        },
+        {
+          "info": {
+            "name": "Perception Encoder Compare",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/perception_encoder/compare",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "countinference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_secret",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run the Meta Perception Encoder model to compute similarity scores."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

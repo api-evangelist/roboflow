@@ -1,0 +1,1335 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Roboflow Inference Server",
+    "version": "1.3.8"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/metrics"
+      },
+      "docs": "Endpoint that serves Prometheus metrics."
+    },
+    {
+      "info": {
+        "name": "Info",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/info"
+      },
+      "docs": "Get the server name and version number"
+    },
+    {
+      "info": {
+        "name": "Get Recent Logs",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/logs",
+        "params": [
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query",
+            "description": "Maximum number of log entries to return"
+          },
+          {
+            "name": "level",
+            "value": "",
+            "type": "query",
+            "description": "Filter by log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)"
+          },
+          {
+            "name": "since",
+            "value": "",
+            "type": "query",
+            "description": "Return logs since this ISO timestamp"
+          }
+        ]
+      },
+      "docs": "Get recent application logs for debugging"
+    },
+    {
+      "info": {
+        "name": "Get model keys",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/model/registry"
+      },
+      "docs": "Get the ID of each loaded model"
+    },
+    {
+      "info": {
+        "name": "Large multi-modal model infer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/infer/lmm",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run inference with the specified large multi-modal model"
+    },
+    {
+      "info": {
+        "name": "Large multi-modal model infer with model ID in path",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/infer/lmm/:model_id",
+        "params": [
+          {
+            "name": "model_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run inference with the specified large multi-modal model. Model ID is specified in the URL path (can contain slashes)."
+    },
+    {
+      "info": {
+        "name": "[EXPERIMENTAL] Establishes WebRTC peer connection and processes video stream in spawned process or modal function",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/initialise_webrtc_worker",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "[EXPERIMENTAL] Establishes WebRTC peer connection and processes video stream in spawned process or modal function"
+    },
+    {
+      "info": {
+        "name": "WebRTC session heartbeat",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/webrtc/session/heartbeat",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Receive heartbeat for an active WebRTC session.\n\nThis endpoint is called periodically to indicate\nthat their session is still active. The session will be removed from\nthe quota count if no heartbeat is received within the TTL period.\n\nRequires api_key for authentication."
+    },
+    {
+      "info": {
+        "name": "End WebRTC session",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/webrtc/session/heartbeat/end",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "End a WebRTC session and immediately free the quota slot.\n\nRequires api_key for authentication."
+    },
+    {
+      "info": {
+        "name": "Readiness",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/readiness"
+      },
+      "docs": "Readiness endpoint for Kubernetes readiness probe."
+    },
+    {
+      "info": {
+        "name": "Healthz",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/healthz"
+      },
+      "docs": "Health endpoint for Kubernetes liveness probe.\n\nVerifies CUDA context health when running on GPU. Returns 503 if\nCUDA is corrupted (unrecoverable - requires process restart)."
+    },
+    {
+      "info": {
+        "name": "CLIP Image Embeddings",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/clip/embed_image",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the Open AI CLIP model to embed image data."
+    },
+    {
+      "info": {
+        "name": "CLIP Text Embeddings",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/clip/embed_text",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the Open AI CLIP model to embed text data."
+    },
+    {
+      "info": {
+        "name": "CLIP Compare",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/clip/compare",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the Open AI CLIP model to compute similarity scores."
+    },
+    {
+      "info": {
+        "name": "PE Image Embeddings",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/perception_encoder/embed_image",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the Meta Perception Encoder model to embed image data."
+    },
+    {
+      "info": {
+        "name": "Perception Encoder Text Embeddings",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/perception_encoder/embed_text",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the Meta Perception Encoder model to embed text data."
+    },
+    {
+      "info": {
+        "name": "Perception Encoder Compare",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/perception_encoder/compare",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the Meta Perception Encoder model to compute similarity scores."
+    },
+    {
+      "info": {
+        "name": "Grounding DINO inference.",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/grounding_dino/infer",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the Grounding DINO zero-shot object detection model."
+    },
+    {
+      "info": {
+        "name": "YOLO-World inference.",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/yolo_world/infer",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the YOLO-World zero-shot object detection model."
+    },
+    {
+      "info": {
+        "name": "DocTR OCR response",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/doctr/ocr",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the DocTR OCR model to retrieve text in an image."
+    },
+    {
+      "info": {
+        "name": "EasyOCR OCR response",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/easy_ocr/ocr",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the EasyOCR model to retrieve text in an image."
+    },
+    {
+      "info": {
+        "name": "SAM Image Embeddings",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/sam/embed_image",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the Meta AI Segmant Anything Model to embed image data."
+    },
+    {
+      "info": {
+        "name": "SAM Image Segmentation",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/sam/segment_image",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the Meta AI Segmant Anything Model to generate segmenations for image data."
+    },
+    {
+      "info": {
+        "name": "SAM2 Image Embeddings",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/sam2/embed_image",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the Meta AI Segment Anything 2 Model to embed image data."
+    },
+    {
+      "info": {
+        "name": "SAM2 Image Segmentation",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/sam2/segment_image",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the Meta AI Segment Anything 2 Model to generate segmenations for image data."
+    },
+    {
+      "info": {
+        "name": "Seg preview Image Embeddings",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/sam3/embed_image",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the  Model to embed image data."
+    },
+    {
+      "info": {
+        "name": "SAM3 PCS (promptable concept segmentation)",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/sam3/concept_segment",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "source",
+            "value": "",
+            "type": "query",
+            "description": "The source of the inference request"
+          },
+          {
+            "name": "source_info",
+            "value": "",
+            "type": "query",
+            "description": "The detailed source information of the inference request"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the SAM3 PCS (promptable concept segmentation) to generate segmentations for image data."
+    },
+    {
+      "info": {
+        "name": "SAM3 PVS (promptable visual segmentation)",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/sam3/visual_segment",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "source",
+            "value": "",
+            "type": "query",
+            "description": "The source of the inference request"
+          },
+          {
+            "name": "source_info",
+            "value": "",
+            "type": "query",
+            "description": "The detailed source information of the inference request"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the SAM3 PVS (promptable visual segmentation) to generate segmentations for image data."
+    },
+    {
+      "info": {
+        "name": "SAM3 3D Object Generation",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/sam3_3d/infer",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Generate 3D meshes and Gaussian splatting from 2D images with mask prompts."
+    },
+    {
+      "info": {
+        "name": "Owlv2 image prompting",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/owlv2/infer",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the google owlv2 model to few-shot object detect"
+    },
+    {
+      "info": {
+        "name": "Gaze Detection (deprecated)",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/gaze/gaze_detection"
+      },
+      "docs": "Deprecated. Always returns HTTP 410 Gone. The endpoint stub will be removed end of Q2 2026."
+    },
+    {
+      "info": {
+        "name": "Depth Estimation",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/infer/depth-estimation",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the depth estimation model to generate a depth map."
+    },
+    {
+      "info": {
+        "name": "Depth Estimation with model ID in path",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/infer/depth-estimation/:model_id",
+        "params": [
+          {
+            "name": "model_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run depth estimation. Model ID is specified in the URL path and can contain slashes."
+    },
+    {
+      "info": {
+        "name": "TrOCR OCR response",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/ocr/trocr",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run the TrOCR model to retrieve text in an image."
+    },
+    {
+      "info": {
+        "name": "PP-OCRv6 OCR response",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/ocr/pp-ocr",
+        "params": [
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "countinference",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "service_secret",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run PP-OCRv6 two-stage OCR to retrieve text in an image."
+    },
+    {
+      "info": {
+        "name": "Legacy Infer From Request",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/:dataset_id/:version_id",
+        "params": [
+          {
+            "name": "dataset_id",
+            "value": "",
+            "type": "path",
+            "description": "ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID"
+          },
+          {
+            "name": "version_id",
+            "value": "",
+            "type": "path",
+            "description": "ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID"
+          },
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "confidence",
+            "value": "",
+            "type": "query",
+            "description": "The confidence threshold used to filter out predictions. Pass a float in [0, 1], or \"best\" to use F1-optimal thresholds from model evaluation, or \"default\" to use the model's built-in default."
+          },
+          {
+            "name": "keypoint_confidence",
+            "value": "",
+            "type": "query",
+            "description": "The confidence threshold used to filter out keypoints that are not visible based on model confidence"
+          },
+          {
+            "name": "format",
+            "value": "",
+            "type": "query",
+            "description": "One of 'json' or 'image'. If 'json' prediction data is return as a JSON string. If 'image' prediction data is visualized and overlayed on the original input image."
+          },
+          {
+            "name": "image",
+            "value": "",
+            "type": "query",
+            "description": "The publically accessible URL of an image to use for inference."
+          },
+          {
+            "name": "image_type",
+            "value": "",
+            "type": "query",
+            "description": "One of base64 or numpy. Note, numpy input is not supported for Roboflow Hosted Inference."
+          },
+          {
+            "name": "labels",
+            "value": "",
+            "type": "query",
+            "description": "If true, labels will be include in any inference visualization."
+          },
+          {
+            "name": "mask_decode_mode",
+            "value": "",
+            "type": "query",
+            "description": "One of 'accurate' or 'fast'. If 'accurate' the mask will be decoded using the original image size. If 'fast' the mask will be decoded using the original mask size. 'accurate' is slower but more accurate."
+          },
+          {
+            "name": "tradeoff_factor",
+            "value": "",
+            "type": "query",
+            "description": "The amount to tradeoff between 0='fast' and 1='accurate'"
+          },
+          {
+            "name": "max_detections",
+            "value": "",
+            "type": "query",
+            "description": "The maximum number of detections to return. This is used to limit the number of predictions returned by the model. The model may return more predictions than this number, but only the top `max_detections` predictions will be returned."
+          },
+          {
+            "name": "overlap",
+            "value": "",
+            "type": "query",
+            "description": "The IoU threhsold that must be met for a box pair to be considered duplicate during NMS"
+          },
+          {
+            "name": "stroke",
+            "value": "",
+            "type": "query",
+            "description": "The stroke width used when visualizing predictions"
+          },
+          {
+            "name": "disable_preproc_auto_orient",
+            "value": "",
+            "type": "query",
+            "description": "If true, disables automatic image orientation"
+          },
+          {
+            "name": "disable_preproc_contrast",
+            "value": "",
+            "type": "query",
+            "description": "If true, disables automatic contrast adjustment"
+          },
+          {
+            "name": "disable_preproc_grayscale",
+            "value": "",
+            "type": "query",
+            "description": "If true, disables automatic grayscale conversion"
+          },
+          {
+            "name": "disable_preproc_static_crop",
+            "value": "",
+            "type": "query",
+            "description": "If true, disables automatic static crop"
+          },
+          {
+            "name": "disable_active_learning",
+            "value": "",
+            "type": "query",
+            "description": "If true, the predictions will be prevented from registration by Active Learning (if the functionality is enabled)"
+          },
+          {
+            "name": "active_learning_target_dataset",
+            "value": "",
+            "type": "query",
+            "description": "Parameter to be used when Active Learning data registration should happen against different dataset than the one pointed by model_id"
+          },
+          {
+            "name": "source",
+            "value": "",
+            "type": "query",
+            "description": "The source of the inference request"
+          },
+          {
+            "name": "source_info",
+            "value": "",
+            "type": "query",
+            "description": "The detailed source information of the inference request"
+          },
+          {
+            "name": "response_mask_format",
+            "value": "",
+            "type": "query",
+            "description": "The format of the prediction mask - polygon (default) or rle - applicable for instance segmentation models."
+          }
+        ]
+      },
+      "docs": "Legacy inference endpoint for object detection, instance segmentation, and classification.\n\nArgs:\n    background_tasks: (BackgroundTasks) pool of fastapi background tasks\n    dataset_id (str): ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID\n    version_id (str): ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID\n    api_key (Optional[str], default None): Roboflow API Key passed to the model during initialization f"
+    },
+    {
+      "info": {
+        "name": "Legacy Infer From Request",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/:dataset_id/:version_id",
+        "params": [
+          {
+            "name": "dataset_id",
+            "value": "",
+            "type": "path",
+            "description": "ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID"
+          },
+          {
+            "name": "version_id",
+            "value": "",
+            "type": "path",
+            "description": "ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID"
+          },
+          {
+            "name": "api_key",
+            "value": "",
+            "type": "query",
+            "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+          },
+          {
+            "name": "confidence",
+            "value": "",
+            "type": "query",
+            "description": "The confidence threshold used to filter out predictions. Pass a float in [0, 1], or \"best\" to use F1-optimal thresholds from model evaluation, or \"default\" to use the model's built-in default."
+          },
+          {
+            "name": "keypoint_confidence",
+            "value": "",
+            "type": "query",
+            "description": "The confidence threshold used to filter out keypoints that are not visible based on model confidence"
+          },
+          {
+            "name": "format",
+            "value": "",
+            "type": "query",
+            "description": "One of 'json' or 'image'. If 'json' prediction data is return as a JSON string. If 'image' prediction data is visualized and overlayed on the original input image."
+          },
+          {
+            "name": "image",
+            "value": "",
+            "type": "query",
+            "description": "The publically accessible URL of an image to use for inference."
+          },
+          {
+            "name": "image_type",
+            "value": "",
+            "type": "query",
+            "description": "One of base64 or numpy. Note, numpy input is not supported for Roboflow Hosted Inference."
+          },
+          {
+            "name": "labels",
+            "value": "",
+            "type": "query",
+            "description": "If true, labels will be include in any inference visualization."
+          },
+          {
+            "name": "mask_decode_mode",
+            "value": "",
+            "type": "query",
+            "description": "One of 'accurate' or 'fast'. If 'accurate' the mask will be decoded using the original image size. If 'fast' the mask will be decoded using the original mask size. 'accurate' is slower but more accurate."
+          },
+          {
+            "name": "tradeoff_factor",
+            "value": "",
+            "type": "query",
+            "description": "The amount to tradeoff between 0='fast' and 1='accurate'"
+          },
+          {
+            "name": "max_detections",
+            "value": "",
+            "type": "query",
+            "description": "The maximum number of detections to return. This is used to limit the number of predictions returned by the model. The model may return more predictions than this number, but only the top `max_detections` predictions will be returned."
+          },
+          {
+            "name": "overlap",
+            "value": "",
+            "type": "query",
+            "description": "The IoU threhsold that must be met for a box pair to be considered duplicate during NMS"
+          },
+          {
+            "name": "stroke",
+            "value": "",
+            "type": "query",
+            "description": "The stroke width used when visualizing predictions"
+          },
+          {
+            "name": "disable_preproc_auto_orient",
+            "value": "",
+            "type": "query",
+            "description": "If true, disables automatic image orientation"
+          },
+          {
+            "name": "disable_preproc_contrast",
+            "value": "",
+            "type": "query",
+            "description": "If true, disables automatic contrast adjustment"
+          },
+          {
+            "name": "disable_preproc_grayscale",
+            "value": "",
+            "type": "query",
+            "description": "If true, disables automatic grayscale conversion"
+          },
+          {
+            "name": "disable_preproc_static_crop",
+            "value": "",
+            "type": "query",
+            "description": "If true, disables automatic static crop"
+          },
+          {
+            "name": "disable_active_learning",
+            "value": "",
+            "type": "query",
+            "description": "If true, the predictions will be prevented from registration by Active Learning (if the functionality is enabled)"
+          },
+          {
+            "name": "active_learning_target_dataset",
+            "value": "",
+            "type": "query",
+            "description": "Parameter to be used when Active Learning data registration should happen against different dataset than the one pointed by model_id"
+          },
+          {
+            "name": "source",
+            "value": "",
+            "type": "query",
+            "description": "The source of the inference request"
+          },
+          {
+            "name": "source_info",
+            "value": "",
+            "type": "query",
+            "description": "The detailed source information of the inference request"
+          },
+          {
+            "name": "response_mask_format",
+            "value": "",
+            "type": "query",
+            "description": "The format of the prediction mask - polygon (default) or rle - applicable for instance segmentation models."
+          }
+        ]
+      },
+      "docs": "Legacy inference endpoint for object detection, instance segmentation, and classification.\n\nArgs:\n    background_tasks: (BackgroundTasks) pool of fastapi background tasks\n    dataset_id (str): ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID\n    version_id (str): ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID\n    api_key (Optional[str], default None): Roboflow API Key passed to the model during initialization f"
+    },
+    {
+      "info": {
+        "name": "Dashboard Guard",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/dashboard.html"
+      },
+      "docs": "Dashboard Guard"
+    },
+    {
+      "info": {
+        "name": "Dashboard Guard",
+        "type": "http"
+      },
+      "http": {
+        "method": "HEAD",
+        "url": "{{baseUrl}}/dashboard.html"
+      },
+      "docs": "Dashboard Guard"
+    }
+  ],
+  "bundled": true
+}

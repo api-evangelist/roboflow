@@ -1,0 +1,932 @@
+{
+  "item": [
+    {
+      "id": "4f7da920-7b2b-4ba7-842e-ec0110e5fa00",
+      "name": "Roboflow Inference Server",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e0962964-472e-48ed-a4a5-9599b7e66b36",
+          "name": "Legacy Infer From Request",
+          "request": {
+            "name": "Legacy Infer From Request",
+            "description": {
+              "content": "Legacy inference endpoint for object detection, instance segmentation, and classification.\n\nArgs:\n    background_tasks: (BackgroundTasks) pool of fastapi background tasks\n    dataset_id (str): ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID\n    version_id (str): ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID\n    api_key (Optional[str], default None): Roboflow API Key passed to the model during initialization for artifact retrieval.\n    # Other parameters described in the function signature...\n\nReturns:\n    Union[InstanceSegmentationInferenceResponse, KeypointsDetectionInferenceRequest, ObjectDetectionInferenceResponse, ClassificationInferenceResponse, MultiLabelClassificationInferenceResponse, SemanticSegmentationInferenceResponse, Any]: The response containing the inference results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":dataset_id",
+                ":version_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "confidence",
+                  "value": "<number>",
+                  "description": "The confidence threshold used to filter out predictions. Pass a float in [0, 1], or \"best\" to use F1-optimal thresholds from model evaluation, or \"default\" to use the model's built-in default."
+                },
+                {
+                  "disabled": false,
+                  "key": "keypoint_confidence",
+                  "value": "0",
+                  "description": "The confidence threshold used to filter out keypoints that are not visible based on model confidence"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "One of 'json' or 'image'. If 'json' prediction data is return as a JSON string. If 'image' prediction data is visualized and overlayed on the original input image."
+                },
+                {
+                  "disabled": false,
+                  "key": "image",
+                  "value": "<string>",
+                  "description": "The publically accessible URL of an image to use for inference."
+                },
+                {
+                  "disabled": false,
+                  "key": "image_type",
+                  "value": "<string>",
+                  "description": "One of base64 or numpy. Note, numpy input is not supported for Roboflow Hosted Inference."
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<boolean>",
+                  "description": "If true, labels will be include in any inference visualization."
+                },
+                {
+                  "disabled": false,
+                  "key": "mask_decode_mode",
+                  "value": "<string>",
+                  "description": "One of 'accurate' or 'fast'. If 'accurate' the mask will be decoded using the original image size. If 'fast' the mask will be decoded using the original mask size. 'accurate' is slower but more accurate."
+                },
+                {
+                  "disabled": false,
+                  "key": "tradeoff_factor",
+                  "value": "<number>",
+                  "description": "The amount to tradeoff between 0='fast' and 1='accurate'"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_detections",
+                  "value": "300",
+                  "description": "The maximum number of detections to return. This is used to limit the number of predictions returned by the model. The model may return more predictions than this number, but only the top `max_detections` predictions will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "overlap",
+                  "value": "0.3",
+                  "description": "The IoU threhsold that must be met for a box pair to be considered duplicate during NMS"
+                },
+                {
+                  "disabled": false,
+                  "key": "stroke",
+                  "value": "1",
+                  "description": "The stroke width used when visualizing predictions"
+                },
+                {
+                  "disabled": false,
+                  "key": "disable_preproc_auto_orient",
+                  "value": "<boolean>",
+                  "description": "If true, disables automatic image orientation"
+                },
+                {
+                  "disabled": false,
+                  "key": "disable_preproc_contrast",
+                  "value": "<boolean>",
+                  "description": "If true, disables automatic contrast adjustment"
+                },
+                {
+                  "disabled": false,
+                  "key": "disable_preproc_grayscale",
+                  "value": "<boolean>",
+                  "description": "If true, disables automatic grayscale conversion"
+                },
+                {
+                  "disabled": false,
+                  "key": "disable_preproc_static_crop",
+                  "value": "<boolean>",
+                  "description": "If true, disables automatic static crop"
+                },
+                {
+                  "disabled": false,
+                  "key": "disable_active_learning",
+                  "value": "<boolean>",
+                  "description": "If true, the predictions will be prevented from registration by Active Learning (if the functionality is enabled)"
+                },
+                {
+                  "disabled": false,
+                  "key": "active_learning_target_dataset",
+                  "value": "<string>",
+                  "description": "Parameter to be used when Active Learning data registration should happen against different dataset than the one pointed by model_id"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "The source of the inference request"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_info",
+                  "value": "<string>",
+                  "description": "The detailed source information of the inference request"
+                },
+                {
+                  "disabled": false,
+                  "key": "response_mask_format",
+                  "value": "<string>",
+                  "description": "The format of the prediction mask - polygon (default) or rle - applicable for instance segmentation models."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataset_id",
+                  "description": "(Required) ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "version_id",
+                  "description": "(Required) ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4bc80e0d-13d8-4d1f-b3df-b138464443fa",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":dataset_id",
+                    ":version_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "confidence",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "keypoint_confidence",
+                      "value": "0"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "image_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mask_decode_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradeoff_factor",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "max_detections",
+                      "value": "300"
+                    },
+                    {
+                      "key": "overlap",
+                      "value": "0.3"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "1"
+                    },
+                    {
+                      "key": "disable_preproc_auto_orient",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_preproc_contrast",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_preproc_grayscale",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_preproc_static_crop",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_active_learning",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "active_learning_target_dataset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_info",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "response_mask_format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_id",
+                      "description": "(Required) ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version_id",
+                      "description": "(Required) ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"image\": [\n    {\n      \"width\": 7251,\n      \"height\": 6609\n    },\n    {\n      \"width\": 1312,\n      \"height\": 844\n    }\n  ],\n  \"predictions\": [\n    {\n      \"x\": 5136.683888931377,\n      \"y\": 2015.5505783374638,\n      \"width\": 783.0136416503419,\n      \"height\": 4214.761299972446,\n      \"confidence\": 3350.048920455979,\n      \"class\": \"string\",\n      \"class_id\": 6685,\n      \"points\": [\n        {\n          \"x\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"y\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"x\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"y\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"detection_id\": \"string\",\n      \"parent_id\": \"string\",\n      \"class_confidence\": 6197.317363216762,\n      \"mask_format\": \"polygon\"\n    },\n    {\n      \"x\": 3759.2937256427604,\n      \"y\": 4804.996492263147,\n      \"width\": 1132.3380346423296,\n      \"height\": 2926.333471676714,\n      \"confidence\": 1253.6571663665052,\n      \"class\": \"string\",\n      \"class_id\": 4331,\n      \"points\": [\n        {\n          \"x\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"y\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"x\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"y\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"detection_id\": \"string\",\n      \"parent_id\": \"string\",\n      \"class_confidence\": 5527.009109183831,\n      \"mask_format\": \"polygon\"\n    }\n  ],\n  \"visualization\": \"string\",\n  \"inference_id\": \"string\",\n  \"frame_id\": 6954,\n  \"time\": 3691.0369151912146\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23f3ac8f-1aa0-46d4-a9af-b3f471441938",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":dataset_id",
+                    ":version_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "confidence",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "keypoint_confidence",
+                      "value": "0"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "image_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mask_decode_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradeoff_factor",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "max_detections",
+                      "value": "300"
+                    },
+                    {
+                      "key": "overlap",
+                      "value": "0.3"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "1"
+                    },
+                    {
+                      "key": "disable_preproc_auto_orient",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_preproc_contrast",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_preproc_grayscale",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_preproc_static_crop",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_active_learning",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "active_learning_target_dataset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_info",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "response_mask_format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_id",
+                      "description": "(Required) ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version_id",
+                      "description": "(Required) ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c31ba29c-4f59-4ff3-bee9-b6597509793a",
+          "name": "Legacy Infer From Request",
+          "request": {
+            "name": "Legacy Infer From Request",
+            "description": {
+              "content": "Legacy inference endpoint for object detection, instance segmentation, and classification.\n\nArgs:\n    background_tasks: (BackgroundTasks) pool of fastapi background tasks\n    dataset_id (str): ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID\n    version_id (str): ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID\n    api_key (Optional[str], default None): Roboflow API Key passed to the model during initialization for artifact retrieval.\n    # Other parameters described in the function signature...\n\nReturns:\n    Union[InstanceSegmentationInferenceResponse, KeypointsDetectionInferenceRequest, ObjectDetectionInferenceResponse, ClassificationInferenceResponse, MultiLabelClassificationInferenceResponse, SemanticSegmentationInferenceResponse, Any]: The response containing the inference results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":dataset_id",
+                ":version_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "confidence",
+                  "value": "<number>",
+                  "description": "The confidence threshold used to filter out predictions. Pass a float in [0, 1], or \"best\" to use F1-optimal thresholds from model evaluation, or \"default\" to use the model's built-in default."
+                },
+                {
+                  "disabled": false,
+                  "key": "keypoint_confidence",
+                  "value": "0",
+                  "description": "The confidence threshold used to filter out keypoints that are not visible based on model confidence"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "One of 'json' or 'image'. If 'json' prediction data is return as a JSON string. If 'image' prediction data is visualized and overlayed on the original input image."
+                },
+                {
+                  "disabled": false,
+                  "key": "image",
+                  "value": "<string>",
+                  "description": "The publically accessible URL of an image to use for inference."
+                },
+                {
+                  "disabled": false,
+                  "key": "image_type",
+                  "value": "<string>",
+                  "description": "One of base64 or numpy. Note, numpy input is not supported for Roboflow Hosted Inference."
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<boolean>",
+                  "description": "If true, labels will be include in any inference visualization."
+                },
+                {
+                  "disabled": false,
+                  "key": "mask_decode_mode",
+                  "value": "<string>",
+                  "description": "One of 'accurate' or 'fast'. If 'accurate' the mask will be decoded using the original image size. If 'fast' the mask will be decoded using the original mask size. 'accurate' is slower but more accurate."
+                },
+                {
+                  "disabled": false,
+                  "key": "tradeoff_factor",
+                  "value": "<number>",
+                  "description": "The amount to tradeoff between 0='fast' and 1='accurate'"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_detections",
+                  "value": "300",
+                  "description": "The maximum number of detections to return. This is used to limit the number of predictions returned by the model. The model may return more predictions than this number, but only the top `max_detections` predictions will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "overlap",
+                  "value": "0.3",
+                  "description": "The IoU threhsold that must be met for a box pair to be considered duplicate during NMS"
+                },
+                {
+                  "disabled": false,
+                  "key": "stroke",
+                  "value": "1",
+                  "description": "The stroke width used when visualizing predictions"
+                },
+                {
+                  "disabled": false,
+                  "key": "disable_preproc_auto_orient",
+                  "value": "<boolean>",
+                  "description": "If true, disables automatic image orientation"
+                },
+                {
+                  "disabled": false,
+                  "key": "disable_preproc_contrast",
+                  "value": "<boolean>",
+                  "description": "If true, disables automatic contrast adjustment"
+                },
+                {
+                  "disabled": false,
+                  "key": "disable_preproc_grayscale",
+                  "value": "<boolean>",
+                  "description": "If true, disables automatic grayscale conversion"
+                },
+                {
+                  "disabled": false,
+                  "key": "disable_preproc_static_crop",
+                  "value": "<boolean>",
+                  "description": "If true, disables automatic static crop"
+                },
+                {
+                  "disabled": false,
+                  "key": "disable_active_learning",
+                  "value": "<boolean>",
+                  "description": "If true, the predictions will be prevented from registration by Active Learning (if the functionality is enabled)"
+                },
+                {
+                  "disabled": false,
+                  "key": "active_learning_target_dataset",
+                  "value": "<string>",
+                  "description": "Parameter to be used when Active Learning data registration should happen against different dataset than the one pointed by model_id"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "The source of the inference request"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_info",
+                  "value": "<string>",
+                  "description": "The detailed source information of the inference request"
+                },
+                {
+                  "disabled": false,
+                  "key": "response_mask_format",
+                  "value": "<string>",
+                  "description": "The format of the prediction mask - polygon (default) or rle - applicable for instance segmentation models."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataset_id",
+                  "description": "(Required) ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "version_id",
+                  "description": "(Required) ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f8228b1-2e36-4988-be07-9c34bcd54506",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":dataset_id",
+                    ":version_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "confidence",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "keypoint_confidence",
+                      "value": "0"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "image_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mask_decode_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradeoff_factor",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "max_detections",
+                      "value": "300"
+                    },
+                    {
+                      "key": "overlap",
+                      "value": "0.3"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "1"
+                    },
+                    {
+                      "key": "disable_preproc_auto_orient",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_preproc_contrast",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_preproc_grayscale",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_preproc_static_crop",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_active_learning",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "active_learning_target_dataset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_info",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "response_mask_format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_id",
+                      "description": "(Required) ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version_id",
+                      "description": "(Required) ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"image\": [\n    {\n      \"width\": 2421,\n      \"height\": 2402\n    },\n    {\n      \"width\": 1576,\n      \"height\": 6294\n    }\n  ],\n  \"predictions\": [\n    {\n      \"x\": 4480.969069769792,\n      \"y\": 1758.2387857674653,\n      \"width\": 7322.909298335444,\n      \"height\": 2526.198125999438,\n      \"confidence\": 1886.6688958035859,\n      \"class\": \"string\",\n      \"class_id\": 4716,\n      \"points\": [\n        {\n          \"x\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"y\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"x\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"y\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"detection_id\": \"string\",\n      \"parent_id\": \"string\",\n      \"class_confidence\": 2838.544243204896,\n      \"mask_format\": \"polygon\"\n    },\n    {\n      \"x\": 6695.760102246941,\n      \"y\": 3107.3916191937988,\n      \"width\": 3749.933420993986,\n      \"height\": 7623.737478797825,\n      \"confidence\": 905.668763406331,\n      \"class\": \"string\",\n      \"class_id\": 7693,\n      \"points\": [\n        {\n          \"x\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"y\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"x\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"y\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"detection_id\": \"string\",\n      \"parent_id\": \"string\",\n      \"class_confidence\": 7752.395525722462,\n      \"mask_format\": \"polygon\"\n    }\n  ],\n  \"visualization\": \"string\",\n  \"inference_id\": \"string\",\n  \"frame_id\": 1426,\n  \"time\": 7934.511928512028\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ee912f8-b72a-48dc-a965-a4d23632150c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":dataset_id",
+                    ":version_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "confidence",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "keypoint_confidence",
+                      "value": "0"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "image_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mask_decode_mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradeoff_factor",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "max_detections",
+                      "value": "300"
+                    },
+                    {
+                      "key": "overlap",
+                      "value": "0.3"
+                    },
+                    {
+                      "key": "stroke",
+                      "value": "1"
+                    },
+                    {
+                      "key": "disable_preproc_auto_orient",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_preproc_contrast",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_preproc_grayscale",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_preproc_static_crop",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "disable_active_learning",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "active_learning_target_dataset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_info",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "response_mask_format",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_id",
+                      "description": "(Required) ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version_id",
+                      "description": "(Required) ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5a73e9a3-8ea9-4651-a277-6e4035cba830",
+    "name": "Roboflow Inference Server API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Roboflow inference server\n\nContact Support:\n Name: Roboflow Inc.\n Email: help@roboflow.com",
+      "type": "text/plain"
+    }
+  }
+}

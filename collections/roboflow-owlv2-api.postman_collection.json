@@ -1,0 +1,212 @@
+{
+  "item": [
+    {
+      "id": "eb7e78e2-7448-46c6-8262-88be197bdec9",
+      "name": "Owlv2",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "881d6c08-a591-4fc3-a319-6d828eadec5d",
+          "name": "Owlv2 image prompting",
+          "request": {
+            "name": "Owlv2 image prompting",
+            "description": {
+              "content": "Run the google owlv2 model to few-shot object detect",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "owlv2",
+                "infer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "countinference",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_secret",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"training_data\": [\n    {\n      \"boxes\": [\n        {\n          \"x\": \"<integer>\",\n          \"y\": \"<integer>\",\n          \"w\": \"<integer>\",\n          \"h\": \"<integer>\",\n          \"cls\": \"<string>\",\n          \"negative\": false\n        },\n        {\n          \"x\": \"<integer>\",\n          \"y\": \"<integer>\",\n          \"w\": \"<integer>\",\n          \"h\": \"<integer>\",\n          \"cls\": \"<string>\",\n          \"negative\": false\n        }\n      ],\n      \"image\": {\n        \"type\": \"<string>\",\n        \"value\": {}\n      }\n    },\n    {\n      \"boxes\": [\n        {\n          \"x\": \"<integer>\",\n          \"y\": \"<integer>\",\n          \"w\": \"<integer>\",\n          \"h\": \"<integer>\",\n          \"cls\": \"<string>\",\n          \"negative\": false\n        },\n        {\n          \"x\": \"<integer>\",\n          \"y\": \"<integer>\",\n          \"w\": \"<integer>\",\n          \"h\": \"<integer>\",\n          \"cls\": \"<string>\",\n          \"negative\": false\n        }\n      ],\n      \"image\": {\n        \"type\": \"<string>\",\n        \"value\": {}\n      }\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"owlv2_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"confidence\": \"<number>\",\n  \"visualize_predictions\": \"<boolean>\",\n  \"visualization_labels\": \"<boolean>\",\n  \"visualization_stroke_width\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "44816319-7f07-4bc2-b221-55539343114d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "owlv2",
+                    "infer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"training_data\": [\n    {\n      \"boxes\": [\n        {\n          \"x\": \"<integer>\",\n          \"y\": \"<integer>\",\n          \"w\": \"<integer>\",\n          \"h\": \"<integer>\",\n          \"cls\": \"<string>\",\n          \"negative\": false\n        },\n        {\n          \"x\": \"<integer>\",\n          \"y\": \"<integer>\",\n          \"w\": \"<integer>\",\n          \"h\": \"<integer>\",\n          \"cls\": \"<string>\",\n          \"negative\": false\n        }\n      ],\n      \"image\": {\n        \"type\": \"<string>\",\n        \"value\": {}\n      }\n    },\n    {\n      \"boxes\": [\n        {\n          \"x\": \"<integer>\",\n          \"y\": \"<integer>\",\n          \"w\": \"<integer>\",\n          \"h\": \"<integer>\",\n          \"cls\": \"<string>\",\n          \"negative\": false\n        },\n        {\n          \"x\": \"<integer>\",\n          \"y\": \"<integer>\",\n          \"w\": \"<integer>\",\n          \"h\": \"<integer>\",\n          \"cls\": \"<string>\",\n          \"negative\": false\n        }\n      ],\n      \"image\": {\n        \"type\": \"<string>\",\n        \"value\": {}\n      }\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"owlv2_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"confidence\": \"<number>\",\n  \"visualize_predictions\": \"<boolean>\",\n  \"visualization_labels\": \"<boolean>\",\n  \"visualization_stroke_width\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"image\": [\n    {\n      \"width\": 3856,\n      \"height\": 5413\n    },\n    {\n      \"width\": 379,\n      \"height\": 8509\n    }\n  ],\n  \"predictions\": [\n    {\n      \"x\": 8286.995061020973,\n      \"y\": 9303.565285372428,\n      \"width\": 6939.080291927071,\n      \"height\": 7894.424303252603,\n      \"confidence\": 6228.423507939719,\n      \"class\": \"string\",\n      \"class_id\": 2769,\n      \"class_confidence\": 5262.78161806421,\n      \"tracker_id\": 7757,\n      \"detection_id\": \"string\",\n      \"parent_id\": \"string\"\n    },\n    {\n      \"x\": 1734.5237912282453,\n      \"y\": 8297.488512315293,\n      \"width\": 4166.460190062241,\n      \"height\": 3204.8419698079833,\n      \"confidence\": 8890.713452797698,\n      \"class\": \"string\",\n      \"class_id\": 3876,\n      \"class_confidence\": 5700.173339009995,\n      \"tracker_id\": 5575,\n      \"detection_id\": \"string\",\n      \"parent_id\": \"string\"\n    }\n  ],\n  \"visualization\": \"string\",\n  \"inference_id\": \"string\",\n  \"frame_id\": 7610,\n  \"time\": 9346.393571241097\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "245d27b4-f479-4c26-9b81-77f90ea0c88e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "owlv2",
+                    "infer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countinference",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "service_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"image\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"training_data\": [\n    {\n      \"boxes\": [\n        {\n          \"x\": \"<integer>\",\n          \"y\": \"<integer>\",\n          \"w\": \"<integer>\",\n          \"h\": \"<integer>\",\n          \"cls\": \"<string>\",\n          \"negative\": false\n        },\n        {\n          \"x\": \"<integer>\",\n          \"y\": \"<integer>\",\n          \"w\": \"<integer>\",\n          \"h\": \"<integer>\",\n          \"cls\": \"<string>\",\n          \"negative\": false\n        }\n      ],\n      \"image\": {\n        \"type\": \"<string>\",\n        \"value\": {}\n      }\n    },\n    {\n      \"boxes\": [\n        {\n          \"x\": \"<integer>\",\n          \"y\": \"<integer>\",\n          \"w\": \"<integer>\",\n          \"h\": \"<integer>\",\n          \"cls\": \"<string>\",\n          \"negative\": false\n        },\n        {\n          \"x\": \"<integer>\",\n          \"y\": \"<integer>\",\n          \"w\": \"<integer>\",\n          \"h\": \"<integer>\",\n          \"cls\": \"<string>\",\n          \"negative\": false\n        }\n      ],\n      \"image\": {\n        \"type\": \"<string>\",\n        \"value\": {}\n      }\n    }\n  ],\n  \"api_key\": \"<string>\",\n  \"usage_billable\": true,\n  \"start\": \"<number>\",\n  \"source\": \"<string>\",\n  \"source_info\": \"<string>\",\n  \"stream_pipeline_context_id\": \"<string>\",\n  \"disable_model_monitoring\": \"<boolean>\",\n  \"owlv2_version_id\": \"<string>\",\n  \"model_id\": \"<string>\",\n  \"confidence\": \"<number>\",\n  \"visualize_predictions\": \"<boolean>\",\n  \"visualization_labels\": \"<boolean>\",\n  \"visualization_stroke_width\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d6f95f58-0c1c-4209-82d8-0877f409a22e",
+    "name": "Roboflow Inference Server Owlv2 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Roboflow inference server\n\nContact Support:\n Name: Roboflow Inc.\n Email: help@roboflow.com",
+      "type": "text/plain"
+    }
+  }
+}

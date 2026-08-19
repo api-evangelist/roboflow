@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "75c980fa-d420-4a3f-bf9d-4432380b54f0",
+      "name": "Model",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ebcdcdcf-0b96-413d-8191-e5dbeb680e2a",
+          "name": "Get model keys",
+          "request": {
+            "name": "Get model keys",
+            "description": {
+              "content": "Get the ID of each loaded model",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "model",
+                "registry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "568ed1cd-a974-46e2-bfcf-d95c48d862e0",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "model",
+                    "registry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"models\": [\n    {\n      \"model_id\": \"string\",\n      \"task_type\": \"string\",\n      \"batch_size\": 5878,\n      \"input_height\": 8868,\n      \"input_width\": 9646,\n      \"vram_bytes\": 2007,\n      \"request_aliases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"request_paths\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"model_id\": \"string\",\n      \"task_type\": \"string\",\n      \"batch_size\": 9649,\n      \"input_height\": 1812,\n      \"input_width\": 1017,\n      \"vram_bytes\": 9598,\n      \"request_aliases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"request_paths\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"total_vram_bytes\": 1000,\n  \"gpu_memory_used\": 5545,\n  \"gpu_memory_total\": 1573,\n  \"torch_cuda_allocated\": 2021,\n  \"torch_cuda_reserved\": 4250,\n  \"torch_cuda_allocator_cache\": 8263,\n  \"non_torch_gpu_memory\": 221\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "af7d714f-e4ae-4bb6-af00-593acff7864a",
+    "name": "Roboflow Inference Server Model API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Roboflow inference server\n\nContact Support:\n Name: Roboflow Inc.\n Email: help@roboflow.com",
+      "type": "text/plain"
+    }
+  }
+}

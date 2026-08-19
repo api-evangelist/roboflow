@@ -1,0 +1,31 @@
+openapi: 3.2.0
+info:
+  title: Roboflow Inference Server Gaze API
+  description: Roboflow inference server
+  termsOfService: https://roboflow.com/terms
+  contact:
+    name: Roboflow Inc.
+    url: https://roboflow.com/contact
+    email: help@roboflow.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.3.8
+tags:
+- name: Gaze
+paths:
+  /gaze/gaze_detection:
+    post:
+      summary: Gaze Detection (deprecated)
+      description: Deprecated. Always returns HTTP 410 Gone. The endpoint stub will be removed end of
+        Q2 2026.
+      operationId: gaze_detection_deprecated_gaze_gaze_detection_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      deprecated: true
+      tags:
+      - Gaze

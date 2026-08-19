@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Roboflow Inference Server Infer API",
+    "version": "1.3.8"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Infer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Large multi-modal model infer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/infer/lmm",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "countinference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_secret",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run inference with the specified large multi-modal model"
+        },
+        {
+          "info": {
+            "name": "Large multi-modal model infer with model ID in path",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/infer/lmm/:model_id",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "countinference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_secret",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run inference with the specified large multi-modal model. Model ID is specified in the URL path (can contain slashes)."
+        },
+        {
+          "info": {
+            "name": "Depth Estimation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/infer/depth-estimation",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "countinference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_secret",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run the depth estimation model to generate a depth map."
+        },
+        {
+          "info": {
+            "name": "Depth Estimation with model ID in path",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/infer/depth-estimation/:model_id",
+            "params": [
+              {
+                "name": "model_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "countinference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_secret",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run depth estimation. Model ID is specified in the URL path and can contain slashes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

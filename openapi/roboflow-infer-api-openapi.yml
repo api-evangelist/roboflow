@@ -1,0 +1,682 @@
+openapi: 3.2.0
+info:
+  title: Roboflow Inference Server Infer API
+  description: Roboflow inference server
+  termsOfService: https://roboflow.com/terms
+  contact:
+    name: Roboflow Inc.
+    url: https://roboflow.com/contact
+    email: help@roboflow.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.3.8
+tags:
+- name: Infer
+paths:
+  /infer/lmm:
+    post:
+      summary: Large multi-modal model infer
+      description: Run inference with the specified large multi-modal model
+      operationId: infer_lmm_infer_lmm_post
+      parameters:
+      - name: api_key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Roboflow API Key that will be passed to the model during initialization for artifact
+            retrieval
+          title: Api Key
+        description: Roboflow API Key that will be passed to the model during initialization for artifact
+          retrieval
+      - name: countinference
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Countinference
+      - name: service_secret
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Service Secret
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LMMInferenceRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/LMMInferenceResponse'
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/LMMInferenceResponse'
+                - $ref: '#/components/schemas/StubResponse'
+                title: Response Infer Lmm Infer Lmm Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Infer
+  /infer/lmm/{model_id}:
+    post:
+      summary: Large multi-modal model infer with model ID in path
+      description: Run inference with the specified large multi-modal model. Model ID is specified in
+        the URL path (can contain slashes).
+      operationId: infer_lmm_with_model_id_infer_lmm__model_id__post
+      parameters:
+      - name: model_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Model Id
+      - name: api_key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Roboflow API Key that will be passed to the model during initialization for artifact
+            retrieval
+          title: Api Key
+        description: Roboflow API Key that will be passed to the model during initialization for artifact
+          retrieval
+      - name: countinference
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Countinference
+      - name: service_secret
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Service Secret
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LMMInferenceRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/LMMInferenceResponse'
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/LMMInferenceResponse'
+                - $ref: '#/components/schemas/StubResponse'
+                title: Response Infer Lmm With Model Id Infer Lmm  Model Id  Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Infer
+  /infer/depth-estimation:
+    post:
+      summary: Depth Estimation
+      description: Run the depth estimation model to generate a depth map.
+      operationId: depth_estimation_infer_depth_estimation_post
+      parameters:
+      - name: api_key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Roboflow API Key that will be passed to the model during initialization for artifact
+            retrieval
+          title: Api Key
+        description: Roboflow API Key that will be passed to the model during initialization for artifact
+          retrieval
+      - name: countinference
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Countinference
+      - name: service_secret
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Service Secret
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepthEstimationRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepthEstimationResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Infer
+  /infer/depth-estimation/{model_id}:
+    post:
+      summary: Depth Estimation with model ID in path
+      description: Run depth estimation. Model ID is specified in the URL path and can contain slashes.
+      operationId: depth_estimation_with_model_id_infer_depth_estimation__model_id__post
+      parameters:
+      - name: model_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Model Id
+      - name: api_key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Roboflow API Key that will be passed to the model during initialization for artifact
+            retrieval
+          title: Api Key
+        description: Roboflow API Key that will be passed to the model during initialization for artifact
+          retrieval
+      - name: countinference
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Countinference
+      - name: service_secret
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Service Secret
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepthEstimationRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepthEstimationResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Infer
+components:
+  schemas:
+    LMMInferenceRequest:
+      properties:
+        id:
+          type: string
+          title: Id
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+          description: Roboflow API Key that will be passed to the model during initialization for artifact
+            retrieval
+        usage_billable:
+          type: boolean
+          title: Usage Billable
+          default: true
+        start:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Start
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        source_info:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Info
+        stream_pipeline_context_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Stream Pipeline Context Id
+          description: Internal stream-pipeline frame pairing id. Not part of the public API.
+        disable_model_monitoring:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Model Monitoring
+          description: If true, disables model monitoring for this request
+          default: false
+        model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Id
+          description: A unique model identifier
+          example: raccoon-detector-1
+        model_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Type
+          description: The type of the model, usually referring to what task the model performs
+          examples:
+          - object-detection
+        image:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/InferenceRequestImage'
+            type: array
+          - $ref: '#/components/schemas/InferenceRequestImage'
+          title: Image
+        disable_preproc_auto_orient:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Preproc Auto Orient
+          description: If true, the auto orient preprocessing step is disabled for this call.
+          default: false
+        disable_preproc_contrast:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Preproc Contrast
+          description: If true, the auto contrast preprocessing step is disabled for this call.
+          default: false
+        disable_preproc_grayscale:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Preproc Grayscale
+          description: If true, the grayscale preprocessing step is disabled for this call.
+          default: false
+        disable_preproc_static_crop:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Preproc Static Crop
+          description: If true, the static crop preprocessing step is disabled for this call.
+          default: false
+        prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prompt
+          description: If set, use this prompt to guide the LMM
+          examples:
+          - caption
+        enable_thinking:
+          type: boolean
+          title: Enable Thinking
+          description: If true, enables thinking/reasoning mode for models that support it (e.g. Qwen3.5).
+            The model's reasoning will be included in the response.
+          default: false
+        max_new_tokens:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max New Tokens
+          description: Maximum number of tokens to generate. If not set, the model's default will be used.
+      type: object
+      required:
+      - id
+      - model_id
+      - image
+      title: LMMInferenceRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    DepthEstimationResponse:
+      properties:
+        normalized_depth:
+          anyOf:
+          - type: string
+          - items:
+              items:
+                type: number
+              type: array
+            type: array
+          title: Normalized Depth
+          description: 'Per-image normalized ordinal depth as a 2D array of floats between 0 and 1, where
+            1 is nearest and 0 is farthest. Values are not physical distances or directly comparable across
+            images or model families without calibration. The normalized depth map: a 2D array of floats
+            between 0 and 1 (`json` format, default) or a base64 grayscale PNG string (`png16`/`png8`),
+            per the request''s `depth_map_format`'
+        depth_map_format:
+          type: string
+          enum:
+          - json
+          - png16
+          - png8
+          title: Depth Map Format
+          description: The serialization format used for `normalized_depth`
+          default: json
+        image:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image
+          description: Base64 encoded visualization of the depth map if visualize_predictions is True
+      type: object
+      required:
+      - normalized_depth
+      title: DepthEstimationResponse
+      description: "Response for depth estimation inference.\n\nAttributes:\n    normalized_depth (Union[str,\
+        \ List[List[float]]]): The per-image normalized ordinal\n        depth map as a 2D array of floats\
+        \ between 0 and 1. Higher values\n        indicate nearer predictions.\n        serialized according\
+        \ to the request's `depth_map_format`: a 2D array of\n        floats between 0 and 1 (`json`,\
+        \ the default) or a base64 grayscale PNG\n        string (16-bit for `png16`, 8-bit for `png8`).\n\
+        \    depth_map_format (Literal[\"json\", \"png16\", \"png8\"]): The serialization\n        format\
+        \ used for `normalized_depth`.\n    image (Optional[str]): Base64 encoded visualization of the\
+        \ depth map if visualize_predictions is True.\n    time (float): The processing time in seconds.\n\
+        \    visualization (Optional[str]): Base64 encoded visualization of the depth map if visualize_predictions\
+        \ is True."
+    InferenceRequestImage:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
+          examples:
+          - url
+        value:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Value
+          description: Image data corresponding to the image type, if type = 'url' then value is a string
+            containing the url of an image, else if type = 'base64' then value is a string containing
+            base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized
+            using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
+          examples:
+          - http://www.example-image-url.com
+      type: object
+      required:
+      - type
+      title: InferenceRequestImage
+      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image\
+        \ data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding\
+        \ to the image type."
+    LMMInferenceResponse:
+      properties:
+        inference_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Id
+          description: Unique identifier of inference
+        frame_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Id
+          description: The frame id of the image used in inference if the input was a video
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: The time in seconds it took to produce the predictions including image preprocessing
+        image:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/InferenceResponseImage'
+            type: array
+          - $ref: '#/components/schemas/InferenceResponseImage'
+          title: Image
+        response:
+          anyOf:
+          - type: string
+          - additionalProperties: true
+            type: object
+          title: Response
+          description: Text/structured response generated by model
+      type: object
+      required:
+      - image
+      - response
+      title: LMMInferenceResponse
+    InferenceResponseImage:
+      properties:
+        width:
+          type: integer
+          title: Width
+          description: The original width of the image used in inference
+        height:
+          type: integer
+          title: Height
+          description: The original height of the image used in inference
+      type: object
+      required:
+      - width
+      - height
+      title: InferenceResponseImage
+      description: "Inference response image information.\n\nAttributes:\n    width (int): The original\
+        \ width of the image used in inference.\n    height (int): The original height of the image used\
+        \ in inference."
+    DepthEstimationRequest:
+      properties:
+        id:
+          type: string
+          title: Id
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+          description: Roboflow API Key that will be passed to the model during initialization for artifact
+            retrieval
+        usage_billable:
+          type: boolean
+          title: Usage Billable
+          default: true
+        start:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Start
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        source_info:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Info
+        stream_pipeline_context_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Stream Pipeline Context Id
+          description: Internal stream-pipeline frame pairing id. Not part of the public API.
+        disable_model_monitoring:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Model Monitoring
+          description: If true, disables model monitoring for this request
+          default: false
+        model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Id
+        model_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Type
+          description: The type of the model, usually referring to what task the model performs
+          examples:
+          - object-detection
+        image:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/InferenceRequestImage'
+            type: array
+          - $ref: '#/components/schemas/InferenceRequestImage'
+          title: Image
+        depth_version_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Depth Version Id
+          description: The version ID of the depth estimation model
+          default: small
+          examples:
+          - small
+        depth_map_format:
+          type: string
+          enum:
+          - json
+          - png16
+          - png8
+          title: Depth Map Format
+          description: 'Serialization format for `normalized_depth` in the response: `json` (default,
+            wire-compatible with older clients) returns the nested float list; `png16` returns a base64
+            16-bit grayscale PNG (quantization step 1/65535, typically >10x smaller payload - `inference_sdk`
+            decodes it back to a numpy array when requested via `depth_map_format=''png16''`); `png8`
+            returns a base64 8-bit grayscale PNG (256 depth levels, roughly another order of magnitude
+            smaller - fine for visualization/thresholding, lossy for geometric use).'
+          default: json
+      type: object
+      required:
+      - id
+      - image
+      title: DepthEstimationRequest
+      description: "Request for depth estimation.\n\nAttributes:\n    image (Union[List[InferenceRequestImage],\
+        \ InferenceRequestImage]): Image(s) to be estimated.\n    model_id (str): The model ID to use\
+        \ for depth estimation.\n    depth_version_id (Optional[str]): The version ID of the depth estimation\
+        \ model.\n    depth_map_format (Literal[\"json\", \"png16\", \"png8\"]): Serialization format\n\
+        \        for the normalized depth map in the response."
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    StubResponse:
+      properties:
+        visualization:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Visualization
+          description: Base64 encoded string containing prediction visualization image data
+        inference_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Id
+          description: Unique identifier of inference
+        frame_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Id
+          description: The frame id of the image used in inference if the input was a video
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: The time in seconds it took to produce the predictions including image preprocessing
+        is_stub:
+          type: boolean
+          title: Is Stub
+          description: Field to mark prediction type as stub
+        model_id:
+          type: string
+          title: Model Id
+          description: Identifier of a model stub that was called
+        task_type:
+          type: string
+          title: Task Type
+          description: Task type of the project
+      type: object
+      required:
+      - is_stub
+      - model_id
+      - task_type
+      title: StubResponse

@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Roboflow Inference Server Ocr API",
+    "version": "1.3.8"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ocr",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "TrOCR OCR response",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ocr/trocr",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "countinference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_secret",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run the TrOCR model to retrieve text in an image."
+        },
+        {
+          "info": {
+            "name": "PP-OCRv6 OCR response",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ocr/pp-ocr",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "countinference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_secret",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run PP-OCRv6 two-stage OCR to retrieve text in an image."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

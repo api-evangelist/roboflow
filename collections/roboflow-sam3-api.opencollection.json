@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Roboflow Inference Server Sam3 API",
+    "version": "1.3.8"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sam3",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Seg preview Image Embeddings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/sam3/embed_image",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "countinference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_secret",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run the  Model to embed image data."
+        },
+        {
+          "info": {
+            "name": "SAM3 PCS (promptable concept segmentation)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/sam3/concept_segment",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "countinference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_secret",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "The source of the inference request"
+              },
+              {
+                "name": "source_info",
+                "value": "",
+                "type": "query",
+                "description": "The detailed source information of the inference request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run the SAM3 PCS (promptable concept segmentation) to generate segmentations for image data."
+        },
+        {
+          "info": {
+            "name": "SAM3 PVS (promptable visual segmentation)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/sam3/visual_segment",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "countinference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service_secret",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "The source of the inference request"
+              },
+              {
+                "name": "source_info",
+                "value": "",
+                "type": "query",
+                "description": "The detailed source information of the inference request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run the SAM3 PVS (promptable visual segmentation) to generate segmentations for image data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

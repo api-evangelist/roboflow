@@ -1,0 +1,131 @@
+openapi: 3.2.0
+info:
+  title: Roboflow Inference Server Webrtc API
+  description: Roboflow inference server
+  termsOfService: https://roboflow.com/terms
+  contact:
+    name: Roboflow Inc.
+    url: https://roboflow.com/contact
+    email: help@roboflow.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.3.8
+tags:
+- name: Webrtc
+paths:
+  /webrtc/session/heartbeat:
+    post:
+      summary: WebRTC session heartbeat
+      description: 'Receive heartbeat for an active WebRTC session.
+
+
+        This endpoint is called periodically to indicate
+
+        that their session is still active. The session will be removed from
+
+        the quota count if no heartbeat is received within the TTL period.
+
+
+        Requires api_key for authentication.'
+      operationId: webrtc_session_heartbeat_webrtc_session_heartbeat_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebRTCSessionHeartbeatRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Webrtc Session Heartbeat Webrtc Session Heartbeat Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Webrtc
+  /webrtc/session/heartbeat/end:
+    post:
+      summary: End WebRTC session
+      description: 'End a WebRTC session and immediately free the quota slot.
+
+
+        Requires api_key for authentication.'
+      operationId: webrtc_session_end_webrtc_session_heartbeat_end_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebRTCSessionHeartbeatRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Webrtc Session End Webrtc Session Heartbeat End Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Webrtc
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    WebRTCSessionHeartbeatRequest:
+      properties:
+        session_id:
+          type: string
+          title: Session Id
+        api_key:
+          type: string
+          title: Api Key
+      type: object
+      required:
+      - session_id
+      - api_key
+      title: WebRTCSessionHeartbeatRequest
+      description: Request body for WebRTC session heartbeat and end endpoints.

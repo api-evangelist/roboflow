@@ -1,0 +1,320 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Roboflow Inference Server API",
+    "version": "1.3.8"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Roboflow Inference Server",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Legacy Infer From Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/:dataset_id/:version_id",
+            "params": [
+              {
+                "name": "dataset_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "confidence",
+                "value": "",
+                "type": "query",
+                "description": "The confidence threshold used to filter out predictions. Pass a float in [0, 1], or \"best\" to use F1-optimal thresholds from model evaluation, or \"default\" to use the model's built-in default."
+              },
+              {
+                "name": "keypoint_confidence",
+                "value": "",
+                "type": "query",
+                "description": "The confidence threshold used to filter out keypoints that are not visible based on model confidence"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "One of 'json' or 'image'. If 'json' prediction data is return as a JSON string. If 'image' prediction data is visualized and overlayed on the original input image."
+              },
+              {
+                "name": "image",
+                "value": "",
+                "type": "query",
+                "description": "The publically accessible URL of an image to use for inference."
+              },
+              {
+                "name": "image_type",
+                "value": "",
+                "type": "query",
+                "description": "One of base64 or numpy. Note, numpy input is not supported for Roboflow Hosted Inference."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "If true, labels will be include in any inference visualization."
+              },
+              {
+                "name": "mask_decode_mode",
+                "value": "",
+                "type": "query",
+                "description": "One of 'accurate' or 'fast'. If 'accurate' the mask will be decoded using the original image size. If 'fast' the mask will be decoded using the original mask size. 'accurate' is slower but more accurate."
+              },
+              {
+                "name": "tradeoff_factor",
+                "value": "",
+                "type": "query",
+                "description": "The amount to tradeoff between 0='fast' and 1='accurate'"
+              },
+              {
+                "name": "max_detections",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of detections to return. This is used to limit the number of predictions returned by the model. The model may return more predictions than this number, but only the top `max_detections` predictions will be returned."
+              },
+              {
+                "name": "overlap",
+                "value": "",
+                "type": "query",
+                "description": "The IoU threhsold that must be met for a box pair to be considered duplicate during NMS"
+              },
+              {
+                "name": "stroke",
+                "value": "",
+                "type": "query",
+                "description": "The stroke width used when visualizing predictions"
+              },
+              {
+                "name": "disable_preproc_auto_orient",
+                "value": "",
+                "type": "query",
+                "description": "If true, disables automatic image orientation"
+              },
+              {
+                "name": "disable_preproc_contrast",
+                "value": "",
+                "type": "query",
+                "description": "If true, disables automatic contrast adjustment"
+              },
+              {
+                "name": "disable_preproc_grayscale",
+                "value": "",
+                "type": "query",
+                "description": "If true, disables automatic grayscale conversion"
+              },
+              {
+                "name": "disable_preproc_static_crop",
+                "value": "",
+                "type": "query",
+                "description": "If true, disables automatic static crop"
+              },
+              {
+                "name": "disable_active_learning",
+                "value": "",
+                "type": "query",
+                "description": "If true, the predictions will be prevented from registration by Active Learning (if the functionality is enabled)"
+              },
+              {
+                "name": "active_learning_target_dataset",
+                "value": "",
+                "type": "query",
+                "description": "Parameter to be used when Active Learning data registration should happen against different dataset than the one pointed by model_id"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "The source of the inference request"
+              },
+              {
+                "name": "source_info",
+                "value": "",
+                "type": "query",
+                "description": "The detailed source information of the inference request"
+              },
+              {
+                "name": "response_mask_format",
+                "value": "",
+                "type": "query",
+                "description": "The format of the prediction mask - polygon (default) or rle - applicable for instance segmentation models."
+              }
+            ]
+          },
+          "docs": "Legacy inference endpoint for object detection, instance segmentation, and classification.\n\nArgs:\n    background_tasks: (BackgroundTasks) pool of fastapi background tasks\n    dataset_id (str): ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID\n    version_id (str): ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID\n    api_key (Optional[str], default None): Roboflow API Key passed to the model during initialization f"
+        },
+        {
+          "info": {
+            "name": "Legacy Infer From Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/:dataset_id/:version_id",
+            "params": [
+              {
+                "name": "dataset_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Roboflow API Key that will be passed to the model during initialization for artifact retrieval"
+              },
+              {
+                "name": "confidence",
+                "value": "",
+                "type": "query",
+                "description": "The confidence threshold used to filter out predictions. Pass a float in [0, 1], or \"best\" to use F1-optimal thresholds from model evaluation, or \"default\" to use the model's built-in default."
+              },
+              {
+                "name": "keypoint_confidence",
+                "value": "",
+                "type": "query",
+                "description": "The confidence threshold used to filter out keypoints that are not visible based on model confidence"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "One of 'json' or 'image'. If 'json' prediction data is return as a JSON string. If 'image' prediction data is visualized and overlayed on the original input image."
+              },
+              {
+                "name": "image",
+                "value": "",
+                "type": "query",
+                "description": "The publically accessible URL of an image to use for inference."
+              },
+              {
+                "name": "image_type",
+                "value": "",
+                "type": "query",
+                "description": "One of base64 or numpy. Note, numpy input is not supported for Roboflow Hosted Inference."
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "If true, labels will be include in any inference visualization."
+              },
+              {
+                "name": "mask_decode_mode",
+                "value": "",
+                "type": "query",
+                "description": "One of 'accurate' or 'fast'. If 'accurate' the mask will be decoded using the original image size. If 'fast' the mask will be decoded using the original mask size. 'accurate' is slower but more accurate."
+              },
+              {
+                "name": "tradeoff_factor",
+                "value": "",
+                "type": "query",
+                "description": "The amount to tradeoff between 0='fast' and 1='accurate'"
+              },
+              {
+                "name": "max_detections",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of detections to return. This is used to limit the number of predictions returned by the model. The model may return more predictions than this number, but only the top `max_detections` predictions will be returned."
+              },
+              {
+                "name": "overlap",
+                "value": "",
+                "type": "query",
+                "description": "The IoU threhsold that must be met for a box pair to be considered duplicate during NMS"
+              },
+              {
+                "name": "stroke",
+                "value": "",
+                "type": "query",
+                "description": "The stroke width used when visualizing predictions"
+              },
+              {
+                "name": "disable_preproc_auto_orient",
+                "value": "",
+                "type": "query",
+                "description": "If true, disables automatic image orientation"
+              },
+              {
+                "name": "disable_preproc_contrast",
+                "value": "",
+                "type": "query",
+                "description": "If true, disables automatic contrast adjustment"
+              },
+              {
+                "name": "disable_preproc_grayscale",
+                "value": "",
+                "type": "query",
+                "description": "If true, disables automatic grayscale conversion"
+              },
+              {
+                "name": "disable_preproc_static_crop",
+                "value": "",
+                "type": "query",
+                "description": "If true, disables automatic static crop"
+              },
+              {
+                "name": "disable_active_learning",
+                "value": "",
+                "type": "query",
+                "description": "If true, the predictions will be prevented from registration by Active Learning (if the functionality is enabled)"
+              },
+              {
+                "name": "active_learning_target_dataset",
+                "value": "",
+                "type": "query",
+                "description": "Parameter to be used when Active Learning data registration should happen against different dataset than the one pointed by model_id"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "The source of the inference request"
+              },
+              {
+                "name": "source_info",
+                "value": "",
+                "type": "query",
+                "description": "The detailed source information of the inference request"
+              },
+              {
+                "name": "response_mask_format",
+                "value": "",
+                "type": "query",
+                "description": "The format of the prediction mask - polygon (default) or rle - applicable for instance segmentation models."
+              }
+            ]
+          },
+          "docs": "Legacy inference endpoint for object detection, instance segmentation, and classification.\n\nArgs:\n    background_tasks: (BackgroundTasks) pool of fastapi background tasks\n    dataset_id (str): ID of a Roboflow dataset corresponding to the model to use for inference OR workspace ID\n    version_id (str): ID of a Roboflow dataset version corresponding to the model to use for inference OR model ID\n    api_key (Optional[str], default None): Roboflow API Key passed to the model during initialization f"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

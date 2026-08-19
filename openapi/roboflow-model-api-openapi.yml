@@ -1,0 +1,143 @@
+openapi: 3.2.0
+info:
+  title: Roboflow Inference Server Model API
+  description: Roboflow inference server
+  termsOfService: https://roboflow.com/terms
+  contact:
+    name: Roboflow Inc.
+    url: https://roboflow.com/contact
+    email: help@roboflow.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.3.8
+tags:
+- name: Model
+paths:
+  /model/registry:
+    get:
+      summary: Get model keys
+      description: Get the ID of each loaded model
+      operationId: registry_model_registry_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelsDescriptions'
+      tags:
+      - Model
+components:
+  schemas:
+    ModelsDescriptions:
+      properties:
+        models:
+          items:
+            $ref: '#/components/schemas/ModelDescriptionEntity'
+          type: array
+          title: Models
+          description: List of models that are loaded by model manager.
+        total_vram_bytes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Total Vram Bytes
+          description: Total estimated VRAM consumed by all loaded models in bytes.
+        gpu_memory_used:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Gpu Memory Used
+          description: Current GPU memory in use in bytes (device-level, includes all runtimes).
+        gpu_memory_total:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Gpu Memory Total
+          description: Total GPU memory available in bytes.
+        torch_cuda_allocated:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Torch Cuda Allocated
+          description: Live tensor memory allocated by PyTorch's CUDA allocator in bytes.
+        torch_cuda_reserved:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Torch Cuda Reserved
+          description: Total memory reserved by PyTorch's CUDA allocator in bytes.
+        torch_cuda_allocator_cache:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Torch Cuda Allocator Cache
+          description: Reserved but currently unallocated PyTorch CUDA memory in bytes.
+        non_torch_gpu_memory:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Non Torch Gpu Memory
+          description: Device memory not reserved by PyTorch in bytes. This includes native runtimes,
+            CUDA context overhead, and allocations from other processes.
+      type: object
+      required:
+      - models
+      title: ModelsDescriptions
+    ModelDescriptionEntity:
+      properties:
+        model_id:
+          type: string
+          title: Model Id
+          description: Identifier of the model
+          examples:
+          - some-project/3
+        task_type:
+          type: string
+          title: Task Type
+          description: Type of the task that the model performs
+          examples:
+          - classification
+        batch_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Batch Size
+          description: Batch size accepted by the model (if registered).
+        input_height:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Input Height
+          description: Image input height accepted by the model (if registered).
+        input_width:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Input Width
+          description: Image input width accepted by the model (if registered).
+        vram_bytes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Vram Bytes
+          description: Estimated GPU VRAM consumed by this model in bytes (measured during load).
+        request_aliases:
+          items:
+            type: string
+          type: array
+          title: Request Aliases
+          description: Other model IDs that resolved to this model.
+        request_paths:
+          items:
+            type: string
+          type: array
+          title: Request Paths
+          description: HTTP request paths that triggered inference on this model (e.g. /door-glyph-locator/10,
+            /infer/object_detection).
+      type: object
+      required:
+      - model_id
+      - task_type
+      title: ModelDescriptionEntity

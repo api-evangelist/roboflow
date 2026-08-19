@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "c45f001f-37c6-4475-8649-1270749c7cea",
+      "name": "Gaze",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3606851f-74d7-4a9d-bd10-58ac05df6693",
+          "name": "Gaze Detection (deprecated)",
+          "request": {
+            "name": "Gaze Detection (deprecated)",
+            "description": {
+              "content": "Deprecated. Always returns HTTP 410 Gone. The endpoint stub will be removed end of Q2 2026.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gaze",
+                "gaze_detection"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9468efc-f4cc-44b1-ad96-b99ca2fbcd2b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gaze",
+                    "gaze_detection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ab426149-a6c8-4fcb-b809-deed23d1711f",
+    "name": "Roboflow Inference Server Gaze API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Roboflow inference server\n\nContact Support:\n Name: Roboflow Inc.\n Email: help@roboflow.com",
+      "type": "text/plain"
+    }
+  }
+}

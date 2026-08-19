@@ -1,0 +1,571 @@
+openapi: 3.2.0
+info:
+  title: Roboflow Inference Server Sam API
+  description: Roboflow inference server
+  termsOfService: https://roboflow.com/terms
+  contact:
+    name: Roboflow Inc.
+    url: https://roboflow.com/contact
+    email: help@roboflow.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.3.8
+tags:
+- name: Sam
+paths:
+  /sam/embed_image:
+    post:
+      summary: SAM Image Embeddings
+      description: Run the Meta AI Segmant Anything Model to embed image data.
+      operationId: sam_embed_image_sam_embed_image_post
+      parameters:
+      - name: api_key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Roboflow API Key that will be passed to the model during initialization for artifact
+            retrieval
+          title: Api Key
+        description: Roboflow API Key that will be passed to the model during initialization for artifact
+          retrieval
+      - name: countinference
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Countinference
+      - name: service_secret
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Service Secret
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SamEmbeddingRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SamEmbeddingResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Sam
+  /sam/segment_image:
+    post:
+      summary: SAM Image Segmentation
+      description: Run the Meta AI Segmant Anything Model to generate segmenations for image data.
+      operationId: sam_segment_image_sam_segment_image_post
+      parameters:
+      - name: api_key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Roboflow API Key that will be passed to the model during initialization for artifact
+            retrieval
+          title: Api Key
+        description: Roboflow API Key that will be passed to the model during initialization for artifact
+          retrieval
+      - name: countinference
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Countinference
+      - name: service_secret
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Service Secret
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SamSegmentationRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SamSegmentationResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Sam
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    InferenceRequestImage:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
+          examples:
+          - url
+        value:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Value
+          description: Image data corresponding to the image type, if type = 'url' then value is a string
+            containing the url of an image, else if type = 'base64' then value is a string containing
+            base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized
+            using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
+          examples:
+          - http://www.example-image-url.com
+      type: object
+      required:
+      - type
+      title: InferenceRequestImage
+      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image\
+        \ data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding\
+        \ to the image type."
+    SamSegmentationRequest:
+      properties:
+        id:
+          type: string
+          title: Id
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+          description: Roboflow API Key that will be passed to the model during initialization for artifact
+            retrieval
+        usage_billable:
+          type: boolean
+          title: Usage Billable
+          default: true
+        start:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Start
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        source_info:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Info
+        stream_pipeline_context_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Stream Pipeline Context Id
+          description: Internal stream-pipeline frame pairing id. Not part of the public API.
+        disable_model_monitoring:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Model Monitoring
+          description: If true, disables model monitoring for this request
+          default: false
+        sam_version_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sam Version Id
+          description: The version ID of SAM to be used for this request. Must be one of vit_h, vit_l,
+            or vit_b.
+          default: vit_h
+          examples:
+          - vit_h
+        model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Id
+        embeddings:
+          anyOf:
+          - items:
+              items:
+                items:
+                  items:
+                    type: number
+                  type: array
+                type: array
+              type: array
+            type: array
+          - {}
+          - type: 'null'
+          title: Embeddings
+          description: The embeddings to be decoded. The dimensions of the embeddings are 1 x 256 x 64
+            x 64. If embeddings is not provided, image must be provided.
+          examples:
+          - '[[[[0.1, 0.2, 0.3, ...] ...] ...]]'
+        embeddings_format:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Embeddings Format
+          description: The format of the embeddings. Must be one of json or binary. If binary, embeddings
+            are expected to be a binary numpy array.
+          default: json
+          examples:
+          - json
+        format:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Format
+          description: The format of the response. Must be one of json or binary. If binary, masks are
+            returned as binary numpy arrays. If json, masks are converted to polygons, then returned as
+            json.
+          default: json
+          examples:
+          - json
+        image:
+          anyOf:
+          - $ref: '#/components/schemas/InferenceRequestImage'
+          - type: 'null'
+          description: The image to be segmented. Only required if embeddings are not provided.
+        image_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image Id
+          description: The ID of the image to be segmented used to retrieve cached embeddings. If an embedding
+            is cached, it will be used instead of generating a new embedding. If no embedding is cached,
+            a new embedding will be generated and cached.
+          examples:
+          - image_id
+        has_mask_input:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Mask Input
+          description: Whether or not the request includes a mask input. If true, the mask input must
+            be provided.
+          default: false
+          examples:
+          - true
+        mask_input:
+          anyOf:
+          - items:
+              items:
+                items:
+                  type: number
+                type: array
+              type: array
+            type: array
+          - {}
+          - type: 'null'
+          title: Mask Input
+          description: The set of output masks. If request format is json, masks is a list of polygons,
+            where each polygon is a list of points, where each point is a tuple containing the x,y pixel
+            coordinates of the point. If request format is binary, masks is a list of binary numpy arrays.
+            The dimensions of each mask are 256 x 256. This is the same as the output, low resolution
+            mask from the previous inference.
+        mask_input_format:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Mask Input Format
+          description: The format of the mask input. Must be one of json or binary. If binary, mask input
+            is expected to be a binary numpy array.
+          default: json
+          examples:
+          - json
+        orig_im_size:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Orig Im Size
+          description: The original size of the image used to generate the embeddings. This is only required
+            if the image is not provided.
+          examples:
+          - - 640
+            - 320
+        point_coords:
+          anyOf:
+          - items:
+              items:
+                type: number
+              type: array
+            type: array
+          - type: 'null'
+          title: Point Coords
+          description: The coordinates of the interactive points used during decoding. Each point (x,y
+            pair) corresponds to a label in point_labels.
+          default:
+          - - 0.0
+            - 0.0
+          examples:
+          - - - 10.0
+              - 10.0
+        point_labels:
+          anyOf:
+          - items:
+              type: number
+            type: array
+          - type: 'null'
+          title: Point Labels
+          description: The labels of the interactive points used during decoding. A 1 represents a positive
+            point (part of the object to be segmented). A -1 represents a negative point (not part of
+            the object to be segmented). Each label corresponds to a point in point_coords.
+          default:
+          - -1
+          examples:
+          - - 1
+        use_mask_input_cache:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Use Mask Input Cache
+          description: Whether or not to use the mask input cache. If true, the mask input cache will
+            be used if it exists. If false, the mask input cache will not be used.
+          default: true
+          examples:
+          - true
+      type: object
+      required:
+      - id
+      title: SamSegmentationRequest
+      description: "SAM segmentation request.\n\nAttributes:\n    embeddings (Optional[Union[List[List[List[List[float]]]],\
+        \ Any]]): The embeddings to be decoded.\n    embeddings_format (Optional[str]): The format of\
+        \ the embeddings.\n    format (Optional[str]): The format of the response.\n    image (Optional[InferenceRequestImage]):\
+        \ The image to be segmented.\n    image_id (Optional[str]): The ID of the image to be segmented\
+        \ used to retrieve cached embeddings.\n    has_mask_input (Optional[bool]): Whether or not the\
+        \ request includes a mask input.\n    mask_input (Optional[Union[List[List[List[float]]], Any]]):\
+        \ The set of output masks.\n    mask_input_format (Optional[str]): The format of the mask input.\n\
+        \    orig_im_size (Optional[List[int]]): The original size of the image used to generate the embeddings.\n\
+        \    point_coords (Optional[List[List[float]]]): The coordinates of the interactive points used\
+        \ during decoding.\n    point_labels (Optional[List[float]]): The labels of the interactive points\
+        \ used during decoding.\n    use_mask_input_cache (Optional[bool]): Whether or not to use the\
+        \ mask input cache."
+    SamEmbeddingRequest:
+      properties:
+        id:
+          type: string
+          title: Id
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+          description: Roboflow API Key that will be passed to the model during initialization for artifact
+            retrieval
+        usage_billable:
+          type: boolean
+          title: Usage Billable
+          default: true
+        start:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Start
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        source_info:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Info
+        stream_pipeline_context_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Stream Pipeline Context Id
+          description: Internal stream-pipeline frame pairing id. Not part of the public API.
+        disable_model_monitoring:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Model Monitoring
+          description: If true, disables model monitoring for this request
+          default: false
+        sam_version_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sam Version Id
+          description: The version ID of SAM to be used for this request. Must be one of vit_h, vit_l,
+            or vit_b.
+          default: vit_h
+          examples:
+          - vit_h
+        model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Id
+        image:
+          anyOf:
+          - $ref: '#/components/schemas/InferenceRequestImage'
+          - type: 'null'
+          description: The image to be embedded
+        image_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image Id
+          description: The ID of the image to be embedded used to cache the embedding.
+          examples:
+          - image_id
+        format:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Format
+          description: The format of the response. Must be one of json or binary. If binary, embedding
+            is returned as a binary numpy array.
+          default: json
+          examples:
+          - json
+      type: object
+      required:
+      - id
+      title: SamEmbeddingRequest
+      description: "SAM embedding request.\n\nAttributes:\n    image (Optional[inference.core.entities.requests.inference.InferenceRequestImage]):\
+        \ The image to be embedded.\n    image_id (Optional[str]): The ID of the image to be embedded\
+        \ used to cache the embedding.\n    format (Optional[str]): The format of the response. Must be\
+        \ one of json or binary."
+    SamSegmentationResponse:
+      properties:
+        masks:
+          anyOf:
+          - items:
+              items:
+                items:
+                  type: integer
+                type: array
+              type: array
+            type: array
+          - {}
+          title: Masks
+          description: The set of output masks. If request format is json, masks is a list of polygons,
+            where each polygon is a list of points, where each point is a tuple containing the x,y pixel
+            coordinates of the point. If request format is binary, masks is a list of binary numpy arrays.
+            The dimensions of each mask are the same as the dimensions of the input image.
+        low_res_masks:
+          anyOf:
+          - items:
+              items:
+                items:
+                  type: integer
+                type: array
+              type: array
+            type: array
+          - {}
+          title: Low Res Masks
+          description: The set of output masks. If request format is json, masks is a list of polygons,
+            where each polygon is a list of points, where each point is a tuple containing the x,y pixel
+            coordinates of the point. If request format is binary, masks is a list of binary numpy arrays.
+            The dimensions of each mask are 256 x 256
+        time:
+          type: number
+          title: Time
+          description: The time in seconds it took to produce the segmentation including preprocessing
+      type: object
+      required:
+      - masks
+      - low_res_masks
+      - time
+      title: SamSegmentationResponse
+      description: "SAM segmentation response.\n\nAttributes:\n    masks (Union[List[List[List[int]]],\
+        \ Any]): The set of output masks.\n    low_res_masks (Union[List[List[List[int]]], Any]): The\
+        \ set of output low-resolution masks.\n    time (float): The time in seconds it took to produce\
+        \ the segmentation including preprocessing."
+    SamEmbeddingResponse:
+      properties:
+        embeddings:
+          anyOf:
+          - items:
+              items:
+                items:
+                  items:
+                    type: number
+                  type: array
+                type: array
+              type: array
+            type: array
+          - {}
+          title: Embeddings
+          description: If request format is json, embeddings is a series of nested lists representing
+            the SAM embedding. If request format is binary, embeddings is a binary numpy array. The dimensions
+            of the embedding are 1 x 256 x 64 x 64.
+          examples:
+          - '[[[[0.1, 0.2, 0.3, ...] ...] ...]]'
+        time:
+          type: number
+          title: Time
+          description: The time in seconds it took to produce the embeddings including preprocessing
+      type: object
+      required:
+      - embeddings
+      - time
+      title: SamEmbeddingResponse
+      description: "SAM embedding response.\n\nAttributes:\n    embeddings (Union[List[List[List[List[float]]]],\
+        \ Any]): The SAM embedding.\n    time (float): The time in seconds it took to produce the embeddings\
+        \ including preprocessing."
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

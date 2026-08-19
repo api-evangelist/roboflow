@@ -22,15 +22,16 @@ authentication:
   - S256
   scope_count: 55
   scopes: scopes/roboflow-scopes.yml
-  pre_registered_clients: Workspace Settings > Developer > Create OAuth App, for gateways that cannot use DCR (Azure
-    AI Foundry, Microsoft Copilot Studio, TrueFoundry).
+  pre_registered_clients: Workspace Settings > Developer > Create OAuth App, for gateways that cannot
+    use DCR (Azure AI Foundry, Microsoft Copilot Studio, TrueFoundry).
 introspection:
   tools_list: gated
   http_status: 401
   probed: POST https://mcp.roboflow.com/mcp {"jsonrpc":"2.0","id":1,"method":"tools/list"}
   www_authenticate: Bearer resource_metadata="https://mcp.roboflow.com/.well-known/oauth-protected-resource/mcp"
-  note: The live tools/list requires an OAuth access token. The tool set below is taken verbatim from the provider-published
-    tool tables in the MCP Server docs (names + descriptions only); inputSchemas require authenticated introspection.
+  note: The live tools/list requires an OAuth access token. The tool set below is taken verbatim from
+    the provider-published tool tables in the MCP Server docs (names + descriptions only); inputSchemas
+    require authenticated introspection.
 clients:
 - client: Claude
   method: Custom connector / Claude directory
@@ -84,7 +85,8 @@ categories:
 tools:
 - name: agent_chat
   category: agent
-  description: Chat with the Roboflow AI agent (Roboflow Q&A, advanced Workflow building, CV solution planning).
+  description: Chat with the Roboflow AI agent (Roboflow Q&A, advanced Workflow building, CV solution
+    planning).
 - name: agent_conversation_get
   category: agent
   description: Get a single agent conversation with its full message history.
@@ -114,14 +116,15 @@ tools:
   description: Open a Prefab UI so the human can create a Roboflow project (calls projects_create on confirm).
 - name: images_search
   category: images
-  description: Search for images inside a project with filters for tag, class, batch, annotation job, and visual
-    similarity.
+  description: Search for images inside a project with filters for tag, class, batch, annotation job,
+    and visual similarity.
 - name: images_prepare_upload
   category: images
   description: Get a pre-built upload URL to upload a single image to a project via curl.
 - name: images_prepare_upload_zip
   category: images
-  description: Prepare a signed URL to bulk-upload a zip of images (and optional COCO/YOLO/VOC/folder annotations).
+  description: Prepare a signed URL to bulk-upload a zip of images (and optional COCO/YOLO/VOC/folder
+    annotations).
 - name: images_upload_zip_status
   category: images
   description: Check the status of a zip upload task started with images_prepare_upload_zip.
@@ -145,13 +148,15 @@ tools:
   description: Get details about a specific batch including image count and status.
 - name: versions_get
   category: versions
-  description: Get info about a dataset version including splits, preprocessing, augmentation, and model metrics.
+  description: Get info about a dataset version including splits, preprocessing, augmentation, and model
+    metrics.
 - name: versions_generate
   category: versions
   description: Create a new dataset version with optional preprocessing and augmentation settings.
 - name: versions_export
   category: versions
-  description: Check or trigger a dataset export for a version in a specific format (e.g. coco, yolov8, jsonl).
+  description: Check or trigger a dataset export for a version in a specific format (e.g. coco, yolov8,
+    jsonl).
 - name: models_list
   category: models
   description: List trained models associated with a project.
@@ -271,22 +276,30 @@ tools:
   description: Get a single stream by id.
 - name: universe_search
   category: universe
-  description: Search Roboflow Universe for public datasets or models, with operators for class, image count, project
-    type, and sort.
+  description: Search Roboflow Universe for public datasets or models, with operators for class, image
+    count, project type, and sort.
 - name: universe_search_app
   category: universe
-  description: Open a Prefab Universe UI for search, visual comparison, image skim, and fork - the human picks the
-    dataset.
+  description: Open a Prefab Universe UI for search, visual comparison, image skim, and fork - the human
+    picks the dataset.
 - name: universe_dataset_images_search
   category: universe
   description: Search images inside a public Universe dataset URL.
 - name: async_tasks_get
   category: misc
-  description: Poll an async task by id (e.g. project forks). Poll every 5 seconds; processing may take up to 30
-    seconds to start.
+  description: Poll an async task by id (e.g. project forks). Poll every 5 seconds; processing may take
+    up to 30 seconds to start.
 - name: meta_feedback_send
   category: misc
-  description: Report a bug, missing feature, UX friction, or documentation issue back to the Roboflow team.
+  description: Report a bug, missing feature, UX friction, or documentation issue back to the Roboflow
+    team.
 related:
   skills: skills/_index.yml
   crosswalk: mcp/roboflow-tool-crosswalk.yml
+deployment:
+  mode: remote
+  endpoint: https://mcp.roboflow.com/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

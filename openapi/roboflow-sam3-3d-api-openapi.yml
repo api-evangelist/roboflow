@@ -1,0 +1,231 @@
+openapi: 3.2.0
+info:
+  title: Roboflow Inference Server Sam3 3d API
+  description: Roboflow inference server
+  termsOfService: https://roboflow.com/terms
+  contact:
+    name: Roboflow Inc.
+    url: https://roboflow.com/contact
+    email: help@roboflow.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.3.8
+tags:
+- name: Sam3 3d
+paths:
+  /sam3_3d/infer:
+    post:
+      summary: SAM3 3D Object Generation
+      description: Generate 3D meshes and Gaussian splatting from 2D images with mask prompts.
+      operationId: sam3_3d_infer_sam3_3d_infer_post
+      parameters:
+      - name: api_key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Roboflow API Key that will be passed to the model during initialization for artifact
+            retrieval
+          title: Api Key
+        description: Roboflow API Key that will be passed to the model during initialization for artifact
+          retrieval
+      - name: countinference
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Countinference
+      - name: service_secret
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Service Secret
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sam3_3D_Objects_InferenceRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Sam3 3d
+components:
+  schemas:
+    InferenceRequestImage:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
+          examples:
+          - url
+        value:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Value
+          description: Image data corresponding to the image type, if type = 'url' then value is a string
+            containing the url of an image, else if type = 'base64' then value is a string containing
+            base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized
+            using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
+          examples:
+          - http://www.example-image-url.com
+      type: object
+      required:
+      - type
+      title: InferenceRequestImage
+      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image\
+        \ data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding\
+        \ to the image type."
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Sam3_3D_Objects_InferenceRequest:
+      properties:
+        id:
+          type: string
+          title: Id
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+          description: Roboflow API Key that will be passed to the model during initialization for artifact
+            retrieval
+        usage_billable:
+          type: boolean
+          title: Usage Billable
+          default: true
+        start:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Start
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        source_info:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Info
+        stream_pipeline_context_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Stream Pipeline Context Id
+          description: Internal stream-pipeline frame pairing id. Not part of the public API.
+        disable_model_monitoring:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Model Monitoring
+          description: If true, disables model monitoring for this request
+          default: false
+        image:
+          $ref: '#/components/schemas/InferenceRequestImage'
+          description: The input image to be used for 3D generation.
+        mask_input:
+          title: Mask Input
+          description: 'Mask input in any supported format: polygon [x1,y1,x2,y2,...], binary mask (base64),
+            RLE dict, or list of these.'
+        model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Id
+          description: The model ID for SAM3_3D.
+          default: sam3-3d-objects
+        output_meshes:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Output Meshes
+          description: SAM3 3D always outputs object gaussians, and can optionally output object meshes
+            if output_meshes is True.
+          default: true
+        output_scene:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Output Scene
+          description: Output the combined scene reconstruction in addition to individual object reconstructions.
+          default: true
+        with_mesh_postprocess:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: With Mesh Postprocess
+          description: Enable mesh postprocessing.
+          default: true
+        with_texture_baking:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: With Texture Baking
+          description: Enable texture baking for meshes.
+          default: true
+        use_distillations:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Use Distillations
+          description: Use the distilled versions of the model components.
+          default: false
+      type: object
+      required:
+      - id
+      - image
+      - mask_input
+      title: Sam3_3D_Objects_InferenceRequest
+      description: "SAM3D inference request for 3D object generation.\n\nAttributes:\n    api_key (Optional[str]):\
+        \ Roboflow API Key.\n    image (InferenceRequestImage): The input image to be used for 3D generation.\n\
+        \    mask_input: Mask(s) in any supported format - polygon, binary mask, or RLE."
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

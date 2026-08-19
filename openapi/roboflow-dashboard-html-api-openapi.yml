@@ -1,0 +1,39 @@
+openapi: 3.2.0
+info:
+  title: Roboflow Inference Server Dashboard.html API
+  description: Roboflow inference server
+  termsOfService: https://roboflow.com/terms
+  contact:
+    name: Roboflow Inc.
+    url: https://roboflow.com/contact
+    email: help@roboflow.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.3.8
+tags:
+- name: Dashboard.html
+paths:
+  /dashboard.html:
+    get:
+      summary: Dashboard Guard
+      operationId: dashboard_guard_dashboard_html_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Dashboard.html
+    head:
+      summary: Dashboard Guard
+      operationId: dashboard_guard_dashboard_html_head
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Dashboard.html

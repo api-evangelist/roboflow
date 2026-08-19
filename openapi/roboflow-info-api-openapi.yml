@@ -1,0 +1,57 @@
+openapi: 3.2.0
+info:
+  title: Roboflow Inference Server Info API
+  description: Roboflow inference server
+  termsOfService: https://roboflow.com/terms
+  contact:
+    name: Roboflow Inc.
+    url: https://roboflow.com/contact
+    email: help@roboflow.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.3.8
+tags:
+- name: Info
+paths:
+  /info:
+    get:
+      summary: Info
+      description: Get the server name and version number
+      operationId: root_info_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerVersionInfo'
+      tags:
+      - Info
+components:
+  schemas:
+    ServerVersionInfo:
+      properties:
+        name:
+          type: string
+          title: Name
+          examples:
+          - Roboflow Inference Server
+        version:
+          type: string
+          title: Version
+          examples:
+          - 0.0.1
+        uuid:
+          type: string
+          title: Uuid
+          examples:
+          - 9c18c6f4-2266-41fb-8a0f-c12ae28f6fbe
+      type: object
+      required:
+      - name
+      - version
+      - uuid
+      title: ServerVersionInfo
+      description: "Server version information.\n\nAttributes:\n    name (str): Server name.\n    version\
+        \ (str): Server version.\n    uuid (str): Server UUID."
