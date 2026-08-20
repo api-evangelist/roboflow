@@ -17,6 +17,17 @@ specificationVersion: '0.23'
 created: '2026-08-02'
 modified: '2026-08-02'
 tags:
+- Computer-Vision
+- Machine-Learning
+- Artificial Intelligence
+- Object Detection
+- Image Annotation
+- Model Training
+- Inference
+- MLOps
+- Edge AI
+- Datasets
+tags_raw:
 - Computer Vision
 - Machine Learning
 - Artificial Intelligence
@@ -60,6 +71,10 @@ apis:
   humanURL: https://docs.roboflow.com/agents/agents/mcp-server
   baseURL: https://mcp.roboflow.com/mcp
   tags:
+  - MCP
+  - Agents
+  - Computer-Vision
+  tags_raw:
   - MCP
   - Agents
   - Computer Vision
@@ -233,6 +248,8 @@ apis:
   humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
   baseURL: https://serverless.roboflow.com
   tags:
+  - OCR
+  tags_raw:
   - Ocr
   properties:
   - type: OpenAPI
@@ -294,6 +311,8 @@ apis:
   humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
   baseURL: https://serverless.roboflow.com
   tags:
+  - SAM
+  tags_raw:
   - Sam
   properties:
   - type: OpenAPI
@@ -342,6 +361,8 @@ apis:
   humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
   baseURL: https://serverless.roboflow.com
   tags:
+  - WebRTC
+  tags_raw:
   - Webrtc
   properties:
   - type: OpenAPI
