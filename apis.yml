@@ -9,6 +9,18 @@ description: Roboflow is a computer vision platform used by over one million eng
   devices. Roboflow Universe publishes a large open library of community datasets and models. Developers
   reach the platform through a REST API, a Python SDK and CLI, an OpenAPI-described inference server, and a
   hosted OAuth-protected MCP server paired with first-party Agent Skills.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://cdn.prod.website-files.com/5f6bc60e665f54545a1e52a5/670954c541fe7e67c3d2cb01_og-logo.png
 url: https://raw.githubusercontent.com/api-evangelist/roboflow/refs/heads/main/apis.yml
 x-type: company
