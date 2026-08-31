@@ -260,7 +260,7 @@ apis:
   humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
   baseURL: https://serverless.roboflow.com
   tags:
-  - OCR
+  - Ocr
   tags_raw:
   - Ocr
   properties:
@@ -323,7 +323,7 @@ apis:
   humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
   baseURL: https://serverless.roboflow.com
   tags:
-  - SAM
+  - Sam
   tags_raw:
   - Sam
   properties:
@@ -373,7 +373,7 @@ apis:
   humanURL: https://docs.roboflow.com/deployment/roboflow-cloud/serverless-api
   baseURL: https://serverless.roboflow.com
   tags:
-  - WebRTC
+  - Webrtc
   tags_raw:
   - Webrtc
   properties:
