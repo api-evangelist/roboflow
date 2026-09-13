@@ -1,0 +1,766 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Roboflow",
+    "identifier": "did:web:roboflow.com",
+    "documentationUrl": "https://docs.roboflow.com",
+    "logoUrl": "https://cdn.prod.website-files.com/5f6bc60e665f54545a1e52a5/669974bcd33beb1adf952037_logo-roboflow-purple.svg",
+    "trustManifest": {
+      "identity": "did:web:roboflow.com",
+      "identityType": "did",
+      "attestations": [
+        {
+          "type": "SOC2-Type2",
+          "uri": "https://roboflow.com/security"
+        }
+      ],
+      "metadata": {
+        "signatureStatus": "todo",
+        "signatureTodo": "Add detached JWS signature over the canonicalized Trust Manifest after did:web:roboflow.com key material is published."
+      }
+    }
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:roboflow.com:mcp:platform",
+      "displayName": "Roboflow MCP Server",
+      "type": "application/mcp-server-card+json",
+      "description": "Hosted Model Context Protocol server for Roboflow's computer vision platform. Agents can manage projects, datasets, images, annotations, dataset versions, model training and evaluation, Workflows, inference, devices, active learning, Universe search, and production vision events.",
+      "tags": [
+        "roboflow",
+        "computer-vision",
+        "mcp",
+        "datasets",
+        "annotation",
+        "training",
+        "inference",
+        "workflows",
+        "deployment",
+        "active-learning"
+      ],
+      "capabilities": [
+        "agent_chat",
+        "projects_list",
+        "projects_create",
+        "projects_get",
+        "projects_health",
+        "projects_fork",
+        "image_upload",
+        "images_search",
+        "images_workspace_search",
+        "annotations_save",
+        "autolabel_start",
+        "annotation_jobs_create",
+        "versions_generate",
+        "versions_get",
+        "versions_export",
+        "models_list",
+        "models_get",
+        "models_infer",
+        "trainings_create",
+        "trainings_get",
+        "model_evals_list",
+        "model_evals_get",
+        "workflows_list",
+        "workflows_create",
+        "workflows_update",
+        "workflows_run",
+        "workflow_specs_validate",
+        "workflow_specs_run",
+        "devices_list",
+        "devices_create",
+        "devices_update_config",
+        "vision_events_query",
+        "vision_events_use_case_create",
+        "universe_search"
+      ],
+      "representativeQueries": [
+        "create a Roboflow project, upload images, generate a dataset version, and start training",
+        "run inference on an image using my Roboflow model",
+        "build and run a Roboflow Workflow for a computer vision pipeline",
+        "search Roboflow Universe for public datasets with a trained model",
+        "inspect model evaluation metrics and suggest ways to improve accuracy"
+      ],
+      "updatedAt": "2026-07-01T07:35:44Z",
+      "data": {
+        "name": "roboflow",
+        "title": "Roboflow MCP Server",
+        "description": "A hosted MCP server that exposes Roboflow's computer vision platform as tools and skill resources for AI assistants.",
+        "protocol": "mcp",
+        "protocolVersion": "2025-06-18",
+        "transports": [
+          {
+            "type": "streamable-http",
+            "url": "https://mcp.roboflow.com/mcp"
+          }
+        ],
+        "authentication": {
+          "type": "oauth2",
+          "resourceMetadataUrl": "https://mcp.roboflow.com/.well-known/oauth-protected-resource/mcp",
+          "authorizationServers": [
+            "https://app.roboflow.com"
+          ],
+          "bearerMethodsSupported": [
+            "header"
+          ]
+        },
+        "documentationUrl": "https://docs.roboflow.com/developer/mcp-server",
+        "homepageUrl": "https://mcp.roboflow.com/",
+        "llmsTxtUrl": "https://mcp.roboflow.com/llms.txt",
+        "nativeCapabilities": [
+          "tools",
+          "resources"
+        ],
+        "toolCategories": [
+          "Agent",
+          "Projects",
+          "Project Deployment",
+          "Images",
+          "Annotations",
+          "Auto-label",
+          "Batch",
+          "Versions",
+          "Models",
+          "Model Evaluations",
+          "Workflows",
+          "Devices",
+          "Vision Events",
+          "Universe",
+          "Async tasks",
+          "Meta"
+        ],
+        "skillResources": [
+          "roboflow://skills/api-reference/SKILL",
+          "roboflow://skills/data-management/SKILL",
+          "roboflow://skills/inference/SKILL",
+          "roboflow://skills/plans-and-pricing/SKILL",
+          "roboflow://skills/product-navigation/SKILL",
+          "roboflow://skills/training-and-evaluation/SKILL",
+          "roboflow://skills/universe/SKILL"
+        ]
+      }
+    },
+    {
+      "identifier": "urn:air:roboflow.com:openapi:serverless-inference",
+      "displayName": "Roboflow Serverless Inference OpenAPI",
+      "type": "application/openapi+json",
+      "url": "https://serverless.roboflow.com/openapi.json",
+      "description": "OpenAPI 3.1 specification for the Roboflow Inference Server on the serverless host, covering model inference, Workflows, OCR, embeddings, segmentation, large multimodal models, WebRTC session endpoints, and service health checks.",
+      "tags": [
+        "roboflow",
+        "openapi",
+        "computer-vision",
+        "inference",
+        "workflows",
+        "serverless",
+        "ocr",
+        "segmentation",
+        "embeddings",
+        "webrtc"
+      ],
+      "capabilities": [
+        "infer_with_model",
+        "run_workflow",
+        "ocr",
+        "embed_image",
+        "embed_text",
+        "segment_image",
+        "lmm_inference",
+        "webrtc_video_streaming",
+        "health_check"
+      ],
+      "representativeQueries": [
+        "call the Roboflow Serverless API to run inference on an image",
+        "generate a client from the Roboflow Inference OpenAPI spec",
+        "run a Roboflow Workflow from a REST API request",
+        "use SAM or SAM 2 segmentation through Roboflow serverless inference",
+        "start a WebRTC video inference session with Roboflow"
+      ],
+      "version": "1.3.3",
+      "updatedAt": "2026-07-01T07:35:44Z",
+      "metadata": {
+        "openapiVersion": "3.1.0",
+        "baseUrl": "https://serverless.roboflow.com",
+        "documentationUrl": "https://docs.roboflow.com/deploy/serverless-hosted-api-v2/use-with-the-rest-api",
+        "termsOfServiceUrl": "https://roboflow.com/terms",
+        "contact": {
+          "name": "Roboflow Inc.",
+          "url": "https://roboflow.com/contact",
+          "email": "help@roboflow.com"
+        },
+        "license": {
+          "name": "Apache 2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+      }
+    },
+    {
+      "identifier": "urn:air:roboflow.com:catalog:agent-skills",
+      "displayName": "Roboflow Agent Skills and Plugin Catalog",
+      "type": "application/ai-catalog+json",
+      "description": "Nested catalog for Roboflow's agent-ready computer vision skills and plugin manifests. The repository contains skill instructions and MCP configuration for datasets, annotation, training, evaluation, inference, Workflows, Universe, plans, and Roboflow platform APIs.",
+      "tags": [
+        "roboflow",
+        "skills",
+        "plugin",
+        "computer-vision",
+        "codex",
+        "claude-code",
+        "mcp"
+      ],
+      "capabilities": [
+        "api-reference",
+        "data-management",
+        "inference",
+        "plans-and-pricing",
+        "product-navigation",
+        "training-and-evaluation",
+        "universe"
+      ],
+      "representativeQueries": [
+        "load Roboflow skills for a computer vision project",
+        "install the Roboflow plugin in Codex or Claude Code",
+        "find guidance for training and evaluating a Roboflow model",
+        "find guidance for using Roboflow Workflows and inference",
+        "find guidance for uploading and labeling Roboflow datasets"
+      ],
+      "updatedAt": "2026-07-01T07:35:44Z",
+      "metadata": {
+        "repository": "https://github.com/roboflow/computer-vision-skills",
+        "license": "Apache-2.0",
+        "sourceUpdatedAt": "2026-07-01T04:37:27Z"
+      },
+      "data": {
+        "specVersion": "1.0",
+        "host": {
+          "displayName": "Roboflow Computer Vision Skills",
+          "identifier": "did:web:roboflow.com",
+          "documentationUrl": "https://github.com/roboflow/computer-vision-skills",
+          "trustManifest": {
+            "identity": "did:web:roboflow.com",
+            "identityType": "did",
+            "attestations": [
+              {
+                "type": "SOC2-Type2",
+                "uri": "https://roboflow.com/security"
+              }
+            ],
+            "metadata": {
+              "signatureStatus": "todo",
+              "signatureTodo": "Add detached JWS signature over the canonicalized Trust Manifest after did:web:roboflow.com key material is published."
+            }
+          }
+        },
+        "entries": [
+          {
+            "identifier": "urn:air:roboflow.com:plugin:codex",
+            "displayName": "Roboflow Codex Plugin Manifest",
+            "type": "application/vnd.openai.codex-plugin+json",
+            "url": "https://raw.githubusercontent.com/roboflow/computer-vision-skills/main/.codex-plugin/plugin.json",
+            "description": "Codex plugin manifest that loads Roboflow computer vision skills and the Roboflow MCP server configuration.",
+            "tags": [
+              "roboflow",
+              "codex",
+              "plugin",
+              "mcp",
+              "skills"
+            ],
+            "capabilities": [
+              "Interactive",
+              "Write",
+              "skills",
+              "mcpServers"
+            ],
+            "representativeQueries": [
+              "install the Roboflow plugin in Codex",
+              "use Codex with Roboflow MCP and computer vision skills"
+            ],
+            "version": "0.1.0"
+          },
+          {
+            "identifier": "urn:air:roboflow.com:plugin:claude-code",
+            "displayName": "Roboflow Claude Code Plugin Manifest",
+            "type": "application/vnd.anthropic.claude-plugin+json",
+            "url": "https://raw.githubusercontent.com/roboflow/computer-vision-skills/main/.claude-plugin/plugin.json",
+            "description": "Claude Code plugin manifest that loads Roboflow computer vision skills and the Roboflow MCP server configuration.",
+            "tags": [
+              "roboflow",
+              "claude-code",
+              "plugin",
+              "mcp",
+              "skills"
+            ],
+            "capabilities": [
+              "skills",
+              "mcpServers"
+            ],
+            "representativeQueries": [
+              "install the Roboflow plugin in Claude Code",
+              "use Claude Code with Roboflow MCP and computer vision skills"
+            ],
+            "version": "0.1.0"
+          },
+          {
+            "identifier": "urn:air:roboflow.com:mcp-config:computer-vision-skills",
+            "displayName": "Roboflow MCP Configuration",
+            "type": "application/json",
+            "url": "https://raw.githubusercontent.com/roboflow/computer-vision-skills/main/.mcp.json",
+            "description": "MCP client configuration for the official Roboflow MCP server at https://mcp.roboflow.com/mcp.",
+            "tags": [
+              "roboflow",
+              "mcp",
+              "config"
+            ],
+            "capabilities": [
+              "mcpServers"
+            ],
+            "representativeQueries": [
+              "configure a client to use the Roboflow MCP server",
+              "find the Roboflow MCP endpoint URL"
+            ]
+          },
+          {
+            "identifier": "urn:air:roboflow.com:skill:api-reference",
+            "displayName": "Roboflow API Reference Skill",
+            "type": "application/ai-skill+json",
+            "description": "Protocol-level facts for Roboflow REST and Inference APIs, including URL patterns, authentication, parameters, error codes, and SDK quick start.",
+            "tags": [
+              "roboflow",
+              "skill",
+              "api",
+              "rest",
+              "inference"
+            ],
+            "capabilities": [
+              "api-reference",
+              "authentication",
+              "url-patterns",
+              "sdk-quick-start"
+            ],
+            "representativeQueries": [
+              "how do I authenticate to the Roboflow REST API",
+              "what URL should I call for Roboflow serverless inference",
+              "show a Python SDK quick start for Roboflow inference"
+            ],
+            "metadata": {
+              "skillName": "roboflow-api-reference",
+              "format": "SKILL.md",
+              "mcpResourceUri": "roboflow://skills/api-reference/SKILL"
+            },
+            "data": {
+              "name": "roboflow-api-reference",
+              "displayName": "Roboflow API Reference Skill",
+              "description": "Protocol-level facts for Roboflow REST and Inference APIs, including URL patterns, authentication, parameters, error codes, and SDK quick start.",
+              "format": "SKILL.md",
+              "sourceUrl": "https://raw.githubusercontent.com/roboflow/computer-vision-skills/main/skills/api-reference/SKILL.md",
+              "mcpResourceUri": "roboflow://skills/api-reference/SKILL",
+              "tags": [
+                "roboflow",
+                "skill",
+                "api",
+                "rest",
+                "inference"
+              ],
+              "capabilities": [
+                "api-reference",
+                "authentication",
+                "url-patterns",
+                "sdk-quick-start"
+              ],
+              "representativeQueries": [
+                "how do I authenticate to the Roboflow REST API",
+                "what URL should I call for Roboflow serverless inference",
+                "show a Python SDK quick start for Roboflow inference"
+              ]
+            }
+          },
+          {
+            "identifier": "urn:air:roboflow.com:skill:data-management",
+            "displayName": "Roboflow Data Management Skill",
+            "type": "application/ai-skill+json",
+            "description": "Guidance for uploading images, labeling, organizing datasets, creating Roboflow projects, using tags, managing splits, generating versions, and searching with RoboQL.",
+            "tags": [
+              "roboflow",
+              "skill",
+              "datasets",
+              "upload",
+              "labeling",
+              "annotation"
+            ],
+            "capabilities": [
+              "project-creation",
+              "image-upload",
+              "labeling",
+              "dataset-versioning",
+              "roboql-search"
+            ],
+            "representativeQueries": [
+              "create a Roboflow object detection project and upload images",
+              "organize a dataset with tags and splits",
+              "create a labeling job in Roboflow"
+            ],
+            "metadata": {
+              "skillName": "roboflow-data-management",
+              "format": "SKILL.md",
+              "mcpResourceUri": "roboflow://skills/data-management/SKILL"
+            },
+            "data": {
+              "name": "roboflow-data-management",
+              "displayName": "Roboflow Data Management Skill",
+              "description": "Guidance for uploading images, labeling, organizing datasets, creating Roboflow projects, using tags, managing splits, generating versions, and searching with RoboQL.",
+              "format": "SKILL.md",
+              "sourceUrl": "https://raw.githubusercontent.com/roboflow/computer-vision-skills/main/skills/data-management/SKILL.md",
+              "mcpResourceUri": "roboflow://skills/data-management/SKILL",
+              "tags": [
+                "roboflow",
+                "skill",
+                "datasets",
+                "upload",
+                "labeling",
+                "annotation"
+              ],
+              "capabilities": [
+                "project-creation",
+                "image-upload",
+                "labeling",
+                "dataset-versioning",
+                "roboql-search"
+              ],
+              "representativeQueries": [
+                "create a Roboflow object detection project and upload images",
+                "organize a dataset with tags and splits",
+                "create a labeling job in Roboflow"
+              ]
+            }
+          },
+          {
+            "identifier": "urn:air:roboflow.com:skill:inference",
+            "displayName": "Roboflow Inference Skill",
+            "type": "application/ai-skill+json",
+            "description": "Deployment option comparison for serverless, dedicated, self-hosted, batch, and live video inference, plus Workflow execution patterns.",
+            "tags": [
+              "roboflow",
+              "skill",
+              "inference",
+              "deployment",
+              "workflows",
+              "serverless",
+              "self-hosted"
+            ],
+            "capabilities": [
+              "serverless-inference",
+              "dedicated-deployment",
+              "self-hosted-inference",
+              "batch-processing",
+              "workflow-execution",
+              "video-streaming"
+            ],
+            "representativeQueries": [
+              "choose between serverless and dedicated Roboflow inference",
+              "run a Roboflow Workflow from Python",
+              "build a live video inference app with Roboflow"
+            ],
+            "metadata": {
+              "skillName": "roboflow-inference",
+              "format": "SKILL.md",
+              "mcpResourceUri": "roboflow://skills/inference/SKILL"
+            },
+            "data": {
+              "name": "roboflow-inference",
+              "displayName": "Roboflow Inference Skill",
+              "description": "Deployment option comparison for serverless, dedicated, self-hosted, batch, and live video inference, plus Workflow execution patterns.",
+              "format": "SKILL.md",
+              "sourceUrl": "https://raw.githubusercontent.com/roboflow/computer-vision-skills/main/skills/inference/SKILL.md",
+              "mcpResourceUri": "roboflow://skills/inference/SKILL",
+              "tags": [
+                "roboflow",
+                "skill",
+                "inference",
+                "deployment",
+                "workflows",
+                "serverless",
+                "self-hosted"
+              ],
+              "capabilities": [
+                "serverless-inference",
+                "dedicated-deployment",
+                "self-hosted-inference",
+                "batch-processing",
+                "workflow-execution",
+                "video-streaming"
+              ],
+              "representativeQueries": [
+                "choose between serverless and dedicated Roboflow inference",
+                "run a Roboflow Workflow from Python",
+                "build a live video inference app with Roboflow"
+              ]
+            }
+          },
+          {
+            "identifier": "urn:air:roboflow.com:skill:plans-and-pricing",
+            "displayName": "Roboflow Plans and Pricing Skill",
+            "type": "application/ai-skill+json",
+            "description": "Guidance for answering questions about Roboflow plans, credit usage, and cost estimation, with current dollar pricing delegated to roboflow.com/pricing.",
+            "tags": [
+              "roboflow",
+              "skill",
+              "plans",
+              "pricing",
+              "credits",
+              "billing"
+            ],
+            "capabilities": [
+              "plan-comparison",
+              "credit-usage",
+              "cost-estimation",
+              "billing-guidance"
+            ],
+            "representativeQueries": [
+              "estimate Roboflow credits for training and inference",
+              "compare Roboflow plan features",
+              "where should I check current Roboflow pricing"
+            ],
+            "metadata": {
+              "skillName": "roboflow-plans-and-pricing",
+              "format": "SKILL.md",
+              "mcpResourceUri": "roboflow://skills/plans-and-pricing/SKILL"
+            },
+            "data": {
+              "name": "roboflow-plans-and-pricing",
+              "displayName": "Roboflow Plans and Pricing Skill",
+              "description": "Guidance for answering questions about Roboflow plans, credit usage, and cost estimation, with current dollar pricing delegated to roboflow.com/pricing.",
+              "format": "SKILL.md",
+              "sourceUrl": "https://raw.githubusercontent.com/roboflow/computer-vision-skills/main/skills/plans-and-pricing/SKILL.md",
+              "mcpResourceUri": "roboflow://skills/plans-and-pricing/SKILL",
+              "tags": [
+                "roboflow",
+                "skill",
+                "plans",
+                "pricing",
+                "credits",
+                "billing"
+              ],
+              "capabilities": [
+                "plan-comparison",
+                "credit-usage",
+                "cost-estimation",
+                "billing-guidance"
+              ],
+              "representativeQueries": [
+                "estimate Roboflow credits for training and inference",
+                "compare Roboflow plan features",
+                "where should I check current Roboflow pricing"
+              ]
+            }
+          },
+          {
+            "identifier": "urn:air:roboflow.com:skill:product-navigation",
+            "displayName": "Roboflow Product Navigation Skill",
+            "type": "application/ai-skill+json",
+            "description": "Guidance for mapping user intents to locations in the Roboflow web app, including projects, upload, annotation, training, deployment, Workflows, settings, billing, and API keys.",
+            "tags": [
+              "roboflow",
+              "skill",
+              "navigation",
+              "web-app",
+              "dashboard"
+            ],
+            "capabilities": [
+              "app-navigation",
+              "settings-navigation",
+              "workflow-builder-navigation",
+              "api-key-navigation"
+            ],
+            "representativeQueries": [
+              "where do I find my Roboflow API key",
+              "where do I create a Roboflow Workflow",
+              "where do I manage Roboflow deployments"
+            ],
+            "metadata": {
+              "skillName": "roboflow-product-navigation",
+              "format": "SKILL.md",
+              "mcpResourceUri": "roboflow://skills/product-navigation/SKILL"
+            },
+            "data": {
+              "name": "roboflow-product-navigation",
+              "displayName": "Roboflow Product Navigation Skill",
+              "description": "Guidance for mapping user intents to locations in the Roboflow web app, including projects, upload, annotation, training, deployment, Workflows, settings, billing, and API keys.",
+              "format": "SKILL.md",
+              "sourceUrl": "https://raw.githubusercontent.com/roboflow/computer-vision-skills/main/skills/product-navigation/SKILL.md",
+              "mcpResourceUri": "roboflow://skills/product-navigation/SKILL",
+              "tags": [
+                "roboflow",
+                "skill",
+                "navigation",
+                "web-app",
+                "dashboard"
+              ],
+              "capabilities": [
+                "app-navigation",
+                "settings-navigation",
+                "workflow-builder-navigation",
+                "api-key-navigation"
+              ],
+              "representativeQueries": [
+                "where do I find my Roboflow API key",
+                "where do I create a Roboflow Workflow",
+                "where do I manage Roboflow deployments"
+              ]
+            }
+          },
+          {
+            "identifier": "urn:air:roboflow.com:skill:training-and-evaluation",
+            "displayName": "Roboflow Training and Evaluation Skill",
+            "type": "application/ai-skill+json",
+            "description": "Guidance for training Roboflow models, selecting architectures, improving accuracy, reading evaluation metrics, and setting up production feedback loops and active learning.",
+            "tags": [
+              "roboflow",
+              "skill",
+              "training",
+              "evaluation",
+              "model-quality",
+              "active-learning"
+            ],
+            "capabilities": [
+              "architecture-selection",
+              "training-flow",
+              "model-evaluation",
+              "accuracy-improvement",
+              "active-learning"
+            ],
+            "representativeQueries": [
+              "train a Roboflow model on a dataset version",
+              "choose the right model architecture for object detection",
+              "improve model accuracy using Roboflow evaluation metrics"
+            ],
+            "metadata": {
+              "skillName": "roboflow-training-and-evaluation",
+              "format": "SKILL.md",
+              "mcpResourceUri": "roboflow://skills/training-and-evaluation/SKILL"
+            },
+            "data": {
+              "name": "roboflow-training-and-evaluation",
+              "displayName": "Roboflow Training and Evaluation Skill",
+              "description": "Guidance for training Roboflow models, selecting architectures, improving accuracy, reading evaluation metrics, and setting up production feedback loops and active learning.",
+              "format": "SKILL.md",
+              "sourceUrl": "https://raw.githubusercontent.com/roboflow/computer-vision-skills/main/skills/training-and-evaluation/SKILL.md",
+              "mcpResourceUri": "roboflow://skills/training-and-evaluation/SKILL",
+              "tags": [
+                "roboflow",
+                "skill",
+                "training",
+                "evaluation",
+                "model-quality",
+                "active-learning"
+              ],
+              "capabilities": [
+                "architecture-selection",
+                "training-flow",
+                "model-evaluation",
+                "accuracy-improvement",
+                "active-learning"
+              ],
+              "representativeQueries": [
+                "train a Roboflow model on a dataset version",
+                "choose the right model architecture for object detection",
+                "improve model accuracy using Roboflow evaluation metrics"
+              ]
+            }
+          },
+          {
+            "identifier": "urn:air:roboflow.com:skill:universe",
+            "displayName": "Roboflow Universe Skill",
+            "type": "application/ai-skill+json",
+            "description": "Guidance for searching and using public datasets and models on Roboflow Universe, including URL patterns, query operators, dataset selection, forking, and downloads.",
+            "tags": [
+              "roboflow",
+              "skill",
+              "universe",
+              "public-datasets",
+              "pretrained-models"
+            ],
+            "capabilities": [
+              "universe-search",
+              "dataset-selection",
+              "dataset-forking",
+              "public-models",
+              "query-operators"
+            ],
+            "representativeQueries": [
+              "search Roboflow Universe for a helmet detection dataset",
+              "find public datasets with trained models",
+              "fork a Universe dataset into my Roboflow workspace"
+            ],
+            "metadata": {
+              "skillName": "roboflow-universe",
+              "format": "SKILL.md",
+              "mcpResourceUri": "roboflow://skills/universe/SKILL"
+            },
+            "data": {
+              "name": "roboflow-universe",
+              "displayName": "Roboflow Universe Skill",
+              "description": "Guidance for searching and using public datasets and models on Roboflow Universe, including URL patterns, query operators, dataset selection, forking, and downloads.",
+              "format": "SKILL.md",
+              "sourceUrl": "https://raw.githubusercontent.com/roboflow/computer-vision-skills/main/skills/universe/SKILL.md",
+              "mcpResourceUri": "roboflow://skills/universe/SKILL",
+              "tags": [
+                "roboflow",
+                "skill",
+                "universe",
+                "public-datasets",
+                "pretrained-models"
+              ],
+              "capabilities": [
+                "universe-search",
+                "dataset-selection",
+                "dataset-forking",
+                "public-models",
+                "query-operators"
+              ],
+              "representativeQueries": [
+                "search Roboflow Universe for a helmet detection dataset",
+                "find public datasets with trained models",
+                "fork a Universe dataset into my Roboflow workspace"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "description": "Canonical AI Catalog for Roboflow agentic resources: MCP, OpenAPI, and agent skills.",
+    "canonicalUrl": "https://roboflow.com/.well-known/ai-catalog.json",
+    "recommendedDiscovery": {
+      "wellKnownPath": "https://roboflow.com/.well-known/ai-catalog.json",
+      "htmlLink": "<link rel=\"ai-catalog\" href=\"https://roboflow.com/.well-known/ai-catalog.json\" type=\"application/ai-catalog+json\">",
+      "httpLinkHeader": "<https://roboflow.com/.well-known/ai-catalog.json>; rel=\"ai-catalog\"; type=\"application/ai-catalog+json\"",
+      "robotsTxt": "Agentmap: https://roboflow.com/.well-known/ai-catalog.json",
+      "dnsTxt": "_catalog._agents.roboflow.com TXT \"url=https://roboflow.com/.well-known/ai-catalog.json\"",
+      "httpHeaders": {
+        "Content-Type": "application/ai-catalog+json",
+        "Access-Control-Allow-Origin": "*"
+      }
+    },
+    "sourceUrls": [
+      "https://agenticresourcediscovery.org/spec/",
+      "https://agenticresourcediscovery.org/how_to_publish/",
+      "https://ai-catalog.io/",
+      "https://mcp.roboflow.com/",
+      "https://mcp.roboflow.com/llms.txt",
+      "https://mcp.roboflow.com/.well-known/oauth-protected-resource/mcp",
+      "https://docs.roboflow.com/developer/mcp-server",
+      "https://serverless.roboflow.com/openapi.json",
+      "https://github.com/roboflow/computer-vision-skills",
+      "https://raw.githubusercontent.com/roboflow/computer-vision-skills/main/.codex-plugin/plugin.json",
+      "https://raw.githubusercontent.com/roboflow/computer-vision-skills/main/.claude-plugin/plugin.json",
+      "https://raw.githubusercontent.com/roboflow/computer-vision-skills/main/.mcp.json"
+    ],
+    "generatedAt": "2026-07-01T07:35:44Z",
+    "todos": [
+      "Publish https://roboflow.com/.well-known/did.json for did:web:roboflow.com before relying on DID verification.",
+      "Add a detached JWS signature to host.trustManifest.signature after the DID verification method is live.",
+      "Auto-generate this catalog in CI so updatedAt, OpenAPI version, MCP tool lists, OAuth scopes, and skill manifests do not drift."
+    ]
+  }
+}
