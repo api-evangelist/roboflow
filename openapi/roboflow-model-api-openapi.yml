@@ -30,61 +30,6 @@ paths:
       - Model
 components:
   schemas:
-    ModelsDescriptions:
-      properties:
-        models:
-          items:
-            $ref: '#/components/schemas/ModelDescriptionEntity'
-          type: array
-          title: Models
-          description: List of models that are loaded by model manager.
-        total_vram_bytes:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Total Vram Bytes
-          description: Total estimated VRAM consumed by all loaded models in bytes.
-        gpu_memory_used:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Gpu Memory Used
-          description: Current GPU memory in use in bytes (device-level, includes all runtimes).
-        gpu_memory_total:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Gpu Memory Total
-          description: Total GPU memory available in bytes.
-        torch_cuda_allocated:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Torch Cuda Allocated
-          description: Live tensor memory allocated by PyTorch's CUDA allocator in bytes.
-        torch_cuda_reserved:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Torch Cuda Reserved
-          description: Total memory reserved by PyTorch's CUDA allocator in bytes.
-        torch_cuda_allocator_cache:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Torch Cuda Allocator Cache
-          description: Reserved but currently unallocated PyTorch CUDA memory in bytes.
-        non_torch_gpu_memory:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Non Torch Gpu Memory
-          description: Device memory not reserved by PyTorch in bytes. This includes native runtimes,
-            CUDA context overhead, and allocations from other processes.
-      type: object
-      required:
-      - models
-      title: ModelsDescriptions
     ModelDescriptionEntity:
       properties:
         model_id:
@@ -134,10 +79,63 @@ components:
             type: string
           type: array
           title: Request Paths
-          description: HTTP request paths that triggered inference on this model (e.g. /door-glyph-locator/10,
-            /infer/object_detection).
+          description: HTTP request paths that triggered inference on this model (e.g. /door-glyph-locator/10, /infer/object_detection).
       type: object
       required:
       - model_id
       - task_type
       title: ModelDescriptionEntity
+    ModelsDescriptions:
+      properties:
+        models:
+          items:
+            $ref: '#/components/schemas/ModelDescriptionEntity'
+          type: array
+          title: Models
+          description: List of models that are loaded by model manager.
+        total_vram_bytes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Total Vram Bytes
+          description: Total estimated VRAM consumed by all loaded models in bytes.
+        gpu_memory_used:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Gpu Memory Used
+          description: Current GPU memory in use in bytes (device-level, includes all runtimes).
+        gpu_memory_total:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Gpu Memory Total
+          description: Total GPU memory available in bytes.
+        torch_cuda_allocated:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Torch Cuda Allocated
+          description: Live tensor memory allocated by PyTorch's CUDA allocator in bytes.
+        torch_cuda_reserved:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Torch Cuda Reserved
+          description: Total memory reserved by PyTorch's CUDA allocator in bytes.
+        torch_cuda_allocator_cache:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Torch Cuda Allocator Cache
+          description: Reserved but currently unallocated PyTorch CUDA memory in bytes.
+        non_torch_gpu_memory:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Non Torch Gpu Memory
+          description: Device memory not reserved by PyTorch in bytes. This includes native runtimes, CUDA context overhead, and allocations from other processes.
+      type: object
+      required:
+      - models
+      title: ModelsDescriptions

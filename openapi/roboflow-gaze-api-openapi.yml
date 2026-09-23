@@ -17,8 +17,7 @@ paths:
   /gaze/gaze_detection:
     post:
       summary: Gaze Detection (deprecated)
-      description: Deprecated. Always returns HTTP 410 Gone. The endpoint stub will be removed end of
-        Q2 2026.
+      description: Deprecated. Always returns HTTP 410 Gone. The endpoint stub will be removed end of Q2 2026.
       operationId: gaze_detection_deprecated_gaze_gaze_detection_post
       responses:
         '200':

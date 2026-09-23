@@ -53,5 +53,4 @@ components:
       - version
       - uuid
       title: ServerVersionInfo
-      description: "Server version information.\n\nAttributes:\n    name (str): Server name.\n    version\
-        \ (str): Server version.\n    uuid (str): Server UUID."
+      description: "Server version information.\n\nAttributes:\n    name (str): Server name.\n    version (str): Server version.\n    uuid (str): Server UUID."

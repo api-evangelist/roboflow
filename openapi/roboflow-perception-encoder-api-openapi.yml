@@ -27,11 +27,9 @@ paths:
           anyOf:
           - type: string
           - type: 'null'
-          description: Roboflow API Key that will be passed to the model during initialization for artifact
-            retrieval
+          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
           title: Api Key
-        description: Roboflow API Key that will be passed to the model during initialization for artifact
-          retrieval
+        description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
       - name: countinference
         in: query
         required: false
@@ -82,11 +80,9 @@ paths:
           anyOf:
           - type: string
           - type: 'null'
-          description: Roboflow API Key that will be passed to the model during initialization for artifact
-            retrieval
+          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
           title: Api Key
-        description: Roboflow API Key that will be passed to the model during initialization for artifact
-          retrieval
+        description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
       - name: countinference
         in: query
         required: false
@@ -137,11 +133,9 @@ paths:
           anyOf:
           - type: string
           - type: 'null'
-          description: Roboflow API Key that will be passed to the model during initialization for artifact
-            retrieval
+          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
           title: Api Key
-        description: Roboflow API Key that will be passed to the model during initialization for artifact
-          retrieval
+        description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
       - name: countinference
         in: query
         required: false
@@ -181,16 +175,47 @@ paths:
       - Perception Encoder
 components:
   schemas:
-    HTTPValidationError:
+    PerceptionEncoderCompareResponse:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        inference_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Id
+          description: Unique identifier of inference
+        frame_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Id
+          description: The frame id of the image used in inference if the input was a video
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: The time in seconds it took to produce the similarity scores including preprocessing
+        similarity:
+          anyOf:
+          - items:
+              type: number
+            type: array
+          - additionalProperties:
+              type: number
+            type: object
+          title: Similarity
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+          description: Identifier of parent image region. Useful when stack of detection-models is in use to refer the RoI being the input to inference
       type: object
-      title: HTTPValidationError
-    PerceptionEncoderTextEmbeddingRequest:
+      required:
+      - similarity
+      title: PerceptionEncoderCompareResponse
+      description: "Response for PERCEPTION_ENCODER comparison.\n\nAttributes:\n    similarity (Union[List[float], Dict[str, float]]): Similarity scores.\n    time (float): The time in seconds it took to produce the similarity scores including preprocessing."
+    PerceptionEncoderImageEmbeddingRequest:
       properties:
         id:
           type: string
@@ -200,8 +225,7 @@ components:
           - type: string
           - type: 'null'
           title: Api Key
-          description: Roboflow API Key that will be passed to the model during initialization for artifact
-            retrieval
+          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
         usage_billable:
           type: boolean
           title: Usage Billable
@@ -239,8 +263,86 @@ components:
           - type: string
           - type: 'null'
           title: Perception Encoder Version Id
-          description: The version ID of PERCEPTION_ENCODER to be used for this request. Must be one of
-            RN101, RN50, RN50x16, RN50x4, RN50x64, ViT-B-16, ViT-B-32, ViT-L-14-336px, and ViT-L-14.
+          description: The version ID of PERCEPTION_ENCODER to be used for this request. Must be one of RN101, RN50, RN50x16, RN50x4, RN50x64, ViT-B-16, ViT-B-32, ViT-L-14-336px, and ViT-L-14.
+          default: PE-Core-L14-336
+          examples:
+          - PE-Core-L14-336
+        model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Id
+        image:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/InferenceRequestImage'
+            type: array
+          - $ref: '#/components/schemas/InferenceRequestImage'
+          title: Image
+      type: object
+      required:
+      - id
+      - image
+      title: PerceptionEncoderImageEmbeddingRequest
+      description: "Request for PERCEPTION_ENCODER image embedding.\n\nAttributes:\n    image (Union[List[InferenceRequestImage], InferenceRequestImage]): Image(s) to be embedded."
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PerceptionEncoderTextEmbeddingRequest:
+      properties:
+        id:
+          type: string
+          title: Id
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
+        usage_billable:
+          type: boolean
+          title: Usage Billable
+          default: true
+        start:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Start
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        source_info:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Info
+        stream_pipeline_context_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Stream Pipeline Context Id
+          description: Internal stream-pipeline frame pairing id. Not part of the public API.
+        disable_model_monitoring:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Model Monitoring
+          description: If true, disables model monitoring for this request
+          default: false
+        perception_encoder_version_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Perception Encoder Version Id
+          description: The version ID of PERCEPTION_ENCODER to be used for this request. Must be one of RN101, RN50, RN50x16, RN50x4, RN50x64, ViT-B-16, ViT-B-32, ViT-L-14-336px, and ViT-L-14.
           default: PE-Core-L14-336
           examples:
           - PE-Core-L14-336
@@ -264,8 +366,84 @@ components:
       - id
       - text
       title: PerceptionEncoderTextEmbeddingRequest
-      description: "Request for PERCEPTION_ENCODER text embedding.\n\nAttributes:\n    text (Union[List[str],\
-        \ str]): A string or list of strings."
+      description: "Request for PERCEPTION_ENCODER text embedding.\n\nAttributes:\n    text (Union[List[str], str]): A string or list of strings."
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    PerceptionEncoderEmbeddingResponse:
+      properties:
+        inference_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Id
+          description: Unique identifier of inference
+        frame_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Id
+          description: The frame id of the image used in inference if the input was a video
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: The time in seconds it took to produce the embeddings including preprocessing
+        embeddings:
+          items:
+            items:
+              type: number
+            type: array
+          type: array
+          title: Embeddings
+          description: A list of embeddings, each embedding is a list of floats
+          examples:
+          - '[[0.12, 0.23, 0.34, ..., 0.43]]'
+      type: object
+      required:
+      - embeddings
+      title: PerceptionEncoderEmbeddingResponse
+      description: "Response for PERCEPTION_ENCODER embedding.\n\nAttributes:\n    embeddings (List[List[float]]): A list of embeddings, each embedding is a list of floats.\n    time (float): The time in seconds it took to produce the embeddings including preprocessing."
+    InferenceRequestImage:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
+          examples:
+          - url
+        value:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Value
+          description: Image data corresponding to the image type, if type = 'url' then value is a string containing the url of an image, else if type = 'base64' then value is a string containing base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
+          examples:
+          - http://www.example-image-url.com
+      type: object
+      required:
+      - type
+      title: InferenceRequestImage
+      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
     PerceptionEncoderCompareRequest:
       properties:
         id:
@@ -276,8 +454,7 @@ components:
           - type: string
           - type: 'null'
           title: Api Key
-          description: Roboflow API Key that will be passed to the model during initialization for artifact
-            retrieval
+          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
         usage_billable:
           type: boolean
           title: Usage Billable
@@ -315,8 +492,7 @@ components:
           - type: string
           - type: 'null'
           title: Perception Encoder Version Id
-          description: The version ID of PERCEPTION_ENCODER to be used for this request. Must be one of
-            RN101, RN50, RN50x16, RN50x4, RN50x64, ViT-B-16, ViT-B-32, ViT-L-14-336px, and ViT-L-14.
+          description: The version ID of PERCEPTION_ENCODER to be used for this request. Must be one of RN101, RN50, RN50x16, RN50x4, RN50x64, ViT-B-16, ViT-B-32, ViT-L-14-336px, and ViT-L-14.
           default: PE-Core-L14-336
           examples:
           - PE-Core-L14-336
@@ -369,208 +545,4 @@ components:
       - subject
       - prompt
       title: PerceptionEncoderCompareRequest
-      description: "Request for PERCEPTION_ENCODER comparison.\n\nAttributes:\n    subject (Union[InferenceRequestImage,\
-        \ str]): The type of image data provided, one of 'url' or 'base64'.\n    subject_type (str): The\
-        \ type of subject, one of 'image' or 'text'.\n    prompt (Union[List[InferenceRequestImage], InferenceRequestImage,\
-        \ str, List[str], Dict[str, Union[InferenceRequestImage, str]]]): The prompt for comparison.\n\
-        \    prompt_type (str): The type of prompt, one of 'image' or 'text'."
-    InferenceRequestImage:
-      properties:
-        type:
-          type: string
-          title: Type
-          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
-          examples:
-          - url
-        value:
-          anyOf:
-          - {}
-          - type: 'null'
-          title: Value
-          description: Image data corresponding to the image type, if type = 'url' then value is a string
-            containing the url of an image, else if type = 'base64' then value is a string containing
-            base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized
-            using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
-          examples:
-          - http://www.example-image-url.com
-      type: object
-      required:
-      - type
-      title: InferenceRequestImage
-      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image\
-        \ data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding\
-        \ to the image type."
-    PerceptionEncoderImageEmbeddingRequest:
-      properties:
-        id:
-          type: string
-          title: Id
-        api_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Api Key
-          description: Roboflow API Key that will be passed to the model during initialization for artifact
-            retrieval
-        usage_billable:
-          type: boolean
-          title: Usage Billable
-          default: true
-        start:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Start
-        source:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source
-        source_info:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source Info
-        stream_pipeline_context_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Stream Pipeline Context Id
-          description: Internal stream-pipeline frame pairing id. Not part of the public API.
-        disable_model_monitoring:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Disable Model Monitoring
-          description: If true, disables model monitoring for this request
-          default: false
-        perception_encoder_version_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Perception Encoder Version Id
-          description: The version ID of PERCEPTION_ENCODER to be used for this request. Must be one of
-            RN101, RN50, RN50x16, RN50x4, RN50x64, ViT-B-16, ViT-B-32, ViT-L-14-336px, and ViT-L-14.
-          default: PE-Core-L14-336
-          examples:
-          - PE-Core-L14-336
-        model_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Model Id
-        image:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/InferenceRequestImage'
-            type: array
-          - $ref: '#/components/schemas/InferenceRequestImage'
-          title: Image
-      type: object
-      required:
-      - id
-      - image
-      title: PerceptionEncoderImageEmbeddingRequest
-      description: "Request for PERCEPTION_ENCODER image embedding.\n\nAttributes:\n    image (Union[List[InferenceRequestImage],\
-        \ InferenceRequestImage]): Image(s) to be embedded."
-    PerceptionEncoderEmbeddingResponse:
-      properties:
-        inference_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Inference Id
-          description: Unique identifier of inference
-        frame_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Frame Id
-          description: The frame id of the image used in inference if the input was a video
-        time:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Time
-          description: The time in seconds it took to produce the embeddings including preprocessing
-        embeddings:
-          items:
-            items:
-              type: number
-            type: array
-          type: array
-          title: Embeddings
-          description: A list of embeddings, each embedding is a list of floats
-          examples:
-          - '[[0.12, 0.23, 0.34, ..., 0.43]]'
-      type: object
-      required:
-      - embeddings
-      title: PerceptionEncoderEmbeddingResponse
-      description: "Response for PERCEPTION_ENCODER embedding.\n\nAttributes:\n    embeddings (List[List[float]]):\
-        \ A list of embeddings, each embedding is a list of floats.\n    time (float): The time in seconds\
-        \ it took to produce the embeddings including preprocessing."
-    PerceptionEncoderCompareResponse:
-      properties:
-        inference_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Inference Id
-          description: Unique identifier of inference
-        frame_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Frame Id
-          description: The frame id of the image used in inference if the input was a video
-        time:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Time
-          description: The time in seconds it took to produce the similarity scores including preprocessing
-        similarity:
-          anyOf:
-          - items:
-              type: number
-            type: array
-          - additionalProperties:
-              type: number
-            type: object
-          title: Similarity
-        parent_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Parent Id
-          description: Identifier of parent image region. Useful when stack of detection-models is in
-            use to refer the RoI being the input to inference
-      type: object
-      required:
-      - similarity
-      title: PerceptionEncoderCompareResponse
-      description: "Response for PERCEPTION_ENCODER comparison.\n\nAttributes:\n    similarity (Union[List[float],\
-        \ Dict[str, float]]): Similarity scores.\n    time (float): The time in seconds it took to produce\
-        \ the similarity scores including preprocessing."
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      description: "Request for PERCEPTION_ENCODER comparison.\n\nAttributes:\n    subject (Union[InferenceRequestImage, str]): The type of image data provided, one of 'url' or 'base64'.\n    subject_type (str): The type of subject, one of 'image' or 'text'.\n    prompt (Union[List[InferenceRequestImage], InferenceRequestImage, str, List[str], Dict[str, Union[InferenceRequestImage, str]]]): The prompt for comparison.\n    prompt_type (str): The type of prompt, one of 'image' or 'text'."

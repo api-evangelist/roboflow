@@ -106,15 +106,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     WebRTCSessionHeartbeatRequest:
       properties:
         session_id:
@@ -129,3 +120,12 @@ components:
       - api_key
       title: WebRTCSessionHeartbeatRequest
       description: Request body for WebRTC session heartbeat and end endpoints.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
