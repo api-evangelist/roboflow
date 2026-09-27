@@ -42,15 +42,27 @@ paths:
       - Initialise Webrtc Worker
 components:
   schemas:
-    HTTPValidationError:
+    WebRTCTURNConfig:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        urls:
+          anyOf:
+          - type: string
+          - items:
+              type: string
+            type: array
+          title: Urls
+        username:
+          type: string
+          title: Username
+        credential:
+          type: string
+          title: Credential
       type: object
-      title: HTTPValidationError
+      required:
+      - urls
+      - username
+      - credential
+      title: WebRTCTURNConfig
     WebRTCConfig:
       properties:
         iceServers:
@@ -84,27 +96,22 @@ components:
       - sdp
       - type
       title: InitializeWebRTCResponse
-    WebRTCTURNConfig:
+    CommandContext:
       properties:
-        urls:
+        request_id:
           anyOf:
           - type: string
-          - items:
-              type: string
-            type: array
-          title: Urls
-        username:
-          type: string
-          title: Username
-        credential:
-          type: string
-          title: Credential
+          - type: 'null'
+          title: Request Id
+          description: Server-side request ID
+        pipeline_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Pipeline Id
+          description: Identifier of pipeline connected to operation
       type: object
-      required:
-      - urls
-      - username
-      - credential
-      title: WebRTCTURNConfig
+      title: CommandContext
     ValidationError:
       properties:
         loc:
@@ -126,22 +133,6 @@ components:
       - msg
       - type
       title: ValidationError
-    CommandContext:
-      properties:
-        request_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Request Id
-          description: Server-side request ID
-        pipeline_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Pipeline Id
-          description: Identifier of pipeline connected to operation
-      type: object
-      title: CommandContext
     WorkflowConfiguration:
       properties:
         type:
@@ -199,6 +190,15 @@ components:
       required:
       - type
       title: WorkflowConfiguration
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     WebRTCOffer:
       properties:
         type:

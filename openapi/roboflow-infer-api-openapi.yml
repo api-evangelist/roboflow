@@ -252,47 +252,6 @@ paths:
       - Infer
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    DepthEstimationResponse:
-      properties:
-        normalized_depth:
-          anyOf:
-          - type: string
-          - items:
-              items:
-                type: number
-              type: array
-            type: array
-          title: Normalized Depth
-          description: 'Per-image normalized ordinal depth as a 2D array of floats between 0 and 1, where 1 is nearest and 0 is farthest. Values are not physical distances or directly comparable across images or model families without calibration. The normalized depth map: a 2D array of floats between 0 and 1 (`json` format, default) or a base64 grayscale PNG string (`png16`/`png8`), per the request''s `depth_map_format`'
-        depth_map_format:
-          type: string
-          enum:
-          - json
-          - png16
-          - png8
-          title: Depth Map Format
-          description: The serialization format used for `normalized_depth`
-          default: json
-        image:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Image
-          description: Base64 encoded visualization of the depth map if visualize_predictions is True
-      type: object
-      required:
-      - normalized_depth
-      title: DepthEstimationResponse
-      description: "Response for depth estimation inference.\n\nAttributes:\n    normalized_depth (Union[str, List[List[float]]]): The per-image normalized ordinal\n        depth map as a 2D array of floats between 0 and 1. Higher values\n        indicate nearer predictions.\n        serialized according to the request's `depth_map_format`: a 2D array of\n        floats between 0 and 1 (`json`, the default) or a base64 grayscale PNG\n        string (16-bit for `png16`, 8-bit for `png8`).\n    depth_map_format (Literal[\"json\", \"png16\", \"png8\"]): The serialization\n        format used for `normalized_depth`.\n    image (Optional[str]): Base64 encoded visualization of the depth map if visualize_predictions is True.\n    time (float): The processing time in seconds.\n    visualization (Optional[str]): Base64 encoded visualization of the depth map if visualize_predictions is True."
     LMMInferenceResponse:
       properties:
         inference_id:
@@ -515,6 +474,22 @@ components:
       - model_id
       - task_type
       title: StubResponse
+    InferenceResponseImage:
+      properties:
+        width:
+          type: integer
+          title: Width
+          description: The original width of the image used in inference
+        height:
+          type: integer
+          title: Height
+          description: The original height of the image used in inference
+      type: object
+      required:
+      - width
+      - height
+      title: InferenceResponseImage
+      description: "Inference response image information.\n\nAttributes:\n    width (int): The original width of the image used in inference.\n    height (int): The original height of the image used in inference."
     InferenceRequestImage:
       properties:
         type:
@@ -536,22 +511,47 @@ components:
       - type
       title: InferenceRequestImage
       description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
-    InferenceResponseImage:
+    DepthEstimationResponse:
       properties:
-        width:
-          type: integer
-          title: Width
-          description: The original width of the image used in inference
-        height:
-          type: integer
-          title: Height
-          description: The original height of the image used in inference
+        normalized_depth:
+          anyOf:
+          - type: string
+          - items:
+              items:
+                type: number
+              type: array
+            type: array
+          title: Normalized Depth
+          description: 'Per-image normalized ordinal depth as a 2D array of floats between 0 and 1, where 1 is nearest and 0 is farthest. Values are not physical distances or directly comparable across images or model families without calibration. The normalized depth map: a 2D array of floats between 0 and 1 (`json` format, default) or a base64 grayscale PNG string (`png16`/`png8`), per the request''s `depth_map_format`'
+        depth_map_format:
+          type: string
+          enum:
+          - json
+          - png16
+          - png8
+          title: Depth Map Format
+          description: The serialization format used for `normalized_depth`
+          default: json
+        image:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image
+          description: Base64 encoded visualization of the depth map if visualize_predictions is True
       type: object
       required:
-      - width
-      - height
-      title: InferenceResponseImage
-      description: "Inference response image information.\n\nAttributes:\n    width (int): The original width of the image used in inference.\n    height (int): The original height of the image used in inference."
+      - normalized_depth
+      title: DepthEstimationResponse
+      description: "Response for depth estimation inference.\n\nAttributes:\n    normalized_depth (Union[str, List[List[float]]]): The per-image normalized ordinal\n        depth map as a 2D array of floats between 0 and 1. Higher values\n        indicate nearer predictions.\n        serialized according to the request's `depth_map_format`: a 2D array of\n        floats between 0 and 1 (`json`, the default) or a base64 grayscale PNG\n        string (16-bit for `png16`, 8-bit for `png8`).\n    depth_map_format (Literal[\"json\", \"png16\", \"png8\"]): The serialization\n        format used for `normalized_depth`.\n    image (Optional[str]): Base64 encoded visualization of the depth map if visualize_predictions is True.\n    time (float): The processing time in seconds.\n    visualization (Optional[str]): Base64 encoded visualization of the depth map if visualize_predictions is True."
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     DepthEstimationRequest:
       properties:
         id:

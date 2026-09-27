@@ -591,15 +591,6 @@ paths:
       - Roboflow Inference Server
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     MultiLabelClassificationPrediction:
       properties:
         confidence:
@@ -616,6 +607,335 @@ components:
       - class_id
       title: MultiLabelClassificationPrediction
       description: "Multi-label Classification prediction.\n\nAttributes:\n    confidence (float): The class label confidence as a fraction between 0 and 1."
+    Point-Output:
+      properties:
+        x:
+          type: number
+          title: X
+          description: The x-axis pixel coordinate of the point
+        y:
+          type: number
+          title: Y
+          description: The y-axis pixel coordinate of the point
+      type: object
+      required:
+      - x
+      - y
+      title: Point
+      description: "Point coordinates.\n\nAttributes:\n    x (float): The x-axis pixel coordinate of the point.\n    y (float): The y-axis pixel coordinate of the point."
+    InstanceSegmentationInferenceResponse:
+      properties:
+        visualization:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Visualization
+          description: Base64 encoded string containing prediction visualization image data
+        inference_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Id
+          description: Unique identifier of inference
+        frame_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Id
+          description: The frame id of the image used in inference if the input was a video
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: The time in seconds it took to produce the predictions including image preprocessing
+        image:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/InferenceResponseImage'
+            type: array
+          - $ref: '#/components/schemas/InferenceResponseImage'
+          title: Image
+        predictions:
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/InstanceSegmentationPrediction'
+            - $ref: '#/components/schemas/InstanceSegmentationRLEPrediction'
+          type: array
+          title: Predictions
+      type: object
+      required:
+      - image
+      - predictions
+      title: InstanceSegmentationInferenceResponse
+      description: "Instance Segmentation inference response.\n\nAttributes:\n    predictions (List[Union[\n        inference.core.entities.responses.inference.InstanceSegmentationPrediction,\n        inference.core.entities.responses.inference.InstanceSegmentationRLEPrediction\n    ]]): List of instance segmentation predictions."
+    Keypoint:
+      properties:
+        x:
+          type: number
+          title: X
+          description: The x-axis pixel coordinate of the point
+        y:
+          type: number
+          title: Y
+          description: The y-axis pixel coordinate of the point
+        confidence:
+          type: number
+          title: Confidence
+          description: Model confidence regarding keypoint visibility.
+        class_id:
+          type: integer
+          title: Class Id
+          description: Identifier of keypoint.
+        class:
+          type: string
+          title: Class
+          description: Type of keypoint.
+      type: object
+      required:
+      - x
+      - y
+      - confidence
+      - class_id
+      - class
+      title: Keypoint
+    KeypointsDetectionInferenceResponse:
+      properties:
+        visualization:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Visualization
+          description: Base64 encoded string containing prediction visualization image data
+        inference_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Id
+          description: Unique identifier of inference
+        frame_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Id
+          description: The frame id of the image used in inference if the input was a video
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: The time in seconds it took to produce the predictions including image preprocessing
+        image:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/InferenceResponseImage'
+            type: array
+          - $ref: '#/components/schemas/InferenceResponseImage'
+          title: Image
+        predictions:
+          items:
+            $ref: '#/components/schemas/KeypointsPrediction'
+          type: array
+          title: Predictions
+      type: object
+      required:
+      - image
+      - predictions
+      title: KeypointsDetectionInferenceResponse
+    SemanticSegmentationInferenceResponse:
+      properties:
+        visualization:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Visualization
+          description: Base64 encoded string containing prediction visualization image data
+        inference_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Id
+          description: Unique identifier of inference
+        frame_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Id
+          description: The frame id of the image used in inference if the input was a video
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: The time in seconds it took to produce the predictions including image preprocessing
+        image:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/InferenceResponseImage'
+            type: array
+          - $ref: '#/components/schemas/InferenceResponseImage'
+          title: Image
+        predictions:
+          $ref: '#/components/schemas/SemanticSegmentationPrediction'
+      type: object
+      required:
+      - image
+      - predictions
+      title: SemanticSegmentationInferenceResponse
+      description: "Semantic Segmentation inference response.\n\nAttributes:\n    predictions (inference.core.entities.responses.inference.SemanticSegmentationPrediction): Semantic segmentation predictions."
+    ClassificationPrediction:
+      properties:
+        class:
+          type: string
+          title: Class
+          description: The predicted class label
+        class_id:
+          type: integer
+          title: Class Id
+          description: Numeric ID associated with the class label
+        confidence:
+          type: number
+          title: Confidence
+          description: The class label confidence as a fraction between 0 and 1
+      type: object
+      required:
+      - class
+      - class_id
+      - confidence
+      title: ClassificationPrediction
+      description: "Classification prediction.\n\nAttributes:\n    class_name (str): The predicted class label.\n    class_id (int): Numeric ID associated with the class label.\n    confidence (float): The class label confidence as a fraction between 0 and 1."
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ClassificationInferenceResponse:
+      properties:
+        visualization:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Visualization
+          description: Base64 encoded string containing prediction visualization image data
+        inference_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Id
+          description: Unique identifier of inference
+        frame_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Id
+          description: The frame id of the image used in inference if the input was a video
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: The time in seconds it took to produce the predictions including image preprocessing
+        image:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/InferenceResponseImage'
+            type: array
+          - $ref: '#/components/schemas/InferenceResponseImage'
+          title: Image
+        predictions:
+          items:
+            $ref: '#/components/schemas/ClassificationPrediction'
+          type: array
+          title: Predictions
+        top:
+          type: string
+          title: Top
+          description: The top predicted class label
+          default: ''
+        confidence:
+          type: number
+          title: Confidence
+          description: The confidence of the top predicted class label
+          default: 0.0
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+          description: Identifier of parent image region. Useful when stack of detection-models is in use to refer the RoI being the input to inference
+      type: object
+      required:
+      - image
+      - predictions
+      title: ClassificationInferenceResponse
+      description: "Classification inference response.\n\nAttributes:\n    predictions (List[inference.core.entities.responses.inference.ClassificationPrediction]): List of classification predictions.\n    top (str): The top predicted class label.\n    confidence (float): The confidence of the top predicted class label."
+    ObjectDetectionPrediction:
+      properties:
+        x:
+          type: number
+          title: X
+          description: The center x-axis pixel coordinate of the prediction
+        y:
+          type: number
+          title: Y
+          description: The center y-axis pixel coordinate of the prediction
+        width:
+          type: number
+          title: Width
+          description: The width of the prediction bounding box in number of pixels
+        height:
+          type: number
+          title: Height
+          description: The height of the prediction bounding box in number of pixels
+        confidence:
+          type: number
+          title: Confidence
+          description: The detection confidence as a fraction between 0 and 1
+        class:
+          type: string
+          title: Class
+          description: The predicted class label
+        class_confidence:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Class Confidence
+          description: The class label confidence as a fraction between 0 and 1
+        class_id:
+          type: integer
+          title: Class Id
+          description: The class id of the prediction
+        tracker_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Tracker Id
+          description: The tracker id of the prediction if tracking is enabled
+        detection_id:
+          type: string
+          title: Detection Id
+          description: Unique identifier of detection
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+          description: Identifier of parent image region. Useful when stack of detection-models is in use to refer the RoI being the input to inference
+      type: object
+      required:
+      - x
+      - y
+      - width
+      - height
+      - confidence
+      - class
+      - class_id
+      title: ObjectDetectionPrediction
+      description: "Object Detection prediction.\n\nAttributes:\n    x (float): The center x-axis pixel coordinate of the prediction.\n    y (float): The center y-axis pixel coordinate of the prediction.\n    width (float): The width of the prediction bounding box in number of pixels.\n    height (float): The height of the prediction bounding box in number of pixels.\n    confidence (float): The detection confidence as a fraction between 0 and 1.\n    class_name (str): The predicted class label.\n    class_confidence (Union[float, None]): The class label confidence as a fraction between 0 and 1.\n    class_id (int): The class id of the prediction"
     InstanceSegmentationPrediction:
       properties:
         x:
@@ -685,128 +1005,6 @@ components:
       - class_id
       - points
       title: InstanceSegmentationPrediction
-    InferenceResponseImage:
-      properties:
-        width:
-          type: integer
-          title: Width
-          description: The original width of the image used in inference
-        height:
-          type: integer
-          title: Height
-          description: The original height of the image used in inference
-      type: object
-      required:
-      - width
-      - height
-      title: InferenceResponseImage
-      description: "Inference response image information.\n\nAttributes:\n    width (int): The original width of the image used in inference.\n    height (int): The original height of the image used in inference."
-    ObjectDetectionInferenceResponse:
-      properties:
-        visualization:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Visualization
-          description: Base64 encoded string containing prediction visualization image data
-        inference_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Inference Id
-          description: Unique identifier of inference
-        frame_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Frame Id
-          description: The frame id of the image used in inference if the input was a video
-        time:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Time
-          description: The time in seconds it took to produce the predictions including image preprocessing
-        image:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/InferenceResponseImage'
-            type: array
-          - $ref: '#/components/schemas/InferenceResponseImage'
-          title: Image
-        predictions:
-          items:
-            $ref: '#/components/schemas/ObjectDetectionPrediction'
-          type: array
-          title: Predictions
-      type: object
-      required:
-      - image
-      - predictions
-      title: ObjectDetectionInferenceResponse
-      description: "Object Detection inference response.\n\nAttributes:\n    predictions (List[inference.core.entities.responses.inference.ObjectDetectionPrediction]): List of object detection predictions."
-    InstanceSegmentationRLEPrediction:
-      properties:
-        x:
-          type: number
-          title: X
-          description: The center x-axis pixel coordinate of the prediction
-        y:
-          type: number
-          title: Y
-          description: The center y-axis pixel coordinate of the prediction
-        width:
-          type: number
-          title: Width
-          description: The width of the prediction bounding box in number of pixels
-        height:
-          type: number
-          title: Height
-          description: The height of the prediction bounding box in number of pixels
-        confidence:
-          type: number
-          title: Confidence
-          description: The detection confidence as a fraction between 0 and 1
-        class:
-          type: string
-          title: Class
-          description: The predicted class label
-        class_id:
-          type: integer
-          title: Class Id
-          description: The class id of the prediction
-        detection_id:
-          type: string
-          title: Detection Id
-          description: Unique identifier of detection
-        parent_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Parent Id
-          description: Identifier of parent image region
-        rle:
-          additionalProperties: true
-          type: object
-          title: Rle
-          description: 'RLE-encoded mask in COCO format: {''size'': [H, W], ''counts'': ''...''}'
-        mask_format:
-          type: string
-          const: rle
-          title: Mask Format
-          description: Type of mask format
-          default: rle
-      type: object
-      required:
-      - x
-      - y
-      - width
-      - height
-      - confidence
-      - class
-      - class_id
-      - rle
-      title: InstanceSegmentationRLEPrediction
     MultiLabelClassificationInferenceResponse:
       properties:
         visualization:
@@ -864,90 +1062,6 @@ components:
       - predicted_classes
       title: MultiLabelClassificationInferenceResponse
       description: "Multi-label Classification inference response.\n\nAttributes:\n    predictions (Dict[str, inference.core.entities.responses.inference.MultiLabelClassificationPrediction]): Dictionary of multi-label classification predictions.\n    predicted_classes (List[str]): The list of predicted classes."
-    ObjectDetectionPrediction:
-      properties:
-        x:
-          type: number
-          title: X
-          description: The center x-axis pixel coordinate of the prediction
-        y:
-          type: number
-          title: Y
-          description: The center y-axis pixel coordinate of the prediction
-        width:
-          type: number
-          title: Width
-          description: The width of the prediction bounding box in number of pixels
-        height:
-          type: number
-          title: Height
-          description: The height of the prediction bounding box in number of pixels
-        confidence:
-          type: number
-          title: Confidence
-          description: The detection confidence as a fraction between 0 and 1
-        class:
-          type: string
-          title: Class
-          description: The predicted class label
-        class_confidence:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Class Confidence
-          description: The class label confidence as a fraction between 0 and 1
-        class_id:
-          type: integer
-          title: Class Id
-          description: The class id of the prediction
-        tracker_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Tracker Id
-          description: The tracker id of the prediction if tracking is enabled
-        detection_id:
-          type: string
-          title: Detection Id
-          description: Unique identifier of detection
-        parent_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Parent Id
-          description: Identifier of parent image region. Useful when stack of detection-models is in use to refer the RoI being the input to inference
-      type: object
-      required:
-      - x
-      - y
-      - width
-      - height
-      - confidence
-      - class
-      - class_id
-      title: ObjectDetectionPrediction
-      description: "Object Detection prediction.\n\nAttributes:\n    x (float): The center x-axis pixel coordinate of the prediction.\n    y (float): The center y-axis pixel coordinate of the prediction.\n    width (float): The width of the prediction bounding box in number of pixels.\n    height (float): The height of the prediction bounding box in number of pixels.\n    confidence (float): The detection confidence as a fraction between 0 and 1.\n    class_name (str): The predicted class label.\n    class_confidence (Union[float, None]): The class label confidence as a fraction between 0 and 1.\n    class_id (int): The class id of the prediction"
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     StubResponse:
       properties:
         visualization:
@@ -992,174 +1106,6 @@ components:
       - model_id
       - task_type
       title: StubResponse
-    Point-Output:
-      properties:
-        x:
-          type: number
-          title: X
-          description: The x-axis pixel coordinate of the point
-        y:
-          type: number
-          title: Y
-          description: The y-axis pixel coordinate of the point
-      type: object
-      required:
-      - x
-      - y
-      title: Point
-      description: "Point coordinates.\n\nAttributes:\n    x (float): The x-axis pixel coordinate of the point.\n    y (float): The y-axis pixel coordinate of the point."
-    KeypointsDetectionInferenceResponse:
-      properties:
-        visualization:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Visualization
-          description: Base64 encoded string containing prediction visualization image data
-        inference_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Inference Id
-          description: Unique identifier of inference
-        frame_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Frame Id
-          description: The frame id of the image used in inference if the input was a video
-        time:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Time
-          description: The time in seconds it took to produce the predictions including image preprocessing
-        image:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/InferenceResponseImage'
-            type: array
-          - $ref: '#/components/schemas/InferenceResponseImage'
-          title: Image
-        predictions:
-          items:
-            $ref: '#/components/schemas/KeypointsPrediction'
-          type: array
-          title: Predictions
-      type: object
-      required:
-      - image
-      - predictions
-      title: KeypointsDetectionInferenceResponse
-    SemanticSegmentationPrediction:
-      properties:
-        segmentation_mask:
-          type: string
-          title: Segmentation Mask
-          description: base64-encoded PNG of predicted class label at each pixel
-        class_map:
-          additionalProperties:
-            type: string
-          type: object
-          title: Class Map
-          description: Map of pixel intensity value to class label
-        confidence_mask:
-          type: string
-          title: Confidence Mask
-          description: base64-encoded PNG of predicted class confidence at each pixel
-      type: object
-      required:
-      - segmentation_mask
-      - class_map
-      - confidence_mask
-      title: SemanticSegmentationPrediction
-    InstanceSegmentationInferenceResponse:
-      properties:
-        visualization:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Visualization
-          description: Base64 encoded string containing prediction visualization image data
-        inference_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Inference Id
-          description: Unique identifier of inference
-        frame_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Frame Id
-          description: The frame id of the image used in inference if the input was a video
-        time:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Time
-          description: The time in seconds it took to produce the predictions including image preprocessing
-        image:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/InferenceResponseImage'
-            type: array
-          - $ref: '#/components/schemas/InferenceResponseImage'
-          title: Image
-        predictions:
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/InstanceSegmentationPrediction'
-            - $ref: '#/components/schemas/InstanceSegmentationRLEPrediction'
-          type: array
-          title: Predictions
-      type: object
-      required:
-      - image
-      - predictions
-      title: InstanceSegmentationInferenceResponse
-      description: "Instance Segmentation inference response.\n\nAttributes:\n    predictions (List[Union[\n        inference.core.entities.responses.inference.InstanceSegmentationPrediction,\n        inference.core.entities.responses.inference.InstanceSegmentationRLEPrediction\n    ]]): List of instance segmentation predictions."
-    SemanticSegmentationInferenceResponse:
-      properties:
-        visualization:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Visualization
-          description: Base64 encoded string containing prediction visualization image data
-        inference_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Inference Id
-          description: Unique identifier of inference
-        frame_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Frame Id
-          description: The frame id of the image used in inference if the input was a video
-        time:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Time
-          description: The time in seconds it took to produce the predictions including image preprocessing
-        image:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/InferenceResponseImage'
-            type: array
-          - $ref: '#/components/schemas/InferenceResponseImage'
-          title: Image
-        predictions:
-          $ref: '#/components/schemas/SemanticSegmentationPrediction'
-      type: object
-      required:
-      - image
-      - predictions
-      title: SemanticSegmentationInferenceResponse
-      description: "Semantic Segmentation inference response.\n\nAttributes:\n    predictions (inference.core.entities.responses.inference.SemanticSegmentationPrediction): Semantic segmentation predictions."
     KeypointsPrediction:
       properties:
         x:
@@ -1228,37 +1174,7 @@ components:
       - class_id
       - keypoints
       title: KeypointsPrediction
-    Keypoint:
-      properties:
-        x:
-          type: number
-          title: X
-          description: The x-axis pixel coordinate of the point
-        y:
-          type: number
-          title: Y
-          description: The y-axis pixel coordinate of the point
-        confidence:
-          type: number
-          title: Confidence
-          description: Model confidence regarding keypoint visibility.
-        class_id:
-          type: integer
-          title: Class Id
-          description: Identifier of keypoint.
-        class:
-          type: string
-          title: Class
-          description: Type of keypoint.
-      type: object
-      required:
-      - x
-      - y
-      - confidence
-      - class_id
-      - class
-      title: Keypoint
-    ClassificationInferenceResponse:
+    ObjectDetectionInferenceResponse:
       properties:
         visualization:
           anyOf:
@@ -1293,33 +1209,58 @@ components:
           title: Image
         predictions:
           items:
-            $ref: '#/components/schemas/ClassificationPrediction'
+            $ref: '#/components/schemas/ObjectDetectionPrediction'
           type: array
           title: Predictions
-        top:
-          type: string
-          title: Top
-          description: The top predicted class label
-          default: ''
-        confidence:
-          type: number
-          title: Confidence
-          description: The confidence of the top predicted class label
-          default: 0.0
-        parent_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Parent Id
-          description: Identifier of parent image region. Useful when stack of detection-models is in use to refer the RoI being the input to inference
       type: object
       required:
       - image
       - predictions
-      title: ClassificationInferenceResponse
-      description: "Classification inference response.\n\nAttributes:\n    predictions (List[inference.core.entities.responses.inference.ClassificationPrediction]): List of classification predictions.\n    top (str): The top predicted class label.\n    confidence (float): The confidence of the top predicted class label."
-    ClassificationPrediction:
+      title: ObjectDetectionInferenceResponse
+      description: "Object Detection inference response.\n\nAttributes:\n    predictions (List[inference.core.entities.responses.inference.ObjectDetectionPrediction]): List of object detection predictions."
+    ValidationError:
       properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    InstanceSegmentationRLEPrediction:
+      properties:
+        x:
+          type: number
+          title: X
+          description: The center x-axis pixel coordinate of the prediction
+        y:
+          type: number
+          title: Y
+          description: The center y-axis pixel coordinate of the prediction
+        width:
+          type: number
+          title: Width
+          description: The width of the prediction bounding box in number of pixels
+        height:
+          type: number
+          title: Height
+          description: The height of the prediction bounding box in number of pixels
+        confidence:
+          type: number
+          title: Confidence
+          description: The detection confidence as a fraction between 0 and 1
         class:
           type: string
           title: Class
@@ -1327,15 +1268,74 @@ components:
         class_id:
           type: integer
           title: Class Id
-          description: Numeric ID associated with the class label
-        confidence:
-          type: number
-          title: Confidence
-          description: The class label confidence as a fraction between 0 and 1
+          description: The class id of the prediction
+        detection_id:
+          type: string
+          title: Detection Id
+          description: Unique identifier of detection
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+          description: Identifier of parent image region
+        rle:
+          additionalProperties: true
+          type: object
+          title: Rle
+          description: 'RLE-encoded mask in COCO format: {''size'': [H, W], ''counts'': ''...''}'
+        mask_format:
+          type: string
+          const: rle
+          title: Mask Format
+          description: Type of mask format
+          default: rle
       type: object
       required:
+      - x
+      - y
+      - width
+      - height
+      - confidence
       - class
       - class_id
-      - confidence
-      title: ClassificationPrediction
-      description: "Classification prediction.\n\nAttributes:\n    class_name (str): The predicted class label.\n    class_id (int): Numeric ID associated with the class label.\n    confidence (float): The class label confidence as a fraction between 0 and 1."
+      - rle
+      title: InstanceSegmentationRLEPrediction
+    InferenceResponseImage:
+      properties:
+        width:
+          type: integer
+          title: Width
+          description: The original width of the image used in inference
+        height:
+          type: integer
+          title: Height
+          description: The original height of the image used in inference
+      type: object
+      required:
+      - width
+      - height
+      title: InferenceResponseImage
+      description: "Inference response image information.\n\nAttributes:\n    width (int): The original width of the image used in inference.\n    height (int): The original height of the image used in inference."
+    SemanticSegmentationPrediction:
+      properties:
+        segmentation_mask:
+          type: string
+          title: Segmentation Mask
+          description: base64-encoded PNG of predicted class label at each pixel
+        class_map:
+          additionalProperties:
+            type: string
+          type: object
+          title: Class Map
+          description: Map of pixel intensity value to class label
+        confidence_mask:
+          type: string
+          title: Confidence Mask
+          description: base64-encoded PNG of predicted class confidence at each pixel
+      type: object
+      required:
+      - segmentation_mask
+      - class_map
+      - confidence_mask
+      title: SemanticSegmentationPrediction

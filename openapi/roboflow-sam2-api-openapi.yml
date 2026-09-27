@@ -122,43 +122,6 @@ paths:
       - Sam2
 components:
   schemas:
-    Sam2EmbeddingResponse:
-      properties:
-        image_id:
-          type: string
-          title: Image Id
-          description: Image id embeddings are cached to
-        time:
-          type: number
-          title: Time
-          description: The time in seconds it took to produce the embeddings including preprocessing
-      type: object
-      required:
-      - image_id
-      - time
-      title: Sam2EmbeddingResponse
-      description: "SAM embedding response.\n\nAttributes:\n    embeddings (Union[List[List[List[List[float]]]], Any]): The SAM embedding.\n    time (float): The time in seconds it took to produce the embeddings including preprocessing."
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Sam2PromptSet:
-      properties:
-        prompts:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/Sam2Prompt'
-            type: array
-          - type: 'null'
-          title: Prompts
-          description: An optional list of prompts for masks to predict. Each prompt can include a bounding box and / or a set of postive or negative points
-      type: object
-      title: Sam2PromptSet
     Sam2SegmentationRequest:
       properties:
         id:
@@ -269,23 +232,6 @@ components:
       - image
       title: Sam2SegmentationRequest
       description: "SAM segmentation request.\n\nAttributes:\n    format (Optional[str]): The format of the response.\n    image (InferenceRequestImage): The image to be segmented.\n    image_id (Optional[str]): The ID of the image to be segmented used to retrieve cached embeddings.\n    point_coords (Optional[List[List[float]]]): The coordinates of the interactive points used during decoding.\n    point_labels (Optional[List[float]]): The labels of the interactive points used during decoding."
-    Point-Input:
-      properties:
-        x:
-          type: number
-          title: X
-        y:
-          type: number
-          title: Y
-        positive:
-          type: boolean
-          title: Positive
-      type: object
-      required:
-      - x
-      - y
-      - positive
-      title: Point
     ValidationError:
       properties:
         loc:
@@ -307,6 +253,165 @@ components:
       - msg
       - type
       title: ValidationError
+    Sam2EmbeddingResponse:
+      properties:
+        image_id:
+          type: string
+          title: Image Id
+          description: Image id embeddings are cached to
+        time:
+          type: number
+          title: Time
+          description: The time in seconds it took to produce the embeddings including preprocessing
+      type: object
+      required:
+      - image_id
+      - time
+      title: Sam2EmbeddingResponse
+      description: "SAM embedding response.\n\nAttributes:\n    embeddings (Union[List[List[List[List[float]]]], Any]): The SAM embedding.\n    time (float): The time in seconds it took to produce the embeddings including preprocessing."
+    Box:
+      properties:
+        x:
+          type: number
+          title: X
+        y:
+          type: number
+          title: Y
+        width:
+          type: number
+          title: Width
+        height:
+          type: number
+          title: Height
+      type: object
+      required:
+      - x
+      - y
+      - width
+      - height
+      title: Box
+    Sam2SegmentationResponse:
+      properties:
+        predictions:
+          items:
+            $ref: '#/components/schemas/Sam2SegmentationPrediction'
+          type: array
+          title: Predictions
+        time:
+          type: number
+          title: Time
+          description: The time in seconds it took to produce the segmentation including preprocessing
+      type: object
+      required:
+      - predictions
+      - time
+      title: Sam2SegmentationResponse
+    Point-Input:
+      properties:
+        x:
+          type: number
+          title: X
+        y:
+          type: number
+          title: Y
+        positive:
+          type: boolean
+          title: Positive
+      type: object
+      required:
+      - x
+      - y
+      - positive
+      title: Point
+    Sam2PromptSet:
+      properties:
+        prompts:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Sam2Prompt'
+            type: array
+          - type: 'null'
+          title: Prompts
+          description: An optional list of prompts for masks to predict. Each prompt can include a bounding box and / or a set of postive or negative points
+      type: object
+      title: Sam2PromptSet
+    InferenceRequestImage:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
+          examples:
+          - url
+        value:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Value
+          description: Image data corresponding to the image type, if type = 'url' then value is a string containing the url of an image, else if type = 'base64' then value is a string containing base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
+          examples:
+          - http://www.example-image-url.com
+      type: object
+      required:
+      - type
+      title: InferenceRequestImage
+      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
+    Sam2Prompt:
+      properties:
+        box:
+          anyOf:
+          - $ref: '#/components/schemas/Box'
+          - type: 'null'
+        points:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Point-Input'
+            type: array
+          - type: 'null'
+          title: Points
+      type: object
+      title: Sam2Prompt
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Sam2SegmentationPrediction:
+      properties:
+        masks:
+          anyOf:
+          - items:
+              items:
+                items:
+                  type: integer
+                type: array
+              type: array
+            type: array
+          - additionalProperties: true
+            type: object
+          title: Masks
+          description: If polygon format, masks is a list of polygons, where each polygon is a list of points, where each point is a tuple containing the x,y pixel coordinates of the point. If rle format, masks is a dictionary with the keys 'size' and 'counts' containing the size and counts of the RLE encoding.
+        confidence:
+          type: number
+          title: Confidence
+          description: Masks confidences
+        format:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Format
+          description: 'Format of the mask data: ''polygon'' or ''rle'''
+          default: polygon
+      type: object
+      required:
+      - masks
+      - confidence
+      title: Sam2SegmentationPrediction
+      description: "SAM segmentation prediction.\n\nAttributes:\n    masks (Union[List[List[List[int]]], Dict[str, Any], Any]): Mask data - either polygon coordinates or RLE encoding.\n    confidence (float): Masks confidences.\n    format (Optional[str]): Format of the mask data: 'polygon' or 'rle'."
     Sam2EmbeddingRequest:
       properties:
         id:
@@ -382,108 +487,3 @@ components:
       - id
       title: Sam2EmbeddingRequest
       description: "SAM embedding request.\n\nAttributes:\n    image (Optional[inference.core.entities.requests.inference.InferenceRequestImage]): The image to be embedded.\n    image_id (Optional[str]): The ID of the image to be embedded used to cache the embedding.\n    format (Optional[str]): The format of the response. Must be one of json or binary."
-    InferenceRequestImage:
-      properties:
-        type:
-          type: string
-          title: Type
-          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
-          examples:
-          - url
-        value:
-          anyOf:
-          - {}
-          - type: 'null'
-          title: Value
-          description: Image data corresponding to the image type, if type = 'url' then value is a string containing the url of an image, else if type = 'base64' then value is a string containing base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
-          examples:
-          - http://www.example-image-url.com
-      type: object
-      required:
-      - type
-      title: InferenceRequestImage
-      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
-    Box:
-      properties:
-        x:
-          type: number
-          title: X
-        y:
-          type: number
-          title: Y
-        width:
-          type: number
-          title: Width
-        height:
-          type: number
-          title: Height
-      type: object
-      required:
-      - x
-      - y
-      - width
-      - height
-      title: Box
-    Sam2Prompt:
-      properties:
-        box:
-          anyOf:
-          - $ref: '#/components/schemas/Box'
-          - type: 'null'
-        points:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/Point-Input'
-            type: array
-          - type: 'null'
-          title: Points
-      type: object
-      title: Sam2Prompt
-    Sam2SegmentationPrediction:
-      properties:
-        masks:
-          anyOf:
-          - items:
-              items:
-                items:
-                  type: integer
-                type: array
-              type: array
-            type: array
-          - additionalProperties: true
-            type: object
-          title: Masks
-          description: If polygon format, masks is a list of polygons, where each polygon is a list of points, where each point is a tuple containing the x,y pixel coordinates of the point. If rle format, masks is a dictionary with the keys 'size' and 'counts' containing the size and counts of the RLE encoding.
-        confidence:
-          type: number
-          title: Confidence
-          description: Masks confidences
-        format:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Format
-          description: 'Format of the mask data: ''polygon'' or ''rle'''
-          default: polygon
-      type: object
-      required:
-      - masks
-      - confidence
-      title: Sam2SegmentationPrediction
-      description: "SAM segmentation prediction.\n\nAttributes:\n    masks (Union[List[List[List[int]]], Dict[str, Any], Any]): Mask data - either polygon coordinates or RLE encoding.\n    confidence (float): Masks confidences.\n    format (Optional[str]): Format of the mask data: 'polygon' or 'rle'."
-    Sam2SegmentationResponse:
-      properties:
-        predictions:
-          items:
-            $ref: '#/components/schemas/Sam2SegmentationPrediction'
-          type: array
-          title: Predictions
-        time:
-          type: number
-          title: Time
-          description: The time in seconds it took to produce the segmentation including preprocessing
-      type: object
-      required:
-      - predictions
-      - time
-      title: Sam2SegmentationResponse

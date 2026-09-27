@@ -85,6 +85,15 @@ paths:
       - Webrtc
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -120,12 +129,3 @@ components:
       - api_key
       title: WebRTCSessionHeartbeatRequest
       description: Request body for WebRTC session heartbeat and end endpoints.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError

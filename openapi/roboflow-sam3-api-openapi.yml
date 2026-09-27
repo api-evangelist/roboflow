@@ -215,245 +215,27 @@ paths:
       - Sam3
 components:
   schemas:
-    Sam3SegmentationPrediction:
+    BoxXYXY:
       properties:
-        masks:
-          anyOf:
-          - items:
-              items:
-                items:
-                  type: integer
-                type: array
-              type: array
-            type: array
-          - additionalProperties: true
-            type: object
-          title: Masks
-          description: Mask data - either polygon coordinates or RLE encoding
-        confidence:
+        x0:
           type: number
-          title: Confidence
-          description: Masks confidence
-        format:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Format
-          description: 'Format of the mask data: ''polygon'' or ''rle'''
-          default: polygon
+          title: X0
+        y0:
+          type: number
+          title: Y0
+        x1:
+          type: number
+          title: X1
+        y1:
+          type: number
+          title: Y1
       type: object
       required:
-      - masks
-      - confidence
-      title: Sam3SegmentationPrediction
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Sam2EmbeddingRequest:
-      properties:
-        id:
-          type: string
-          title: Id
-        api_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Api Key
-          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
-        usage_billable:
-          type: boolean
-          title: Usage Billable
-          default: true
-        start:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Start
-        source:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source
-        source_info:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source Info
-        stream_pipeline_context_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Stream Pipeline Context Id
-          description: Internal stream-pipeline frame pairing id. Not part of the public API.
-        disable_model_monitoring:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Disable Model Monitoring
-          description: If true, disables model monitoring for this request
-          default: false
-        sam2_version_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sam2 Version Id
-          description: The version ID of SAM to be used for this request. Must be one of hiera_tiny, hiera_small, hiera_large, hiera_b_plus
-          default: hiera_large
-          examples:
-          - hiera_large
-        model_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Model Id
-        image:
-          anyOf:
-          - $ref: '#/components/schemas/InferenceRequestImage'
-          - type: 'null'
-          description: The image to be embedded
-        image_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Image Id
-          description: The ID of the image to be embedded used to cache the embedding.
-          examples:
-          - image_id
-      type: object
-      required:
-      - id
-      title: Sam2EmbeddingRequest
-      description: "SAM embedding request.\n\nAttributes:\n    image (Optional[inference.core.entities.requests.inference.InferenceRequestImage]): The image to be embedded.\n    image_id (Optional[str]): The ID of the image to be embedded used to cache the embedding.\n    format (Optional[str]): The format of the response. Must be one of json or binary."
-    Sam3PromptEcho:
-      properties:
-        prompt_index:
-          type: integer
-          title: Prompt Index
-        type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Type
-        text:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Text
-        num_boxes:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Num Boxes
-      type: object
-      required:
-      - prompt_index
-      title: Sam3PromptEcho
-    InferenceRequestImage:
-      properties:
-        type:
-          type: string
-          title: Type
-          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
-          examples:
-          - url
-        value:
-          anyOf:
-          - {}
-          - type: 'null'
-          title: Value
-          description: Image data corresponding to the image type, if type = 'url' then value is a string containing the url of an image, else if type = 'base64' then value is a string containing base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
-          examples:
-          - http://www.example-image-url.com
-      type: object
-      required:
-      - type
-      title: InferenceRequestImage
-      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
-    Sam2Prompt:
-      properties:
-        box:
-          anyOf:
-          - $ref: '#/components/schemas/Box'
-          - type: 'null'
-        points:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/Point-Input'
-            type: array
-          - type: 'null'
-          title: Points
-      type: object
-      title: Sam2Prompt
-    Sam3PromptResult:
-      properties:
-        prompt_index:
-          type: integer
-          title: Prompt Index
-        echo:
-          $ref: '#/components/schemas/Sam3PromptEcho'
-        predictions:
-          items:
-            $ref: '#/components/schemas/Sam3SegmentationPrediction'
-          type: array
-          title: Predictions
-      type: object
-      required:
-      - prompt_index
-      - echo
-      - predictions
-      title: Sam3PromptResult
-    Sam3Prompt:
-      properties:
-        type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Type
-          description: 'Optional hint: ''text'' or ''visual''. ''visual'' requires at least one box.'
-        text:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Text
-          description: Concept to segment as a short noun phrase (e.g. 'person'). All matching instances are returned. Can be combined with exemplar boxes in the same prompt.
-        output_prob_thresh:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Output Prob Thresh
-          description: Score threshold for this prompt's outputs. Overrides request-level threshold if set.
-        boxes:
-          anyOf:
-          - items:
-              anyOf:
-              - $ref: '#/components/schemas/Box'
-              - $ref: '#/components/schemas/BoxXYXY'
-            type: array
-          - type: 'null'
-          title: Boxes
-          description: Exemplar boxes in absolute pixels, as XYWH entries ({x, y, width, height}, top-left anchored) or XYXY entries ({x0, y0, x1, y1}). Each box marks an example object; the model segments every instance matching the exemplars (and text, if provided), not just the boxed objects. Requires box_labels.
-        box_labels:
-          anyOf:
-          - items:
-              anyOf:
-              - type: integer
-              - type: boolean
-            type: array
-          - type: 'null'
-          title: Box Labels
-          description: 'Per-box exemplar labels, one per entry in boxes: 1/true marks a positive exemplar (segment objects like this), 0/false marks a negative exemplar (exclude objects like this). Required when boxes is set.'
-      type: object
-      title: Sam3Prompt
-      description: 'Unified prompt that can contain text and/or geometry.
-
-
-        Absolute pixel coordinates are used for boxes. Labels accept 0/1 or booleans.'
+      - x0
+      - y0
+      - x1
+      - y1
+      title: BoxXYXY
     Sam2SegmentationRequest:
       properties:
         id:
@@ -564,21 +346,87 @@ components:
       - image
       title: Sam2SegmentationRequest
       description: "SAM segmentation request.\n\nAttributes:\n    format (Optional[str]): The format of the response.\n    image (InferenceRequestImage): The image to be segmented.\n    image_id (Optional[str]): The ID of the image to be segmented used to retrieve cached embeddings.\n    point_coords (Optional[List[List[float]]]): The coordinates of the interactive points used during decoding.\n    point_labels (Optional[List[float]]): The labels of the interactive points used during decoding."
-    Sam3EmbeddingResponse:
+    Sam3SegmentationPrediction:
       properties:
-        image_id:
-          type: string
-          title: Image Id
-          description: Image id embeddings are cached to
-        time:
+        masks:
+          anyOf:
+          - items:
+              items:
+                items:
+                  type: integer
+                type: array
+              type: array
+            type: array
+          - additionalProperties: true
+            type: object
+          title: Masks
+          description: Mask data - either polygon coordinates or RLE encoding
+        confidence:
           type: number
-          title: Time
-          description: The time in seconds it took to produce the embeddings including preprocessing
+          title: Confidence
+          description: Masks confidence
+        format:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Format
+          description: 'Format of the mask data: ''polygon'' or ''rle'''
+          default: polygon
       type: object
       required:
-      - image_id
-      - time
-      title: Sam3EmbeddingResponse
+      - masks
+      - confidence
+      title: Sam3SegmentationPrediction
+    Sam2SegmentationPrediction:
+      properties:
+        masks:
+          anyOf:
+          - items:
+              items:
+                items:
+                  type: integer
+                type: array
+              type: array
+            type: array
+          - additionalProperties: true
+            type: object
+          title: Masks
+          description: If polygon format, masks is a list of polygons, where each polygon is a list of points, where each point is a tuple containing the x,y pixel coordinates of the point. If rle format, masks is a dictionary with the keys 'size' and 'counts' containing the size and counts of the RLE encoding.
+        confidence:
+          type: number
+          title: Confidence
+          description: Masks confidences
+        format:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Format
+          description: 'Format of the mask data: ''polygon'' or ''rle'''
+          default: polygon
+      type: object
+      required:
+      - masks
+      - confidence
+      title: Sam2SegmentationPrediction
+      description: "SAM segmentation prediction.\n\nAttributes:\n    masks (Union[List[List[List[int]]], Dict[str, Any], Any]): Mask data - either polygon coordinates or RLE encoding.\n    confidence (float): Masks confidences.\n    format (Optional[str]): Format of the mask data: 'polygon' or 'rle'."
+    Sam3PromptResult:
+      properties:
+        prompt_index:
+          type: integer
+          title: Prompt Index
+        echo:
+          $ref: '#/components/schemas/Sam3PromptEcho'
+        predictions:
+          items:
+            $ref: '#/components/schemas/Sam3SegmentationPrediction'
+          type: array
+          title: Predictions
+      type: object
+      required:
+      - prompt_index
+      - echo
+      - predictions
+      title: Sam3PromptResult
     Sam3SegmentationResponse:
       properties:
         prompt_results:
@@ -595,6 +443,245 @@ components:
       - prompt_results
       - time
       title: Sam3SegmentationResponse
+    Sam3PromptEcho:
+      properties:
+        prompt_index:
+          type: integer
+          title: Prompt Index
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
+        num_boxes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Num Boxes
+      type: object
+      required:
+      - prompt_index
+      title: Sam3PromptEcho
+    InferenceRequestImage:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
+          examples:
+          - url
+        value:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Value
+          description: Image data corresponding to the image type, if type = 'url' then value is a string containing the url of an image, else if type = 'base64' then value is a string containing base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
+          examples:
+          - http://www.example-image-url.com
+      type: object
+      required:
+      - type
+      title: InferenceRequestImage
+      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Sam2EmbeddingRequest:
+      properties:
+        id:
+          type: string
+          title: Id
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
+        usage_billable:
+          type: boolean
+          title: Usage Billable
+          default: true
+        start:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Start
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        source_info:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Info
+        stream_pipeline_context_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Stream Pipeline Context Id
+          description: Internal stream-pipeline frame pairing id. Not part of the public API.
+        disable_model_monitoring:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Model Monitoring
+          description: If true, disables model monitoring for this request
+          default: false
+        sam2_version_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sam2 Version Id
+          description: The version ID of SAM to be used for this request. Must be one of hiera_tiny, hiera_small, hiera_large, hiera_b_plus
+          default: hiera_large
+          examples:
+          - hiera_large
+        model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Id
+        image:
+          anyOf:
+          - $ref: '#/components/schemas/InferenceRequestImage'
+          - type: 'null'
+          description: The image to be embedded
+        image_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image Id
+          description: The ID of the image to be embedded used to cache the embedding.
+          examples:
+          - image_id
+      type: object
+      required:
+      - id
+      title: Sam2EmbeddingRequest
+      description: "SAM embedding request.\n\nAttributes:\n    image (Optional[inference.core.entities.requests.inference.InferenceRequestImage]): The image to be embedded.\n    image_id (Optional[str]): The ID of the image to be embedded used to cache the embedding.\n    format (Optional[str]): The format of the response. Must be one of json or binary."
+    Box:
+      properties:
+        x:
+          type: number
+          title: X
+        y:
+          type: number
+          title: Y
+        width:
+          type: number
+          title: Width
+        height:
+          type: number
+          title: Height
+      type: object
+      required:
+      - x
+      - y
+      - width
+      - height
+      title: Box
+    Sam2SegmentationResponse:
+      properties:
+        predictions:
+          items:
+            $ref: '#/components/schemas/Sam2SegmentationPrediction'
+          type: array
+          title: Predictions
+        time:
+          type: number
+          title: Time
+          description: The time in seconds it took to produce the segmentation including preprocessing
+      type: object
+      required:
+      - predictions
+      - time
+      title: Sam2SegmentationResponse
+    Sam2PromptSet:
+      properties:
+        prompts:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Sam2Prompt'
+            type: array
+          - type: 'null'
+          title: Prompts
+          description: An optional list of prompts for masks to predict. Each prompt can include a bounding box and / or a set of postive or negative points
+      type: object
+      title: Sam2PromptSet
+    Sam3Prompt:
+      properties:
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          description: 'Optional hint: ''text'' or ''visual''. ''visual'' requires at least one box.'
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
+          description: Concept to segment as a short noun phrase (e.g. 'person'). All matching instances are returned. Can be combined with exemplar boxes in the same prompt.
+        output_prob_thresh:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Output Prob Thresh
+          description: Score threshold for this prompt's outputs. Overrides request-level threshold if set.
+        boxes:
+          anyOf:
+          - items:
+              anyOf:
+              - $ref: '#/components/schemas/Box'
+              - $ref: '#/components/schemas/BoxXYXY'
+            type: array
+          - type: 'null'
+          title: Boxes
+          description: Exemplar boxes in absolute pixels, as XYWH entries ({x, y, width, height}, top-left anchored) or XYXY entries ({x0, y0, x1, y1}). Each box marks an example object; the model segments every instance matching the exemplars (and text, if provided), not just the boxed objects. Requires box_labels.
+        box_labels:
+          anyOf:
+          - items:
+              anyOf:
+              - type: integer
+              - type: boolean
+            type: array
+          - type: 'null'
+          title: Box Labels
+          description: 'Per-box exemplar labels, one per entry in boxes: 1/true marks a positive exemplar (segment objects like this), 0/false marks a negative exemplar (exclude objects like this). Required when boxes is set.'
+      type: object
+      title: Sam3Prompt
+      description: 'Unified prompt that can contain text and/or geometry.
+
+
+        Absolute pixel coordinates are used for boxes. Labels accept 0/1 or booleans.'
+    Sam2Prompt:
+      properties:
+        box:
+          anyOf:
+          - $ref: '#/components/schemas/Box'
+          - type: 'null'
+        points:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Point-Input'
+            type: array
+          - type: 'null'
+          title: Points
+      type: object
+      title: Sam2Prompt
     ValidationError:
       properties:
         loc:
@@ -616,39 +703,38 @@ components:
       - msg
       - type
       title: ValidationError
-    Sam2PromptSet:
+    Point-Input:
       properties:
-        prompts:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/Sam2Prompt'
-            type: array
-          - type: 'null'
-          title: Prompts
-          description: An optional list of prompts for masks to predict. Each prompt can include a bounding box and / or a set of postive or negative points
-      type: object
-      title: Sam2PromptSet
-    BoxXYXY:
-      properties:
-        x0:
+        x:
           type: number
-          title: X0
-        y0:
+          title: X
+        y:
           type: number
-          title: Y0
-        x1:
-          type: number
-          title: X1
-        y1:
-          type: number
-          title: Y1
+          title: Y
+        positive:
+          type: boolean
+          title: Positive
       type: object
       required:
-      - x0
-      - y0
-      - x1
-      - y1
-      title: BoxXYXY
+      - x
+      - y
+      - positive
+      title: Point
+    Sam3EmbeddingResponse:
+      properties:
+        image_id:
+          type: string
+          title: Image Id
+          description: Image id embeddings are cached to
+        time:
+          type: number
+          title: Time
+          description: The time in seconds it took to produce the embeddings including preprocessing
+      type: object
+      required:
+      - image_id
+      - time
+      title: Sam3EmbeddingResponse
     Sam3SegmentationRequest:
       properties:
         id:
@@ -741,89 +827,3 @@ components:
       - image
       - prompts
       title: Sam3SegmentationRequest
-    Point-Input:
-      properties:
-        x:
-          type: number
-          title: X
-        y:
-          type: number
-          title: Y
-        positive:
-          type: boolean
-          title: Positive
-      type: object
-      required:
-      - x
-      - y
-      - positive
-      title: Point
-    Box:
-      properties:
-        x:
-          type: number
-          title: X
-        y:
-          type: number
-          title: Y
-        width:
-          type: number
-          title: Width
-        height:
-          type: number
-          title: Height
-      type: object
-      required:
-      - x
-      - y
-      - width
-      - height
-      title: Box
-    Sam2SegmentationPrediction:
-      properties:
-        masks:
-          anyOf:
-          - items:
-              items:
-                items:
-                  type: integer
-                type: array
-              type: array
-            type: array
-          - additionalProperties: true
-            type: object
-          title: Masks
-          description: If polygon format, masks is a list of polygons, where each polygon is a list of points, where each point is a tuple containing the x,y pixel coordinates of the point. If rle format, masks is a dictionary with the keys 'size' and 'counts' containing the size and counts of the RLE encoding.
-        confidence:
-          type: number
-          title: Confidence
-          description: Masks confidences
-        format:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Format
-          description: 'Format of the mask data: ''polygon'' or ''rle'''
-          default: polygon
-      type: object
-      required:
-      - masks
-      - confidence
-      title: Sam2SegmentationPrediction
-      description: "SAM segmentation prediction.\n\nAttributes:\n    masks (Union[List[List[List[int]]], Dict[str, Any], Any]): Mask data - either polygon coordinates or RLE encoding.\n    confidence (float): Masks confidences.\n    format (Optional[str]): Format of the mask data: 'polygon' or 'rle'."
-    Sam2SegmentationResponse:
-      properties:
-        predictions:
-          items:
-            $ref: '#/components/schemas/Sam2SegmentationPrediction'
-          type: array
-          title: Predictions
-        time:
-          type: number
-          title: Time
-          description: The time in seconds it took to produce the segmentation including preprocessing
-      type: object
-      required:
-      - predictions
-      - time
-      title: Sam2SegmentationResponse
