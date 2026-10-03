@@ -122,27 +122,6 @@ paths:
       - OCR
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     PPOCRInferenceRequest:
       properties:
         id:
@@ -323,22 +302,6 @@ components:
       - time
       title: OCRInferenceResponse
       description: "OCR Inference response.\n\nAttributes:\n    result (str): The combined OCR recognition result.\n    predictions (List[ObjectDetectionPrediction]): List of objects detected by OCR\n    time (float): The time in seconds it took to produce the inference including preprocessing"
-    InferenceResponseImage:
-      properties:
-        width:
-          type: integer
-          title: Width
-          description: The original width of the image used in inference
-        height:
-          type: integer
-          title: Height
-          description: The original height of the image used in inference
-      type: object
-      required:
-      - width
-      - height
-      title: InferenceResponseImage
-      description: "Inference response image information.\n\nAttributes:\n    width (int): The original width of the image used in inference.\n    height (int): The original height of the image used in inference."
     InferenceRequestImage:
       properties:
         type:
@@ -360,6 +323,27 @@ components:
       - type
       title: InferenceRequestImage
       description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     HTTPValidationError:
       properties:
         detail:
@@ -369,6 +353,22 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    InferenceResponseImage:
+      properties:
+        width:
+          type: integer
+          title: Width
+          description: The original width of the image used in inference
+        height:
+          type: integer
+          title: Height
+          description: The original height of the image used in inference
+      type: object
+      required:
+      - width
+      - height
+      title: InferenceResponseImage
+      description: "Inference response image information.\n\nAttributes:\n    width (int): The original width of the image used in inference.\n    height (int): The original height of the image used in inference."
     ObjectDetectionPrediction:
       properties:
         x:

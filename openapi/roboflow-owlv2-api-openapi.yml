@@ -69,27 +69,22 @@ paths:
       - Owlv2
 components:
   schemas:
-    ValidationError:
+    TrainingImage:
       properties:
-        loc:
+        boxes:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/TrainBox'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Boxes
+          description: List of boxes and corresponding classes of examples for the model to learn from
+        image:
+          $ref: '#/components/schemas/InferenceRequestImage'
+          description: Image data that `boxes` describes
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - boxes
+      - image
+      title: TrainingImage
     OwlV2InferenceRequest:
       properties:
         id:
@@ -205,6 +200,48 @@ components:
       - training_data
       title: OwlV2InferenceRequest
       description: "Request for OwlV2 inference.\n\nAttributes:\n    api_key (Optional[str]): Roboflow API Key.\n    owlv2_version_id (Optional[str]): The version ID of OwlV2 to be used for this request.\n    image (Union[List[InferenceRequestImage], InferenceRequestImage]): Image(s) for inference.\n    training_data (List[TrainingImage]): Training data to ground the model on\n    confidence (float): Confidence threshold to filter predictions by"
+    InferenceRequestImage:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
+          examples:
+          - url
+        value:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Value
+          description: Image data corresponding to the image type, if type = 'url' then value is a string containing the url of an image, else if type = 'base64' then value is a string containing base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
+          examples:
+          - http://www.example-image-url.com
+      type: object
+      required:
+      - type
+      title: InferenceRequestImage
+      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     HTTPValidationError:
       properties:
         detail:
@@ -230,43 +267,6 @@ components:
       - height
       title: InferenceResponseImage
       description: "Inference response image information.\n\nAttributes:\n    width (int): The original width of the image used in inference.\n    height (int): The original height of the image used in inference."
-    InferenceRequestImage:
-      properties:
-        type:
-          type: string
-          title: Type
-          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
-          examples:
-          - url
-        value:
-          anyOf:
-          - {}
-          - type: 'null'
-          title: Value
-          description: Image data corresponding to the image type, if type = 'url' then value is a string containing the url of an image, else if type = 'base64' then value is a string containing base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
-          examples:
-          - http://www.example-image-url.com
-      type: object
-      required:
-      - type
-      title: InferenceRequestImage
-      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
-    TrainingImage:
-      properties:
-        boxes:
-          items:
-            $ref: '#/components/schemas/TrainBox'
-          type: array
-          title: Boxes
-          description: List of boxes and corresponding classes of examples for the model to learn from
-        image:
-          $ref: '#/components/schemas/InferenceRequestImage'
-          description: Image data that `boxes` describes
-      type: object
-      required:
-      - boxes
-      - image
-      title: TrainingImage
     TrainBox:
       properties:
         x:
@@ -302,50 +302,6 @@ components:
       - h
       - cls
       title: TrainBox
-    ObjectDetectionInferenceResponse:
-      properties:
-        visualization:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Visualization
-          description: Base64 encoded string containing prediction visualization image data
-        inference_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Inference Id
-          description: Unique identifier of inference
-        frame_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Frame Id
-          description: The frame id of the image used in inference if the input was a video
-        time:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Time
-          description: The time in seconds it took to produce the predictions including image preprocessing
-        image:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/InferenceResponseImage'
-            type: array
-          - $ref: '#/components/schemas/InferenceResponseImage'
-          title: Image
-        predictions:
-          items:
-            $ref: '#/components/schemas/ObjectDetectionPrediction'
-          type: array
-          title: Predictions
-      type: object
-      required:
-      - image
-      - predictions
-      title: ObjectDetectionInferenceResponse
-      description: "Object Detection inference response.\n\nAttributes:\n    predictions (List[inference.core.entities.responses.inference.ObjectDetectionPrediction]): List of object detection predictions."
     ObjectDetectionPrediction:
       properties:
         x:
@@ -409,3 +365,47 @@ components:
       - class_id
       title: ObjectDetectionPrediction
       description: "Object Detection prediction.\n\nAttributes:\n    x (float): The center x-axis pixel coordinate of the prediction.\n    y (float): The center y-axis pixel coordinate of the prediction.\n    width (float): The width of the prediction bounding box in number of pixels.\n    height (float): The height of the prediction bounding box in number of pixels.\n    confidence (float): The detection confidence as a fraction between 0 and 1.\n    class_name (str): The predicted class label.\n    class_confidence (Union[float, None]): The class label confidence as a fraction between 0 and 1.\n    class_id (int): The class id of the prediction"
+    ObjectDetectionInferenceResponse:
+      properties:
+        visualization:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Visualization
+          description: Base64 encoded string containing prediction visualization image data
+        inference_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Id
+          description: Unique identifier of inference
+        frame_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Id
+          description: The frame id of the image used in inference if the input was a video
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: The time in seconds it took to produce the predictions including image preprocessing
+        image:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/InferenceResponseImage'
+            type: array
+          - $ref: '#/components/schemas/InferenceResponseImage'
+          title: Image
+        predictions:
+          items:
+            $ref: '#/components/schemas/ObjectDetectionPrediction'
+          type: array
+          title: Predictions
+      type: object
+      required:
+      - image
+      - predictions
+      title: ObjectDetectionInferenceResponse
+      description: "Object Detection inference response.\n\nAttributes:\n    predictions (List[inference.core.entities.responses.inference.ObjectDetectionPrediction]): List of object detection predictions."

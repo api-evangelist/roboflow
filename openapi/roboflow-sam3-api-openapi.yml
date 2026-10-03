@@ -215,27 +215,139 @@ paths:
       - Sam3
 components:
   schemas:
-    BoxXYXY:
+    Sam2SegmentationResponse:
       properties:
-        x0:
+        predictions:
+          items:
+            $ref: '#/components/schemas/Sam2SegmentationPrediction'
+          type: array
+          title: Predictions
+        time:
           type: number
-          title: X0
-        y0:
-          type: number
-          title: Y0
-        x1:
-          type: number
-          title: X1
-        y1:
-          type: number
-          title: Y1
+          title: Time
+          description: The time in seconds it took to produce the segmentation including preprocessing
       type: object
       required:
-      - x0
-      - y0
-      - x1
-      - y1
-      title: BoxXYXY
+      - predictions
+      - time
+      title: Sam2SegmentationResponse
+    Sam2Prompt:
+      properties:
+        box:
+          anyOf:
+          - $ref: '#/components/schemas/Box'
+          - type: 'null'
+        points:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Point-Input'
+            type: array
+          - type: 'null'
+          title: Points
+      type: object
+      title: Sam2Prompt
+    Box:
+      properties:
+        x:
+          type: number
+          title: X
+        y:
+          type: number
+          title: Y
+        width:
+          type: number
+          title: Width
+        height:
+          type: number
+          title: Height
+      type: object
+      required:
+      - x
+      - y
+      - width
+      - height
+      title: Box
+    Sam3PromptEcho:
+      properties:
+        prompt_index:
+          type: integer
+          title: Prompt Index
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
+        num_boxes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Num Boxes
+      type: object
+      required:
+      - prompt_index
+      title: Sam3PromptEcho
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Sam3EmbeddingResponse:
+      properties:
+        image_id:
+          type: string
+          title: Image Id
+          description: Image id embeddings are cached to
+        time:
+          type: number
+          title: Time
+          description: The time in seconds it took to produce the embeddings including preprocessing
+      type: object
+      required:
+      - image_id
+      - time
+      title: Sam3EmbeddingResponse
+    InferenceRequestImage:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
+          examples:
+          - url
+        value:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Value
+          description: Image data corresponding to the image type, if type = 'url' then value is a string containing the url of an image, else if type = 'base64' then value is a string containing base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
+          examples:
+          - http://www.example-image-url.com
+      type: object
+      required:
+      - type
+      title: InferenceRequestImage
+      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
     Sam2SegmentationRequest:
       properties:
         id:
@@ -346,37 +458,39 @@ components:
       - image
       title: Sam2SegmentationRequest
       description: "SAM segmentation request.\n\nAttributes:\n    format (Optional[str]): The format of the response.\n    image (InferenceRequestImage): The image to be segmented.\n    image_id (Optional[str]): The ID of the image to be segmented used to retrieve cached embeddings.\n    point_coords (Optional[List[List[float]]]): The coordinates of the interactive points used during decoding.\n    point_labels (Optional[List[float]]): The labels of the interactive points used during decoding."
-    Sam3SegmentationPrediction:
+    Sam2PromptSet:
       properties:
-        masks:
+        prompts:
           anyOf:
           - items:
-              items:
-                items:
-                  type: integer
-                type: array
-              type: array
+              $ref: '#/components/schemas/Sam2Prompt'
             type: array
-          - additionalProperties: true
-            type: object
-          title: Masks
-          description: Mask data - either polygon coordinates or RLE encoding
-        confidence:
-          type: number
-          title: Confidence
-          description: Masks confidence
-        format:
-          anyOf:
-          - type: string
           - type: 'null'
-          title: Format
-          description: 'Format of the mask data: ''polygon'' or ''rle'''
-          default: polygon
+          title: Prompts
+          description: An optional list of prompts for masks to predict. Each prompt can include a bounding box and / or a set of postive or negative points
+      type: object
+      title: Sam2PromptSet
+    BoxXYXY:
+      properties:
+        x0:
+          type: number
+          title: X0
+        y0:
+          type: number
+          title: Y0
+        x1:
+          type: number
+          title: X1
+        y1:
+          type: number
+          title: Y1
       type: object
       required:
-      - masks
-      - confidence
-      title: Sam3SegmentationPrediction
+      - x0
+      - y0
+      - x1
+      - y1
+      title: BoxXYXY
     Sam2SegmentationPrediction:
       properties:
         masks:
@@ -409,94 +523,6 @@ components:
       - confidence
       title: Sam2SegmentationPrediction
       description: "SAM segmentation prediction.\n\nAttributes:\n    masks (Union[List[List[List[int]]], Dict[str, Any], Any]): Mask data - either polygon coordinates or RLE encoding.\n    confidence (float): Masks confidences.\n    format (Optional[str]): Format of the mask data: 'polygon' or 'rle'."
-    Sam3PromptResult:
-      properties:
-        prompt_index:
-          type: integer
-          title: Prompt Index
-        echo:
-          $ref: '#/components/schemas/Sam3PromptEcho'
-        predictions:
-          items:
-            $ref: '#/components/schemas/Sam3SegmentationPrediction'
-          type: array
-          title: Predictions
-      type: object
-      required:
-      - prompt_index
-      - echo
-      - predictions
-      title: Sam3PromptResult
-    Sam3SegmentationResponse:
-      properties:
-        prompt_results:
-          items:
-            $ref: '#/components/schemas/Sam3PromptResult'
-          type: array
-          title: Prompt Results
-        time:
-          type: number
-          title: Time
-          description: The time in seconds it took to produce the segmentation including preprocessing
-      type: object
-      required:
-      - prompt_results
-      - time
-      title: Sam3SegmentationResponse
-    Sam3PromptEcho:
-      properties:
-        prompt_index:
-          type: integer
-          title: Prompt Index
-        type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Type
-        text:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Text
-        num_boxes:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Num Boxes
-      type: object
-      required:
-      - prompt_index
-      title: Sam3PromptEcho
-    InferenceRequestImage:
-      properties:
-        type:
-          type: string
-          title: Type
-          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
-          examples:
-          - url
-        value:
-          anyOf:
-          - {}
-          - type: 'null'
-          title: Value
-          description: Image data corresponding to the image type, if type = 'url' then value is a string containing the url of an image, else if type = 'base64' then value is a string containing base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
-          examples:
-          - http://www.example-image-url.com
-      type: object
-      required:
-      - type
-      title: InferenceRequestImage
-      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     Sam2EmbeddingRequest:
       properties:
         id:
@@ -572,7 +598,56 @@ components:
       - id
       title: Sam2EmbeddingRequest
       description: "SAM embedding request.\n\nAttributes:\n    image (Optional[inference.core.entities.requests.inference.InferenceRequestImage]): The image to be embedded.\n    image_id (Optional[str]): The ID of the image to be embedded used to cache the embedding.\n    format (Optional[str]): The format of the response. Must be one of json or binary."
-    Box:
+    Sam3PromptResult:
+      properties:
+        prompt_index:
+          type: integer
+          title: Prompt Index
+        echo:
+          $ref: '#/components/schemas/Sam3PromptEcho'
+        predictions:
+          items:
+            $ref: '#/components/schemas/Sam3SegmentationPrediction'
+          type: array
+          title: Predictions
+      type: object
+      required:
+      - prompt_index
+      - echo
+      - predictions
+      title: Sam3PromptResult
+    Sam3SegmentationPrediction:
+      properties:
+        masks:
+          anyOf:
+          - items:
+              items:
+                items:
+                  type: integer
+                type: array
+              type: array
+            type: array
+          - additionalProperties: true
+            type: object
+          title: Masks
+          description: Mask data - either polygon coordinates or RLE encoding
+        confidence:
+          type: number
+          title: Confidence
+          description: Masks confidence
+        format:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Format
+          description: 'Format of the mask data: ''polygon'' or ''rle'''
+          default: polygon
+      type: object
+      required:
+      - masks
+      - confidence
+      title: Sam3SegmentationPrediction
+    Point-Input:
       properties:
         x:
           type: number
@@ -580,47 +655,31 @@ components:
         y:
           type: number
           title: Y
-        width:
-          type: number
-          title: Width
-        height:
-          type: number
-          title: Height
+        positive:
+          type: boolean
+          title: Positive
       type: object
       required:
       - x
       - y
-      - width
-      - height
-      title: Box
-    Sam2SegmentationResponse:
+      - positive
+      title: Point
+    Sam3SegmentationResponse:
       properties:
-        predictions:
+        prompt_results:
           items:
-            $ref: '#/components/schemas/Sam2SegmentationPrediction'
+            $ref: '#/components/schemas/Sam3PromptResult'
           type: array
-          title: Predictions
+          title: Prompt Results
         time:
           type: number
           title: Time
           description: The time in seconds it took to produce the segmentation including preprocessing
       type: object
       required:
-      - predictions
+      - prompt_results
       - time
-      title: Sam2SegmentationResponse
-    Sam2PromptSet:
-      properties:
-        prompts:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/Sam2Prompt'
-            type: array
-          - type: 'null'
-          title: Prompts
-          description: An optional list of prompts for masks to predict. Each prompt can include a bounding box and / or a set of postive or negative points
-      type: object
-      title: Sam2PromptSet
+      title: Sam3SegmentationResponse
     Sam3Prompt:
       properties:
         type:
@@ -667,74 +726,15 @@ components:
 
 
         Absolute pixel coordinates are used for boxes. Labels accept 0/1 or booleans.'
-    Sam2Prompt:
+    HTTPValidationError:
       properties:
-        box:
-          anyOf:
-          - $ref: '#/components/schemas/Box'
-          - type: 'null'
-        points:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/Point-Input'
-            type: array
-          - type: 'null'
-          title: Points
-      type: object
-      title: Sam2Prompt
-    ValidationError:
-      properties:
-        loc:
+        detail:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Detail
       type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    Point-Input:
-      properties:
-        x:
-          type: number
-          title: X
-        y:
-          type: number
-          title: Y
-        positive:
-          type: boolean
-          title: Positive
-      type: object
-      required:
-      - x
-      - y
-      - positive
-      title: Point
-    Sam3EmbeddingResponse:
-      properties:
-        image_id:
-          type: string
-          title: Image Id
-          description: Image id embeddings are cached to
-        time:
-          type: number
-          title: Time
-          description: The time in seconds it took to produce the embeddings including preprocessing
-      type: object
-      required:
-      - image_id
-      - time
-      title: Sam3EmbeddingResponse
+      title: HTTPValidationError
     Sam3SegmentationRequest:
       properties:
         id:

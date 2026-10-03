@@ -175,237 +175,6 @@ paths:
       - Clip
 components:
   schemas:
-    ClipTextEmbeddingRequest:
-      properties:
-        id:
-          type: string
-          title: Id
-        api_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Api Key
-          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
-        usage_billable:
-          type: boolean
-          title: Usage Billable
-          default: true
-        start:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Start
-        source:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source
-        source_info:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source Info
-        stream_pipeline_context_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Stream Pipeline Context Id
-          description: Internal stream-pipeline frame pairing id. Not part of the public API.
-        disable_model_monitoring:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Disable Model Monitoring
-          description: If true, disables model monitoring for this request
-          default: false
-        clip_version_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Clip Version Id
-          description: The version ID of CLIP to be used for this request. Must be one of RN101, RN50, RN50x16, RN50x4, RN50x64, ViT-B-16, ViT-B-32, ViT-L-14-336px, and ViT-L-14.
-          default: ViT-B-16
-          examples:
-          - ViT-B-16
-        model_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Model Id
-        text:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: string
-          title: Text
-          description: A string or list of strings
-          examples:
-          - The quick brown fox jumps over the lazy dog
-      type: object
-      required:
-      - id
-      - text
-      title: ClipTextEmbeddingRequest
-      description: "Request for CLIP text embedding.\n\nAttributes:\n    text (Union[List[str], str]): A string or list of strings."
-    ClipEmbeddingResponse:
-      properties:
-        inference_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Inference Id
-          description: Unique identifier of inference
-        frame_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Frame Id
-          description: The frame id of the image used in inference if the input was a video
-        time:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Time
-          description: The time in seconds it took to produce the embeddings including preprocessing
-        embeddings:
-          items:
-            items:
-              type: number
-            type: array
-          type: array
-          title: Embeddings
-          description: A list of embeddings, each embedding is a list of floats
-          examples:
-          - '[[0.12, 0.23, 0.34, ..., 0.43]]'
-      type: object
-      required:
-      - embeddings
-      title: ClipEmbeddingResponse
-      description: "Response for CLIP embedding.\n\nAttributes:\n    embeddings (List[List[float]]): A list of embeddings, each embedding is a list of floats.\n    time (float): The time in seconds it took to produce the embeddings including preprocessing."
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    ClipCompareRequest:
-      properties:
-        id:
-          type: string
-          title: Id
-        api_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Api Key
-          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
-        usage_billable:
-          type: boolean
-          title: Usage Billable
-          default: true
-        start:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Start
-        source:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source
-        source_info:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source Info
-        stream_pipeline_context_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Stream Pipeline Context Id
-          description: Internal stream-pipeline frame pairing id. Not part of the public API.
-        disable_model_monitoring:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Disable Model Monitoring
-          description: If true, disables model monitoring for this request
-          default: false
-        clip_version_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Clip Version Id
-          description: The version ID of CLIP to be used for this request. Must be one of RN101, RN50, RN50x16, RN50x4, RN50x64, ViT-B-16, ViT-B-32, ViT-L-14-336px, and ViT-L-14.
-          default: ViT-B-16
-          examples:
-          - ViT-B-16
-        model_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Model Id
-        subject:
-          anyOf:
-          - $ref: '#/components/schemas/InferenceRequestImage'
-          - type: string
-          title: Subject
-          description: The type of image data provided, one of 'url' or 'base64'
-          examples:
-          - url
-        subject_type:
-          type: string
-          title: Subject Type
-          description: The type of subject, one of 'image' or 'text'
-          default: image
-          examples:
-          - image
-        prompt:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/InferenceRequestImage'
-            type: array
-          - $ref: '#/components/schemas/InferenceRequestImage'
-          - type: string
-          - items:
-              type: string
-            type: array
-          - additionalProperties:
-              anyOf:
-              - $ref: '#/components/schemas/InferenceRequestImage'
-              - type: string
-            type: object
-          title: Prompt
-        prompt_type:
-          type: string
-          title: Prompt Type
-          description: The type of prompt, one of 'image' or 'text'
-          default: text
-          examples:
-          - text
-      type: object
-      required:
-      - id
-      - subject
-      - prompt
-      title: ClipCompareRequest
-      description: "Request for CLIP comparison.\n\nAttributes:\n    subject (Union[InferenceRequestImage, str]): The type of image data provided, one of 'url' or 'base64'.\n    subject_type (str): The type of subject, one of 'image' or 'text'.\n    prompt (Union[List[InferenceRequestImage], InferenceRequestImage, str, List[str], Dict[str, Union[InferenceRequestImage, str]]]): The prompt for comparison.\n    prompt_type (str): The type of prompt, one of 'image' or 'text'."
     ClipCompareResponse:
       properties:
         inference_id:
@@ -516,6 +285,41 @@ components:
       - image
       title: ClipImageEmbeddingRequest
       description: "Request for CLIP image embedding.\n\nAttributes:\n    image (Union[List[InferenceRequestImage], InferenceRequestImage]): Image(s) to be embedded."
+    ClipEmbeddingResponse:
+      properties:
+        inference_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Id
+          description: Unique identifier of inference
+        frame_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Id
+          description: The frame id of the image used in inference if the input was a video
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: The time in seconds it took to produce the embeddings including preprocessing
+        embeddings:
+          items:
+            items:
+              type: number
+            type: array
+          type: array
+          title: Embeddings
+          description: A list of embeddings, each embedding is a list of floats
+          examples:
+          - '[[0.12, 0.23, 0.34, ..., 0.43]]'
+      type: object
+      required:
+      - embeddings
+      title: ClipEmbeddingResponse
+      description: "Response for CLIP embedding.\n\nAttributes:\n    embeddings (List[List[float]]): A list of embeddings, each embedding is a list of floats.\n    time (float): The time in seconds it took to produce the embeddings including preprocessing."
     InferenceRequestImage:
       properties:
         type:
@@ -537,6 +341,129 @@ components:
       - type
       title: InferenceRequestImage
       description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
+    ClipCompareRequest:
+      properties:
+        id:
+          type: string
+          title: Id
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
+        usage_billable:
+          type: boolean
+          title: Usage Billable
+          default: true
+        start:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Start
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        source_info:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Info
+        stream_pipeline_context_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Stream Pipeline Context Id
+          description: Internal stream-pipeline frame pairing id. Not part of the public API.
+        disable_model_monitoring:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Model Monitoring
+          description: If true, disables model monitoring for this request
+          default: false
+        clip_version_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Clip Version Id
+          description: The version ID of CLIP to be used for this request. Must be one of RN101, RN50, RN50x16, RN50x4, RN50x64, ViT-B-16, ViT-B-32, ViT-L-14-336px, and ViT-L-14.
+          default: ViT-B-16
+          examples:
+          - ViT-B-16
+        model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Id
+        subject:
+          anyOf:
+          - $ref: '#/components/schemas/InferenceRequestImage'
+          - type: string
+          title: Subject
+          description: The type of image data provided, one of 'url' or 'base64'
+          examples:
+          - url
+        subject_type:
+          type: string
+          title: Subject Type
+          description: The type of subject, one of 'image' or 'text'
+          default: image
+          examples:
+          - image
+        prompt:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/InferenceRequestImage'
+            type: array
+          - $ref: '#/components/schemas/InferenceRequestImage'
+          - type: string
+          - items:
+              type: string
+            type: array
+          - additionalProperties:
+              anyOf:
+              - $ref: '#/components/schemas/InferenceRequestImage'
+              - type: string
+            type: object
+          title: Prompt
+        prompt_type:
+          type: string
+          title: Prompt Type
+          description: The type of prompt, one of 'image' or 'text'
+          default: text
+          examples:
+          - text
+      type: object
+      required:
+      - id
+      - subject
+      - prompt
+      title: ClipCompareRequest
+      description: "Request for CLIP comparison.\n\nAttributes:\n    subject (Union[InferenceRequestImage, str]): The type of image data provided, one of 'url' or 'base64'.\n    subject_type (str): The type of subject, one of 'image' or 'text'.\n    prompt (Union[List[InferenceRequestImage], InferenceRequestImage, str, List[str], Dict[str, Union[InferenceRequestImage, str]]]): The prompt for comparison.\n    prompt_type (str): The type of prompt, one of 'image' or 'text'."
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     HTTPValidationError:
       properties:
         detail:
@@ -546,3 +473,76 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    ClipTextEmbeddingRequest:
+      properties:
+        id:
+          type: string
+          title: Id
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
+        usage_billable:
+          type: boolean
+          title: Usage Billable
+          default: true
+        start:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Start
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        source_info:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Info
+        stream_pipeline_context_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Stream Pipeline Context Id
+          description: Internal stream-pipeline frame pairing id. Not part of the public API.
+        disable_model_monitoring:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Model Monitoring
+          description: If true, disables model monitoring for this request
+          default: false
+        clip_version_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Clip Version Id
+          description: The version ID of CLIP to be used for this request. Must be one of RN101, RN50, RN50x16, RN50x4, RN50x64, ViT-B-16, ViT-B-32, ViT-L-14-336px, and ViT-L-14.
+          default: ViT-B-16
+          examples:
+          - ViT-B-16
+        model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Id
+        text:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: string
+          title: Text
+          description: A string or list of strings
+          examples:
+          - The quick brown fox jumps over the lazy dog
+      type: object
+      required:
+      - id
+      - text
+      title: ClipTextEmbeddingRequest
+      description: "Request for CLIP text embedding.\n\nAttributes:\n    text (Union[List[str], str]): A string or list of strings."

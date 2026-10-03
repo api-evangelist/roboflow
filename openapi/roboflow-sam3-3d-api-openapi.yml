@@ -68,6 +68,36 @@ paths:
       - Sam3 3d
 components:
   schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     Sam3_3D_Objects_InferenceRequest:
       properties:
         id:
@@ -166,36 +196,6 @@ components:
       - mask_input
       title: Sam3_3D_Objects_InferenceRequest
       description: "SAM3D inference request for 3D object generation.\n\nAttributes:\n    api_key (Optional[str]): Roboflow API Key.\n    image (InferenceRequestImage): The input image to be used for 3D generation.\n    mask_input: Mask(s) in any supported format - polygon, binary mask, or RLE."
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     InferenceRequestImage:
       properties:
         type:

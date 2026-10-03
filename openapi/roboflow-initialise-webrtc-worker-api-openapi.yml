@@ -42,27 +42,6 @@ paths:
       - Initialise Webrtc Worker
 components:
   schemas:
-    WebRTCTURNConfig:
-      properties:
-        urls:
-          anyOf:
-          - type: string
-          - items:
-              type: string
-            type: array
-          title: Urls
-        username:
-          type: string
-          title: Username
-        credential:
-          type: string
-          title: Credential
-      type: object
-      required:
-      - urls
-      - username
-      - credential
-      title: WebRTCTURNConfig
     WebRTCConfig:
       properties:
         iceServers:
@@ -96,43 +75,29 @@ components:
       - sdp
       - type
       title: InitializeWebRTCResponse
-    CommandContext:
+    RTCIceServer:
       properties:
-        request_id:
+        urls:
+          anyOf:
+          - type: string
+          - items:
+              type: string
+            type: array
+          title: Urls
+        username:
           anyOf:
           - type: string
           - type: 'null'
-          title: Request Id
-          description: Server-side request ID
-        pipeline_id:
+          title: Username
+        credential:
           anyOf:
           - type: string
           - type: 'null'
-          title: Pipeline Id
-          description: Identifier of pipeline connected to operation
-      type: object
-      title: CommandContext
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Credential
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - urls
+      title: RTCIceServer
     WorkflowConfiguration:
       properties:
         type:
@@ -190,51 +155,6 @@ components:
       required:
       - type
       title: WorkflowConfiguration
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    WebRTCOffer:
-      properties:
-        type:
-          type: string
-          title: Type
-        sdp:
-          type: string
-          title: Sdp
-      type: object
-      required:
-      - type
-      - sdp
-      title: WebRTCOffer
-    RTCIceServer:
-      properties:
-        urls:
-          anyOf:
-          - type: string
-          - items:
-              type: string
-            type: array
-          title: Urls
-        username:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Username
-        credential:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Credential
-      type: object
-      required:
-      - urls
-      title: RTCIceServer
     WebRTCWorkerRequest:
       properties:
         api_key:
@@ -334,3 +254,83 @@ components:
       - workflow_configuration
       - webrtc_offer
       title: WebRTCWorkerRequest
+    CommandContext:
+      properties:
+        request_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Request Id
+          description: Server-side request ID
+        pipeline_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Pipeline Id
+          description: Identifier of pipeline connected to operation
+      type: object
+      title: CommandContext
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    WebRTCTURNConfig:
+      properties:
+        urls:
+          anyOf:
+          - type: string
+          - items:
+              type: string
+            type: array
+          title: Urls
+        username:
+          type: string
+          title: Username
+        credential:
+          type: string
+          title: Credential
+      type: object
+      required:
+      - urls
+      - username
+      - credential
+      title: WebRTCTURNConfig
+    WebRTCOffer:
+      properties:
+        type:
+          type: string
+          title: Type
+        sdp:
+          type: string
+          title: Sdp
+      type: object
+      required:
+      - type
+      - sdp
+      title: WebRTCOffer

@@ -74,99 +74,6 @@ paths:
       - Doctr
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    OCRInferenceResponse:
-      properties:
-        result:
-          type: string
-          title: Result
-          description: The combined OCR recognition result.
-        image:
-          anyOf:
-          - $ref: '#/components/schemas/InferenceResponseImage'
-          - type: 'null'
-          description: Metadata about input image dimensions
-        predictions:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/ObjectDetectionPrediction'
-            type: array
-          - type: 'null'
-          title: Predictions
-          description: List of objects detected by OCR
-        time:
-          type: number
-          title: Time
-          description: The time in seconds it took to produce the inference including preprocessing.
-        parent_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Parent Id
-          description: Identifier of parent image region. Useful when stack of detection-models is in use to refer the RoI being the input to inference
-      type: object
-      required:
-      - result
-      - time
-      title: OCRInferenceResponse
-      description: "OCR Inference response.\n\nAttributes:\n    result (str): The combined OCR recognition result.\n    predictions (List[ObjectDetectionPrediction]): List of objects detected by OCR\n    time (float): The time in seconds it took to produce the inference including preprocessing"
-    InferenceResponseImage:
-      properties:
-        width:
-          type: integer
-          title: Width
-          description: The original width of the image used in inference
-        height:
-          type: integer
-          title: Height
-          description: The original height of the image used in inference
-      type: object
-      required:
-      - width
-      - height
-      title: InferenceResponseImage
-      description: "Inference response image information.\n\nAttributes:\n    width (int): The original width of the image used in inference.\n    height (int): The original height of the image used in inference."
-    InferenceRequestImage:
-      properties:
-        type:
-          type: string
-          title: Type
-          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
-          examples:
-          - url
-        value:
-          anyOf:
-          - {}
-          - type: 'null'
-          title: Value
-          description: Image data corresponding to the image type, if type = 'url' then value is a string containing the url of an image, else if type = 'base64' then value is a string containing base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
-          examples:
-          - http://www.example-image-url.com
-      type: object
-      required:
-      - type
-      title: InferenceRequestImage
-      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
     DoctrOCRInferenceRequest:
       properties:
         id:
@@ -240,6 +147,83 @@ components:
       - image
       title: DoctrOCRInferenceRequest
       description: "DocTR inference request.\n\nAttributes:\n    api_key (Optional[str]): Roboflow API Key."
+    OCRInferenceResponse:
+      properties:
+        result:
+          type: string
+          title: Result
+          description: The combined OCR recognition result.
+        image:
+          anyOf:
+          - $ref: '#/components/schemas/InferenceResponseImage'
+          - type: 'null'
+          description: Metadata about input image dimensions
+        predictions:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ObjectDetectionPrediction'
+            type: array
+          - type: 'null'
+          title: Predictions
+          description: List of objects detected by OCR
+        time:
+          type: number
+          title: Time
+          description: The time in seconds it took to produce the inference including preprocessing.
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+          description: Identifier of parent image region. Useful when stack of detection-models is in use to refer the RoI being the input to inference
+      type: object
+      required:
+      - result
+      - time
+      title: OCRInferenceResponse
+      description: "OCR Inference response.\n\nAttributes:\n    result (str): The combined OCR recognition result.\n    predictions (List[ObjectDetectionPrediction]): List of objects detected by OCR\n    time (float): The time in seconds it took to produce the inference including preprocessing"
+    InferenceRequestImage:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
+          examples:
+          - url
+        value:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Value
+          description: Image data corresponding to the image type, if type = 'url' then value is a string containing the url of an image, else if type = 'base64' then value is a string containing base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
+          examples:
+          - http://www.example-image-url.com
+      type: object
+      required:
+      - type
+      title: InferenceRequestImage
+      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     HTTPValidationError:
       properties:
         detail:
@@ -249,6 +233,22 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    InferenceResponseImage:
+      properties:
+        width:
+          type: integer
+          title: Width
+          description: The original width of the image used in inference
+        height:
+          type: integer
+          title: Height
+          description: The original height of the image used in inference
+      type: object
+      required:
+      - width
+      - height
+      title: InferenceResponseImage
+      description: "Inference response image information.\n\nAttributes:\n    width (int): The original width of the image used in inference.\n    height (int): The original height of the image used in inference."
     ObjectDetectionPrediction:
       properties:
         x:

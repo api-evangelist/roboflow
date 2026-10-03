@@ -69,27 +69,6 @@ paths:
       - Yolo World
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     YOLOWorldInferenceRequest:
       properties:
         id:
@@ -210,22 +189,6 @@ components:
       - text
       title: YOLOWorldInferenceRequest
       description: "Request for Grounding DINO zero-shot predictions.\n\nAttributes:\n    text (List[str]): A list of strings."
-    InferenceResponseImage:
-      properties:
-        width:
-          type: integer
-          title: Width
-          description: The original width of the image used in inference
-        height:
-          type: integer
-          title: Height
-          description: The original height of the image used in inference
-      type: object
-      required:
-      - width
-      - height
-      title: InferenceResponseImage
-      description: "Inference response image information.\n\nAttributes:\n    width (int): The original width of the image used in inference.\n    height (int): The original height of the image used in inference."
     InferenceRequestImage:
       properties:
         type:
@@ -247,6 +210,27 @@ components:
       - type
       title: InferenceRequestImage
       description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     HTTPValidationError:
       properties:
         detail:
@@ -256,50 +240,22 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ObjectDetectionInferenceResponse:
+    InferenceResponseImage:
       properties:
-        visualization:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Visualization
-          description: Base64 encoded string containing prediction visualization image data
-        inference_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Inference Id
-          description: Unique identifier of inference
-        frame_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Frame Id
-          description: The frame id of the image used in inference if the input was a video
-        time:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Time
-          description: The time in seconds it took to produce the predictions including image preprocessing
-        image:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/InferenceResponseImage'
-            type: array
-          - $ref: '#/components/schemas/InferenceResponseImage'
-          title: Image
-        predictions:
-          items:
-            $ref: '#/components/schemas/ObjectDetectionPrediction'
-          type: array
-          title: Predictions
+        width:
+          type: integer
+          title: Width
+          description: The original width of the image used in inference
+        height:
+          type: integer
+          title: Height
+          description: The original height of the image used in inference
       type: object
       required:
-      - image
-      - predictions
-      title: ObjectDetectionInferenceResponse
-      description: "Object Detection inference response.\n\nAttributes:\n    predictions (List[inference.core.entities.responses.inference.ObjectDetectionPrediction]): List of object detection predictions."
+      - width
+      - height
+      title: InferenceResponseImage
+      description: "Inference response image information.\n\nAttributes:\n    width (int): The original width of the image used in inference.\n    height (int): The original height of the image used in inference."
     ObjectDetectionPrediction:
       properties:
         x:
@@ -363,3 +319,47 @@ components:
       - class_id
       title: ObjectDetectionPrediction
       description: "Object Detection prediction.\n\nAttributes:\n    x (float): The center x-axis pixel coordinate of the prediction.\n    y (float): The center y-axis pixel coordinate of the prediction.\n    width (float): The width of the prediction bounding box in number of pixels.\n    height (float): The height of the prediction bounding box in number of pixels.\n    confidence (float): The detection confidence as a fraction between 0 and 1.\n    class_name (str): The predicted class label.\n    class_confidence (Union[float, None]): The class label confidence as a fraction between 0 and 1.\n    class_id (int): The class id of the prediction"
+    ObjectDetectionInferenceResponse:
+      properties:
+        visualization:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Visualization
+          description: Base64 encoded string containing prediction visualization image data
+        inference_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Id
+          description: Unique identifier of inference
+        frame_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Id
+          description: The frame id of the image used in inference if the input was a video
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: The time in seconds it took to produce the predictions including image preprocessing
+        image:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/InferenceResponseImage'
+            type: array
+          - $ref: '#/components/schemas/InferenceResponseImage'
+          title: Image
+        predictions:
+          items:
+            $ref: '#/components/schemas/ObjectDetectionPrediction'
+          type: array
+          title: Predictions
+      type: object
+      required:
+      - image
+      - predictions
+      title: ObjectDetectionInferenceResponse
+      description: "Object Detection inference response.\n\nAttributes:\n    predictions (List[inference.core.entities.responses.inference.ObjectDetectionPrediction]): List of object detection predictions."
