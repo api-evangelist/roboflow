@@ -1,0 +1,95 @@
+slug: roboflow
+provider: Roboflow
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 9
+edges:
+- tag: Infer
+  spec_file: roboflow-infer-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.72
+  evidence: POST /infer/lmm — "Large multi-modal model infer"; POST /infer/depth-estimation — "Depth Estimation";
+    LMMInferenceRequest
+  reason: Generic model-inference surface for large multi-modal models and depth estimation. Clearly AI/ML
+    model serving, which sits under Artificial Intelligence Management.
+- tag: Model
+  spec_file: roboflow-model-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.7
+  evidence: GET /model/registry — "Get model keys"; schemas ModelDescriptionEntity, ModelsDescriptions
+  reason: Exposes the registry of ML models loaded/available on the inference server — model registry/lifecycle
+    management, i.e. AI/ML model lifecycle (MLOps) under Information & Data Management.
+- tag: Owlv2
+  spec_file: roboflow-owlv2-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.7
+  evidence: POST /owlv2/infer  Owlv2 image prompting ... ObjectDetectionInferenceResponse
+  reason: Operation serves an AI object-detection model for inference; this is AI/ML model serving (Artificial
+    Intelligence Management). It is model execution rather than a business process, but AI model lifecycle/serving
+    is the honest fit.
+- tag: Perception Encoder
+  spec_file: roboflow-perception-encoder-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.7
+  evidence: POST /perception_encoder/embed_image  PE Image Embeddings
+  reason: Serving an embedding model for images and text — AI/ML model inference, mapped to Artificial
+    Intelligence Management.
+- tag: Roboflow Inference Server
+  spec_file: roboflow-roboflow-inference-server-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.7
+  evidence: POST /{dataset_id}/{version_id}  Legacy Infer From Request ... ObjectDetectionInferenceResponse,
+    InstanceSegmentationInferenceResponse
+  reason: Legacy inference endpoint running trained model versions on images — AI/ML model serving.
+- tag: Sam
+  spec_file: roboflow-sam-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.7
+  evidence: POST /sam/segment_image  SAM Image Segmentation
+  reason: Segment Anything model inference and embeddings — AI/ML model execution, not a domain business
+    process.
+- tag: Sam2
+  spec_file: roboflow-sam2-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.7
+  evidence: POST /sam2/segment_image  SAM2 Image Segmentation
+  reason: Vision model inference endpoints (embeddings, segmentation); maps to AI/ML model lifecycle/serving.
+- tag: Sam3
+  spec_file: roboflow-sam3-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.7
+  evidence: POST /sam3/concept_segment  SAM3 PCS (promptable concept segmentation)
+  reason: Promptable segmentation model inference — AI model serving under Artificial Intelligence Management.
+- tag: Yolo World
+  spec_file: roboflow-yolo-world-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.7
+  evidence: POST /yolo_world/infer  YOLO-World inference
+  reason: Object-detection model inference endpoint — AI/ML model serving.
