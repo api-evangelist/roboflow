@@ -122,6 +122,148 @@ paths:
       - Sam
 components:
   schemas:
+    SamEmbeddingRequest:
+      properties:
+        id:
+          type: string
+          title: Id
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
+        usage_billable:
+          type: boolean
+          title: Usage Billable
+          default: true
+        start:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Start
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        source_info:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Info
+        stream_pipeline_context_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Stream Pipeline Context Id
+          description: Internal stream-pipeline frame pairing id. Not part of the public API.
+        disable_model_monitoring:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Model Monitoring
+          description: If true, disables model monitoring for this request
+          default: false
+        sam_version_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sam Version Id
+          description: The version ID of SAM to be used for this request. Must be one of vit_h, vit_l, or vit_b.
+          default: vit_h
+          examples:
+          - vit_h
+        model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Id
+        image:
+          anyOf:
+          - $ref: '#/components/schemas/InferenceRequestImage'
+          - type: 'null'
+          description: The image to be embedded
+        image_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image Id
+          description: The ID of the image to be embedded used to cache the embedding.
+          examples:
+          - image_id
+        format:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Format
+          description: The format of the response. Must be one of json or binary. If binary, embedding is returned as a binary numpy array.
+          default: json
+          examples:
+          - json
+      type: object
+      required:
+      - id
+      title: SamEmbeddingRequest
+      description: "SAM embedding request.\n\nAttributes:\n    image (Optional[inference.core.entities.requests.inference.InferenceRequestImage]): The image to be embedded.\n    image_id (Optional[str]): The ID of the image to be embedded used to cache the embedding.\n    format (Optional[str]): The format of the response. Must be one of json or binary."
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SamEmbeddingResponse:
+      properties:
+        embeddings:
+          anyOf:
+          - items:
+              items:
+                items:
+                  items:
+                    type: number
+                  type: array
+                type: array
+              type: array
+            type: array
+          - {}
+          title: Embeddings
+          description: If request format is json, embeddings is a series of nested lists representing the SAM embedding. If request format is binary, embeddings is a binary numpy array. The dimensions of the embedding are 1 x 256 x 64 x 64.
+          examples:
+          - '[[[[0.1, 0.2, 0.3, ...] ...] ...]]'
+        time:
+          type: number
+          title: Time
+          description: The time in seconds it took to produce the embeddings including preprocessing
+      type: object
+      required:
+      - embeddings
+      - time
+      title: SamEmbeddingResponse
+      description: "SAM embedding response.\n\nAttributes:\n    embeddings (Union[List[List[List[List[float]]]], Any]): The SAM embedding.\n    time (float): The time in seconds it took to produce the embeddings including preprocessing."
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     SamSegmentationResponse:
       properties:
         masks:
@@ -159,6 +301,27 @@ components:
       - time
       title: SamSegmentationResponse
       description: "SAM segmentation response.\n\nAttributes:\n    masks (Union[List[List[List[int]]], Any]): The set of output masks.\n    low_res_masks (Union[List[List[List[int]]], Any]): The set of output low-resolution masks.\n    time (float): The time in seconds it took to produce the segmentation including preprocessing."
+    InferenceRequestImage:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
+          examples:
+          - url
+        value:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Value
+          description: Image data corresponding to the image type, if type = 'url' then value is a string containing the url of an image, else if type = 'base64' then value is a string containing base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
+          examples:
+          - http://www.example-image-url.com
+      type: object
+      required:
+      - type
+      title: InferenceRequestImage
+      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
     SamSegmentationRequest:
       properties:
         id:
@@ -348,166 +511,3 @@ components:
       - id
       title: SamSegmentationRequest
       description: "SAM segmentation request.\n\nAttributes:\n    embeddings (Optional[Union[List[List[List[List[float]]]], Any]]): The embeddings to be decoded.\n    embeddings_format (Optional[str]): The format of the embeddings.\n    format (Optional[str]): The format of the response.\n    image (Optional[InferenceRequestImage]): The image to be segmented.\n    image_id (Optional[str]): The ID of the image to be segmented used to retrieve cached embeddings.\n    has_mask_input (Optional[bool]): Whether or not the request includes a mask input.\n    mask_input (Optional[Union[List[List[List[float]]], Any]]): The set of output masks.\n    mask_input_format (Optional[str]): The format of the mask input.\n    orig_im_size (Optional[List[int]]): The original size of the image used to generate the embeddings.\n    point_coords (Optional[List[List[float]]]): The coordinates of the interactive points used during decoding.\n    point_labels (Optional[List[float]]): The labels of the interactive points used during decoding.\n    use_mask_input_cache (Optional[bool]): Whether or not to use the mask input cache."
-    SamEmbeddingResponse:
-      properties:
-        embeddings:
-          anyOf:
-          - items:
-              items:
-                items:
-                  items:
-                    type: number
-                  type: array
-                type: array
-              type: array
-            type: array
-          - {}
-          title: Embeddings
-          description: If request format is json, embeddings is a series of nested lists representing the SAM embedding. If request format is binary, embeddings is a binary numpy array. The dimensions of the embedding are 1 x 256 x 64 x 64.
-          examples:
-          - '[[[[0.1, 0.2, 0.3, ...] ...] ...]]'
-        time:
-          type: number
-          title: Time
-          description: The time in seconds it took to produce the embeddings including preprocessing
-      type: object
-      required:
-      - embeddings
-      - time
-      title: SamEmbeddingResponse
-      description: "SAM embedding response.\n\nAttributes:\n    embeddings (Union[List[List[List[List[float]]]], Any]): The SAM embedding.\n    time (float): The time in seconds it took to produce the embeddings including preprocessing."
-    InferenceRequestImage:
-      properties:
-        type:
-          type: string
-          title: Type
-          description: The type of image data provided, one of 'url', 'base64', or 'numpy'
-          examples:
-          - url
-        value:
-          anyOf:
-          - {}
-          - type: 'null'
-          title: Value
-          description: Image data corresponding to the image type, if type = 'url' then value is a string containing the url of an image, else if type = 'base64' then value is a string containing base64 encoded image data, else if type = 'numpy' then value is binary numpy data serialized using pickle.dumps(); array should 3 dimensions, channels last, with values in the range [0,255].
-          examples:
-          - http://www.example-image-url.com
-      type: object
-      required:
-      - type
-      title: InferenceRequestImage
-      description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    SamEmbeddingRequest:
-      properties:
-        id:
-          type: string
-          title: Id
-        api_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Api Key
-          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
-        usage_billable:
-          type: boolean
-          title: Usage Billable
-          default: true
-        start:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Start
-        source:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source
-        source_info:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source Info
-        stream_pipeline_context_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Stream Pipeline Context Id
-          description: Internal stream-pipeline frame pairing id. Not part of the public API.
-        disable_model_monitoring:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Disable Model Monitoring
-          description: If true, disables model monitoring for this request
-          default: false
-        sam_version_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sam Version Id
-          description: The version ID of SAM to be used for this request. Must be one of vit_h, vit_l, or vit_b.
-          default: vit_h
-          examples:
-          - vit_h
-        model_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Model Id
-        image:
-          anyOf:
-          - $ref: '#/components/schemas/InferenceRequestImage'
-          - type: 'null'
-          description: The image to be embedded
-        image_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Image Id
-          description: The ID of the image to be embedded used to cache the embedding.
-          examples:
-          - image_id
-        format:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Format
-          description: The format of the response. Must be one of json or binary. If binary, embedding is returned as a binary numpy array.
-          default: json
-          examples:
-          - json
-      type: object
-      required:
-      - id
-      title: SamEmbeddingRequest
-      description: "SAM embedding request.\n\nAttributes:\n    image (Optional[inference.core.entities.requests.inference.InferenceRequestImage]): The image to be embedded.\n    image_id (Optional[str]): The ID of the image to be embedded used to cache the embedding.\n    format (Optional[str]): The format of the response. Must be one of json or binary."

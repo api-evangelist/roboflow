@@ -42,119 +42,6 @@ paths:
       - Initialise Webrtc Worker
 components:
   schemas:
-    WebRTCConfig:
-      properties:
-        iceServers:
-          items:
-            $ref: '#/components/schemas/RTCIceServer'
-          type: array
-          title: Iceservers
-      type: object
-      required:
-      - iceServers
-      title: WebRTCConfig
-    InitializeWebRTCResponse:
-      properties:
-        status:
-          type: string
-          title: Status
-          description: Operation status
-        context:
-          $ref: '#/components/schemas/CommandContext'
-          description: Context of the command.
-        sdp:
-          type: string
-          title: Sdp
-        type:
-          type: string
-          title: Type
-      type: object
-      required:
-      - status
-      - context
-      - sdp
-      - type
-      title: InitializeWebRTCResponse
-    RTCIceServer:
-      properties:
-        urls:
-          anyOf:
-          - type: string
-          - items:
-              type: string
-            type: array
-          title: Urls
-        username:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Username
-        credential:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Credential
-      type: object
-      required:
-      - urls
-      title: RTCIceServer
-    WorkflowConfiguration:
-      properties:
-        type:
-          type: string
-          const: WorkflowConfiguration
-          title: Type
-        workflow_specification:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Workflow Specification
-        workspace_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Workspace Name
-        workflow_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Workflow Id
-        workflow_version_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Workflow Version Id
-        image_input_name:
-          type: string
-          title: Image Input Name
-          default: image
-        workflows_parameters:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Workflows Parameters
-        disable_sinks:
-          type: boolean
-          title: Disable Sinks
-          default: false
-        workflows_thread_pool_workers:
-          type: integer
-          title: Workflows Thread Pool Workers
-          default: 4
-        cancel_thread_pool_tasks_on_exit:
-          type: boolean
-          title: Cancel Thread Pool Tasks On Exit
-          default: true
-        video_metadata_input_name:
-          type: string
-          title: Video Metadata Input Name
-          default: video_metadata
-      type: object
-      required:
-      - type
-      title: WorkflowConfiguration
     WebRTCWorkerRequest:
       properties:
         api_key:
@@ -254,6 +141,75 @@ components:
       - workflow_configuration
       - webrtc_offer
       title: WebRTCWorkerRequest
+    WebRTCConfig:
+      properties:
+        iceServers:
+          items:
+            $ref: '#/components/schemas/RTCIceServer'
+          type: array
+          title: Iceservers
+      type: object
+      required:
+      - iceServers
+      title: WebRTCConfig
+    RTCIceServer:
+      properties:
+        urls:
+          anyOf:
+          - type: string
+          - items:
+              type: string
+            type: array
+          title: Urls
+        username:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Username
+        credential:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Credential
+      type: object
+      required:
+      - urls
+      title: RTCIceServer
+    InitializeWebRTCResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+          description: Operation status
+        context:
+          $ref: '#/components/schemas/CommandContext'
+          description: Context of the command.
+        sdp:
+          type: string
+          title: Sdp
+        type:
+          type: string
+          title: Type
+      type: object
+      required:
+      - status
+      - context
+      - sdp
+      - type
+      title: InitializeWebRTCResponse
+    WebRTCOffer:
+      properties:
+        type:
+          type: string
+          title: Type
+        sdp:
+          type: string
+          title: Sdp
+      type: object
+      required:
+      - type
+      - sdp
+      title: WebRTCOffer
     CommandContext:
       properties:
         request_id:
@@ -270,6 +226,15 @@ components:
           description: Identifier of pipeline connected to operation
       type: object
       title: CommandContext
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -291,15 +256,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     WebRTCTURNConfig:
       properties:
         urls:
@@ -321,16 +277,60 @@ components:
       - username
       - credential
       title: WebRTCTURNConfig
-    WebRTCOffer:
+    WorkflowConfiguration:
       properties:
         type:
           type: string
+          const: WorkflowConfiguration
           title: Type
-        sdp:
+        workflow_specification:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Workflow Specification
+        workspace_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Workspace Name
+        workflow_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Workflow Id
+        workflow_version_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Workflow Version Id
+        image_input_name:
           type: string
-          title: Sdp
+          title: Image Input Name
+          default: image
+        workflows_parameters:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Workflows Parameters
+        disable_sinks:
+          type: boolean
+          title: Disable Sinks
+          default: false
+        workflows_thread_pool_workers:
+          type: integer
+          title: Workflows Thread Pool Workers
+          default: 4
+        cancel_thread_pool_tasks_on_exit:
+          type: boolean
+          title: Cancel Thread Pool Tasks On Exit
+          default: true
+        video_metadata_input_name:
+          type: string
+          title: Video Metadata Input Name
+          default: video_metadata
       type: object
       required:
       - type
-      - sdp
-      title: WebRTCOffer
+      title: WorkflowConfiguration
