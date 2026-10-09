@@ -1,0 +1,236 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://roboflow.com/pricing
+sources:
+- https://roboflow.com/pricing
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: per-call
+delivery:
+  delivery: open-core
+  method: page
+  read: '2026-10-07'
+  evidence: Self-Host with Inference About Self-Host with Inference Inference is our open source deployment
+    product.
+  free_edition: Free Tier
+  managed_tier: Core
+published: true
+note: Credit-based pricing; per-image model inference rates listed (e.g. RF-DETR Medium 0.0001875 credits,
+  5,333 images per credit). Self-hosted open source Inference included on all plans; some models require
+  add-on commercial license.
+plan_count: 13
+currency: USD
+plans:
+- name: Free Tier
+  price_text: $0
+  price: 0
+  currency: USD
+  period: month
+  unit: credits
+  included_quota: 10 credits included a month
+  overage: Extend your usage with prepaid or credit packs
+- name: Core
+  price_text: $39 per month, billed monthly
+  price: 39
+  currency: USD
+  period: month
+  unit: credits
+  included_quota: +10 credits a month, 20 total credits
+  overage: Additional On-Demand Credits $6; Additional Prepaid Credits Starting at $4
+- name: Core (+25 credits)
+  price_text: +25 credits a month , $89 a month, 35 credits in total
+  price: 89
+  currency: USD
+  period: month
+  unit: credits
+  included_quota: 35 credits in total
+  overage: $3.56/credit
+- name: Core (+40 credits)
+  price_text: +40 credits a month , $139 a month, 50 credits in total
+  price: 139
+  currency: USD
+  period: month
+  unit: credits
+  included_quota: 50 credits in total
+  overage: $3.48/credit
+- name: Core (+70 credits)
+  price_text: +70 credits a month , $229 a month, 80 credits in total
+  price: 229
+  currency: USD
+  period: month
+  unit: credits
+  included_quota: 80 credits in total
+  overage: $3.27/credit
+- name: Core (+110 credits)
+  price_text: +110 credits a month , $349 a month, 120 credits in total
+  price: 349
+  currency: USD
+  period: month
+  unit: credits
+  included_quota: 120 credits in total
+  overage: $3.17/credit
+- name: Core (+190 credits)
+  price_text: +190 credits a month , $589 a month, 200 credits in total
+  price: 589
+  currency: USD
+  period: month
+  unit: credits
+  included_quota: 200 credits in total
+  overage: $3.10/credit
+- name: Core (+340 credits)
+  price_text: +340 credits a month , $999 a month, 350 credits in total
+  price: 999
+  currency: USD
+  period: month
+  unit: credits
+  included_quota: 350 credits in total
+  overage: $2.94/credit
+- name: Core (+490 credits)
+  price_text: +490 credits a month , $1,399 a month, 500 credits in total
+  price: 1399
+  currency: USD
+  period: month
+  unit: credits
+  included_quota: 500 credits in total
+  overage: $2.86/credit
+- name: Enterprise
+  price_text: Custom Pricing
+  period: none
+- name: Data Labeling Services (bounding box)
+  price_text: Starting at $0.10/bounding box
+  price: 0.1
+  currency: USD
+  period: per-use
+  unit: bounding box
+- name: Data Labeling Services (polygon)
+  price_text: Starting at $0.20/polygon
+  price: 0.2
+  currency: USD
+  period: per-use
+  unit: polygon
+- name: Data Labeling Services (classification/keypoint)
+  price_text: Starting at $0.05/classification/keypoint annotation
+  price: 0.05
+  currency: USD
+  period: per-use
+  unit: annotation
+rate_limit_statements:
+- API Rate Limits About API Rate Limits Requests per minute against the hosted API. Enterprise limits
+  are raised to match your workload. Standard Custom
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - metered
+  - subscription
+  units:
+  - credit
+  plans:
+  - name: Free Tier
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - month
+  - name: Core
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - month
+  - name: Core (+25 credits)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - month
+  - name: Core (+40 credits)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - month
+  - name: Core (+70 credits)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - month
+  - name: Core (+110 credits)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - month
+  - name: Core (+190 credits)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - month
+  - name: Core (+340 credits)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - month
+  - name: Core (+490 credits)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - month
+  - name: Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Data Labeling Services (bounding box)
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Data Labeling Services (polygon)
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Data Labeling Services (classification/keypoint)
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
