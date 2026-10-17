@@ -175,6 +175,67 @@ paths:
       - Clip
 components:
   schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ClipCompareResponse:
+      properties:
+        inference_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Id
+          description: Unique identifier of inference
+        frame_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Id
+          description: The frame id of the image used in inference if the input was a video
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: The time in seconds it took to produce the similarity scores including preprocessing
+        similarity:
+          anyOf:
+          - items:
+              type: number
+            type: array
+          - additionalProperties:
+              type: number
+            type: object
+          title: Similarity
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+          description: Identifier of parent image region. Useful when stack of detection-models is in use to refer the RoI being the input to inference
+      type: object
+      required:
+      - similarity
+      title: ClipCompareResponse
+      description: "Response for CLIP comparison.\n\nAttributes:\n    similarity (Union[List[float], Dict[str, float]]): Similarity scores.\n    time (float): The time in seconds it took to produce the similarity scores including preprocessing."
     ClipImageEmbeddingRequest:
       properties:
         id:
@@ -254,27 +315,114 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ValidationError:
+    ClipEmbeddingResponse:
       properties:
-        loc:
+        inference_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inference Id
+          description: Unique identifier of inference
+        frame_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Frame Id
+          description: The frame id of the image used in inference if the input was a video
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: The time in seconds it took to produce the embeddings including preprocessing
+        embeddings:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            items:
+              type: number
+            type: array
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Embeddings
+          description: A list of embeddings, each embedding is a list of floats
+          examples:
+          - '[[0.12, 0.23, 0.34, ..., 0.43]]'
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - embeddings
+      title: ClipEmbeddingResponse
+      description: "Response for CLIP embedding.\n\nAttributes:\n    embeddings (List[List[float]]): A list of embeddings, each embedding is a list of floats.\n    time (float): The time in seconds it took to produce the embeddings including preprocessing."
+    ClipTextEmbeddingRequest:
+      properties:
+        id:
+          type: string
+          title: Id
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
+        usage_billable:
+          type: boolean
+          title: Usage Billable
+          default: true
+        start:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Start
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        source_info:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Info
+        stream_pipeline_context_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Stream Pipeline Context Id
+          description: Internal stream-pipeline frame pairing id. Not part of the public API.
+        disable_model_monitoring:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Disable Model Monitoring
+          description: If true, disables model monitoring for this request
+          default: false
+        clip_version_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Clip Version Id
+          description: The version ID of CLIP to be used for this request. Must be one of RN101, RN50, RN50x16, RN50x4, RN50x64, ViT-B-16, ViT-B-32, ViT-L-14-336px, and ViT-L-14.
+          default: ViT-B-16
+          examples:
+          - ViT-B-16
+        model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Id
+        text:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: string
+          title: Text
+          description: A string or list of strings
+          examples:
+          - The quick brown fox jumps over the lazy dog
+      type: object
+      required:
+      - id
+      - text
+      title: ClipTextEmbeddingRequest
+      description: "Request for CLIP text embedding.\n\nAttributes:\n    text (Union[List[str], str]): A string or list of strings."
     ClipCompareRequest:
       properties:
         id:
@@ -398,151 +546,3 @@ components:
       - type
       title: InferenceRequestImage
       description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
-    ClipEmbeddingResponse:
-      properties:
-        inference_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Inference Id
-          description: Unique identifier of inference
-        frame_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Frame Id
-          description: The frame id of the image used in inference if the input was a video
-        time:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Time
-          description: The time in seconds it took to produce the embeddings including preprocessing
-        embeddings:
-          items:
-            items:
-              type: number
-            type: array
-          type: array
-          title: Embeddings
-          description: A list of embeddings, each embedding is a list of floats
-          examples:
-          - '[[0.12, 0.23, 0.34, ..., 0.43]]'
-      type: object
-      required:
-      - embeddings
-      title: ClipEmbeddingResponse
-      description: "Response for CLIP embedding.\n\nAttributes:\n    embeddings (List[List[float]]): A list of embeddings, each embedding is a list of floats.\n    time (float): The time in seconds it took to produce the embeddings including preprocessing."
-    ClipTextEmbeddingRequest:
-      properties:
-        id:
-          type: string
-          title: Id
-        api_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Api Key
-          description: Roboflow API Key that will be passed to the model during initialization for artifact retrieval
-        usage_billable:
-          type: boolean
-          title: Usage Billable
-          default: true
-        start:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Start
-        source:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source
-        source_info:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source Info
-        stream_pipeline_context_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Stream Pipeline Context Id
-          description: Internal stream-pipeline frame pairing id. Not part of the public API.
-        disable_model_monitoring:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Disable Model Monitoring
-          description: If true, disables model monitoring for this request
-          default: false
-        clip_version_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Clip Version Id
-          description: The version ID of CLIP to be used for this request. Must be one of RN101, RN50, RN50x16, RN50x4, RN50x64, ViT-B-16, ViT-B-32, ViT-L-14-336px, and ViT-L-14.
-          default: ViT-B-16
-          examples:
-          - ViT-B-16
-        model_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Model Id
-        text:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: string
-          title: Text
-          description: A string or list of strings
-          examples:
-          - The quick brown fox jumps over the lazy dog
-      type: object
-      required:
-      - id
-      - text
-      title: ClipTextEmbeddingRequest
-      description: "Request for CLIP text embedding.\n\nAttributes:\n    text (Union[List[str], str]): A string or list of strings."
-    ClipCompareResponse:
-      properties:
-        inference_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Inference Id
-          description: Unique identifier of inference
-        frame_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Frame Id
-          description: The frame id of the image used in inference if the input was a video
-        time:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Time
-          description: The time in seconds it took to produce the similarity scores including preprocessing
-        similarity:
-          anyOf:
-          - items:
-              type: number
-            type: array
-          - additionalProperties:
-              type: number
-            type: object
-          title: Similarity
-        parent_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Parent Id
-          description: Identifier of parent image region. Useful when stack of detection-models is in use to refer the RoI being the input to inference
-      type: object
-      required:
-      - similarity
-      title: ClipCompareResponse
-      description: "Response for CLIP comparison.\n\nAttributes:\n    similarity (Union[List[float], Dict[str, float]]): Similarity scores.\n    time (float): The time in seconds it took to produce the similarity scores including preprocessing."

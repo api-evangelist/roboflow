@@ -122,6 +122,54 @@ paths:
       - Sam2
 components:
   schemas:
+    Sam2Prompt:
+      properties:
+        box:
+          anyOf:
+          - $ref: '#/components/schemas/Box'
+          - type: 'null'
+        points:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Point-Input'
+            type: array
+          - type: 'null'
+          title: Points
+      type: object
+      title: Sam2Prompt
+    Box:
+      properties:
+        x:
+          type: number
+          title: X
+        y:
+          type: number
+          title: Y
+        width:
+          type: number
+          title: Width
+        height:
+          type: number
+          title: Height
+      type: object
+      required:
+      - x
+      - y
+      - width
+      - height
+      title: Box
+    Sam2PromptSet:
+      properties:
+        prompts:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Sam2Prompt'
+            type: array
+          - type: 'null'
+          title: Prompts
+          description: An optional list of prompts for masks to predict. Each prompt can include a bounding box and / or a set of postive or negative points
+      type: object
+      title: Sam2PromptSet
     Sam2SegmentationRequest:
       properties:
         id:
@@ -264,39 +312,6 @@ components:
       - confidence
       title: Sam2SegmentationPrediction
       description: "SAM segmentation prediction.\n\nAttributes:\n    masks (Union[List[List[List[int]]], Dict[str, Any], Any]): Mask data - either polygon coordinates or RLE encoding.\n    confidence (float): Masks confidences.\n    format (Optional[str]): Format of the mask data: 'polygon' or 'rle'."
-    Sam2SegmentationResponse:
-      properties:
-        predictions:
-          items:
-            $ref: '#/components/schemas/Sam2SegmentationPrediction'
-          type: array
-          title: Predictions
-        time:
-          type: number
-          title: Time
-          description: The time in seconds it took to produce the segmentation including preprocessing
-      type: object
-      required:
-      - predictions
-      - time
-      title: Sam2SegmentationResponse
-    Point-Input:
-      properties:
-        x:
-          type: number
-          title: X
-        y:
-          type: number
-          title: Y
-        positive:
-          type: boolean
-          title: Positive
-      type: object
-      required:
-      - x
-      - y
-      - positive
-      title: Point
     Sam2EmbeddingRequest:
       properties:
         id:
@@ -402,39 +417,6 @@ components:
       - msg
       - type
       title: ValidationError
-    Sam2PromptSet:
-      properties:
-        prompts:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/Sam2Prompt'
-            type: array
-          - type: 'null'
-          title: Prompts
-          description: An optional list of prompts for masks to predict. Each prompt can include a bounding box and / or a set of postive or negative points
-      type: object
-      title: Sam2PromptSet
-    Box:
-      properties:
-        x:
-          type: number
-          title: X
-        y:
-          type: number
-          title: Y
-        width:
-          type: number
-          title: Width
-        height:
-          type: number
-          title: Height
-      type: object
-      required:
-      - x
-      - y
-      - width
-      - height
-      title: Box
     Sam2EmbeddingResponse:
       properties:
         image_id:
@@ -451,21 +433,39 @@ components:
       - time
       title: Sam2EmbeddingResponse
       description: "SAM embedding response.\n\nAttributes:\n    embeddings (Union[List[List[List[List[float]]]], Any]): The SAM embedding.\n    time (float): The time in seconds it took to produce the embeddings including preprocessing."
-    Sam2Prompt:
+    Sam2SegmentationResponse:
       properties:
-        box:
-          anyOf:
-          - $ref: '#/components/schemas/Box'
-          - type: 'null'
-        points:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/Point-Input'
-            type: array
-          - type: 'null'
-          title: Points
+        predictions:
+          items:
+            $ref: '#/components/schemas/Sam2SegmentationPrediction'
+          type: array
+          title: Predictions
+        time:
+          type: number
+          title: Time
+          description: The time in seconds it took to produce the segmentation including preprocessing
       type: object
-      title: Sam2Prompt
+      required:
+      - predictions
+      - time
+      title: Sam2SegmentationResponse
+    Point-Input:
+      properties:
+        x:
+          type: number
+          title: X
+        y:
+          type: number
+          title: Y
+        positive:
+          type: boolean
+          title: Positive
+      type: object
+      required:
+      - x
+      - y
+      - positive
+      title: Point
     InferenceRequestImage:
       properties:
         type:
