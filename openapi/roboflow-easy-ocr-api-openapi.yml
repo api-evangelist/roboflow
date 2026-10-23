@@ -322,3 +322,9 @@ components:
       - type
       title: InferenceRequestImage
       description: "Image data for inference request.\n\nAttributes:\n    type (str): The type of image data provided, one of 'url', 'base64', or 'numpy'.\n    value (Optional[Any]): Image data corresponding to the image type."
+x-provenance:
+  method: harvested
+  publisher: Roboflow
+  source: https://serverless.roboflow.com/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

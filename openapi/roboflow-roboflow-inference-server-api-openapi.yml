@@ -1339,3 +1339,9 @@ components:
       - predictions
       title: InstanceSegmentationInferenceResponse
       description: "Instance Segmentation inference response.\n\nAttributes:\n    predictions (List[Union[\n        inference.core.entities.responses.inference.InstanceSegmentationPrediction,\n        inference.core.entities.responses.inference.InstanceSegmentationRLEPrediction\n    ]]): List of instance segmentation predictions."
+x-provenance:
+  method: harvested
+  publisher: Roboflow
+  source: https://serverless.roboflow.com/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

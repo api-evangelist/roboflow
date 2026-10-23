@@ -54,3 +54,9 @@ components:
       - uuid
       title: ServerVersionInfo
       description: "Server version information.\n\nAttributes:\n    name (str): Server name.\n    version (str): Server version.\n    uuid (str): Server UUID."
+x-provenance:
+  method: harvested
+  publisher: Roboflow
+  source: https://serverless.roboflow.com/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
