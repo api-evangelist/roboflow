@@ -298,6 +298,40 @@ edges:
   category: Docker Verified Publisher
   badges:
   - Docker Verified Publisher
+- partner_name: Hugging Face (hugging-face-hub)
+  partner: hugging-face
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: hugging-face-hub
+  evidence: https://huggingface.co/Roboflow
+  mirror_of: hugging-face/integrations/hugging-face-integration-edges.yml
+  apps:
+  - Roboflow/rf-detr-base
+  - Roboflow/rf-detr-medium
+  - Roboflow/rf-detr-nano
+  - Roboflow/rf-detr-large
+  - Roboflow/rf-detr-small
+  - Roboflow/rf-detr-seg-nano
+  - Roboflow/rf-detr-seg-medium
+  - Roboflow/rf-detr-seg-small
+  - Roboflow/Gemini
+  - Roboflow/RF-DETR
+  - Roboflow/Trackers
+  - Roboflow/SoM
+  - Roboflow/webcamGPT
+  - Roboflow/web-demo
+  - Roboflow/HotDogGPT
+  - Roboflow/DINO-GPT4V
+  listing_count: 2
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Hugging Face Hub models
+  badges:
+  - Verified publisher (Hugging Face verified organisation)
 generated: '2026-10-14'
 method: searched
 checked:
@@ -326,6 +360,7 @@ checked:
 - https://pypi.org/org/{org}/
 - https://pypi.org/pypi/{package}/json
 - docker-hub/integrations/docker-hub-integration-edges.yml
+- hugging-face/integrations/hugging-face-integration-edges.yml
 source:
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
 - https://zapier.com/api/v4/apps/
